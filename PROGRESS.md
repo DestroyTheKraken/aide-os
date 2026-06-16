@@ -87,7 +87,7 @@ export LFCS_ROOT=/home/kraken/Projects/aios-ed   # or your clone path
 
 ## LFCS program
 
-- **Cycle 1:** Day 2 of 45 (as of last portal build)
+- **Cycle 1:** Day 3 of 45 (portal build 2026-06-16 — Project 01, node1)
 - **Schedule:** `schedule/daily-schedule.json` — manual `start_date` for Cycle 2 (no auto-loop)
 - **Weak-area days:** 5, 6, 24, 26, 40, 41
 - **Tests:** `validation/test_program_day.py`, `test_lesson_tasks.py`, `test_ara_eval.py` — pass
@@ -113,15 +113,29 @@ export LFCS_ROOT=/home/kraken/Projects/aios-ed   # or your clone path
 | RAG live ≥80% eval | Jul 1, 2026 | **Blocked** on OWUI spike + first sync |
 | Context injection | Jul 15, 2026 | **Code ready**; needs RAG + deploy |
 | PWA on tablet | Jul 15, 2026 | **Partial** (shell works; polish open) |
-| Cycle 1 complete | ~Jul 28, 2026 | In progress (Day 2) |
+| Cycle 1 complete | ~Jul 28, 2026 | In progress (Day 3) |
 | LFCS exam | Dec 2026 / Jan 2027 | Planned |
+
+---
+
+## Screenshot validation (2026-06-15 session)
+
+Evidence in `.grok/docs/user-attachments/screenshots/`:
+
+| File | Confirms |
+|------|----------|
+| `Screenshot_20260615_221632_Firefox Nightly.png` | Dashboard Home — Day 2 UI, themes, cluster 4/4, Ara sidebar, Tailscale 6/8 |
+| `Screenshot_20260615_221849_Firefox Nightly.png` | Workspace tab — `lfcs` user, creds hint, Launch IDE |
+| `Screenshot_20260615_221308_Chrome.png` | GitHub `aios` → `AIOSed` rename; target remote `aios-os` |
+
+Out-of-scope captures (Jellyfin, chown lab, Fileset) remain in Grok attachments only.
 
 ---
 
 ## Next actions (priority)
 
-1. Push `aios-ed` → `github.com/DestroyTheKraken/aios-os.git` (initial commit)
-2. On um690: clone/pull `aios-os`, set `LFCS_ROOT`, redeploy if needed
+1. Push `aios-ed` → `github.com/DestroyTheKraken/aios-os.git` (**force** — remote is placeholder README only)
+2. On um690: `git pull` (or fresh clone), set `LFCS_ROOT`, run `lfcs-portal-build.sh` + redeploy if needed
 3. Complete Open WebUI RAG spike + first `lfcs-ara-sync.sh`
 4. PR 11 finish: PNG PWA icons + offline banner
 5. Mullvad Firefox profile persistence (bookmarks/homepage volume)
@@ -138,3 +152,4 @@ export LFCS_ROOT=/home/kraken/Projects/aios-ed   # or your clone path
 | Objectives tracker | `guides/OBJECTIVES_TRACKER.md` |
 | Grok mentor rules | `AGENTS.md`, `.grok/rules/` |
 | Theme sources | `.grok/docs/user-attachments/*.toml` |
+| UI screenshots | `.grok/docs/user-attachments/screenshots/` |

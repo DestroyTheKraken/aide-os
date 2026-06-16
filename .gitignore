@@ -1,0 +1,29 @@
+# Portal npm vendor cache (icons committed under static/vendor/)
+portal/node_modules/
+portal/package-lock.json
+
+# Secrets and credentials
+docker/.env
+notifications/tablet-credentials.txt
+notifications/cron.log
+**/.env
+**/*.pem
+**/*.key
+
+# ara_tutor generated artifacts
+ara_tutor/session/Modelfile.daily
+ara_tutor/session/context.md
+ara_tutor/meta/indexing-manifest.json
+ara_tutor/meta/last-sync-state.json
+
+# Grok local session caches (not product rules)
+.grok/sessions/
+
+# Python
+__pycache__/
+*.pyc
+
+# OS / editor
+.DS_Store
+*.swp
+*~

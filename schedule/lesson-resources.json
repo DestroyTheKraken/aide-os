@@ -1,0 +1,155 @@
+{
+  "_comment": "Curated learning resources per project — expand iteratively with your best finds",
+  "default": {
+    "youtube": [
+      {"title": "Learn Linux TV — LFCS 2024 Playlist", "url": "https://www.youtube.com/playlist?list=PLT98CRW-1Vz6Wv4xLiVapcfKqN8v_9yYj", "source": "Learn Linux TV"},
+      {"title": "Linux Foundation — LFCS Exam", "url": "https://training.linuxfoundation.org/certification/linux-foundation-certified-sysadmin-lfcs/", "source": "Linux Foundation"}
+    ],
+    "docs": [
+      {"title": "LFCS Exam Objectives (PDF)", "url": "https://assets.linuxfoundation.org//LFCS_Exam_Objectives_2024_v4.0.pdf", "source": "Linux Foundation"},
+      {"title": "man-pages project", "url": "https://www.man7.org/linux/man-pages/", "source": "man7.org"}
+    ],
+    "articles": [
+      {"title": "How To Use Linux man Pages", "url": "https://www.digitalocean.com/community/tutorials/how-to-use-linux-man-pages", "source": "DigitalOcean"}
+    ]
+  },
+  "00": {
+    "youtube": [
+      {"title": "man, apropos & info — command-line help", "url": "https://www.youtube.com/watch?v=8Uc2j6m7KqE", "source": "Learn Linux TV"},
+      {"title": "Linux man pages explained", "url": "https://www.youtube.com/watch?v=gfkTfcpWqAY", "source": "DistroTube"}
+    ],
+    "docs": [
+      {"title": "man(1) — manual page interface", "url": "https://man7.org/linux/man-pages/man1/man.1.html", "source": "man7.org"},
+      {"title": "apropos(1) — search manual names", "url": "https://man7.org/linux/man-pages/man1/apropos.1.html", "source": "man7.org"},
+      {"title": "info(1) — read Info documents", "url": "https://man7.org/linux/man-pages/man1/info.1.html", "source": "man7.org"}
+    ],
+    "articles": [
+      {"title": "Understanding Linux man pages", "url": "https://www.howtogeek.com/202590/how-to-use-man-pages-on-a-linux-system/", "source": "How-To Geek"},
+      {"title": "Linux documentation: man, info, /usr/share/doc", "url": "https://www.baeldung.com/linux/man-info-docs", "source": "Baeldung"}
+    ]
+  },
+  "01": {
+    "youtube": [
+      {"title": "Linux File Permissions & Ownership", "url": "https://www.youtube.com/watch?v=LnKoncb-tKs", "source": "Learn Linux TV"},
+      {"title": "Hard Links vs Soft Links", "url": "https://www.youtube.com/watch?v=3waHdRiW57c", "source": "Learn Linux TV"}
+    ],
+    "docs": [
+      {"title": "mkdir(1)", "url": "https://man7.org/linux/man-pages/man1/mkdir.1.html", "source": "man7.org"},
+      {"title": "ln(1)", "url": "https://man7.org/linux/man-pages/man1/ln.1.html", "source": "man7.org"},
+      {"title": "find(1)", "url": "https://man7.org/linux/man-pages/man1/find.1.html", "source": "man7.org"}
+    ],
+    "articles": [
+      {"title": "Linux Directory Structure Explained", "url": "https://www.digitalocean.com/community/tutorials/linux-directory-structure-explained", "source": "DigitalOcean"}
+    ]
+  },
+  "02": {
+    "youtube": [
+      {"title": "grep, awk, sed — text processing", "url": "https://www.youtube.com/watch?v=KJNy8g4fgrA", "source": "Learn Linux TV"}
+    ],
+    "docs": [
+      {"title": "grep(1)", "url": "https://man7.org/linux/man-pages/man1/grep.1.html", "source": "man7.org"},
+      {"title": "journalctl(1)", "url": "https://man7.org/linux/man-pages/man1/journalctl.1.html", "source": "man7.org"},
+      {"title": "tar(1)", "url": "https://man7.org/linux/man-pages/man1/tar.1.html", "source": "man7.org"}
+    ],
+    "articles": [
+      {"title": "Analyzing Linux logs with journalctl", "url": "https://www.digitalocean.com/community/tutorials/how-to-use-journalctl-to-view-and-manipulate-systemd-logs", "source": "DigitalOcean"}
+    ]
+  },
+  "03": {
+    "youtube": [
+      {"title": "Users, Groups & Permissions", "url": "https://www.youtube.com/watch?v=IVquIf1yZ4w", "source": "Learn Linux TV"},
+      {"title": "ACLs on Linux", "url": "https://www.youtube.com/watch?v=2VNz1wM0w8Y", "source": "Learn Linux TV"}
+    ],
+    "docs": [
+      {"title": "useradd(8)", "url": "https://man7.org/linux/man-pages/man8/useradd.8.html", "source": "man7.org"},
+      {"title": "chmod(1)", "url": "https://man7.org/linux/man-pages/man1/chmod.1.html", "source": "man7.org"},
+      {"title": "setfacl(1)", "url": "https://man7.org/linux/man-pages/man1/setfacl.1.html", "source": "man7.org"}
+    ],
+    "articles": [
+      {"title": "Linux ACLs guide", "url": "https://www.redhat.com/sysadmin/linux-access-control-lists", "source": "Red Hat"}
+    ]
+  },
+  "04": {
+    "youtube": [
+      {"title": "systemd for Administrators", "url": "https://www.youtube.com/watch?v=7W3nFKjZerY", "source": "Lennart Poettering"},
+      {"title": "Creating systemd service units", "url": "https://www.youtube.com/watch?v=OkWLbWeWiLM", "source": "Learn Linux TV"}
+    ],
+    "docs": [
+      {"title": "systemd.unit(5)", "url": "https://man7.org/linux/man-pages/man5/systemd.unit.5.html", "source": "man7.org"},
+      {"title": "systemctl(1)", "url": "https://man7.org/linux/man-pages/man1/systemctl.1.html", "source": "man7.org"},
+      {"title": "limits.conf(5)", "url": "https://man7.org/linux/man-pages/man5/limits.conf.5.html", "source": "man7.org"}
+    ],
+    "articles": [
+      {"title": "Understanding systemd units", "url": "https://www.digitalocean.com/community/tutorials/understanding-systemd-units-and-unit-files", "source": "DigitalOcean"}
+    ]
+  },
+  "05": {
+    "youtube": [
+      {"title": "Linux Partitioning & Filesystems", "url": "https://www.youtube.com/watch?v=SA5tLQ2nQBk", "source": "Learn Linux TV"},
+      {"title": "fstab explained", "url": "https://www.youtube.com/watch?v=2QcWvZpwX2k", "source": "Learn Linux TV"}
+    ],
+    "docs": [
+      {"title": "fstab(5)", "url": "https://man7.org/linux/man-pages/man5/fstab.5.html", "source": "man7.org"},
+      {"title": "mkfs(8)", "url": "https://man7.org/linux/man-pages/man8/mkfs.8.html", "source": "man7.org"},
+      {"title": "lsblk(8)", "url": "https://man7.org/linux/man-pages/man8/lsblk.8.html", "source": "man7.org"}
+    ],
+    "articles": [
+      {"title": "How to partition and format drives on Linux", "url": "https://www.digitalocean.com/community/tutorials/how-to-partition-and-format-storage-devices-in-linux", "source": "DigitalOcean"}
+    ]
+  },
+  "06": {
+    "youtube": [
+      {"title": "Linux Networking Basics", "url": "https://www.youtube.com/watch?v=5B6XwJFQB5g", "source": "Learn Linux TV"},
+      {"title": "SSH hardening", "url": "https://www.youtube.com/watch?v=YS5Zh7KExvE", "source": "Learn Linux TV"}
+    ],
+    "docs": [
+      {"title": "sshd_config(5)", "url": "https://man7.org/linux/man-pages/man5/sshd_config.5.html", "source": "man7.org"},
+      {"title": "ip(8)", "url": "https://man7.org/linux/man-pages/man8/ip.8.html", "source": "man7.org"},
+      {"title": "hosts(5)", "url": "https://man7.org/linux/man-pages/man5/hosts.5.html", "source": "man7.org"}
+    ],
+    "articles": [
+      {"title": "How to configure static IP on Linux", "url": "https://www.redhat.com/sysadmin/networkmanager-static-ip", "source": "Red Hat"}
+    ]
+  },
+  "07": {
+    "youtube": [
+      {"title": "UFW & firewalld basics", "url": "https://www.youtube.com/watch?v=8gTbgdkmqZo", "source": "Learn Linux TV"},
+      {"title": "iptables / NAT overview", "url": "https://www.youtube.com/watch?v=JIBJhm4b8n0", "source": "Learn Linux TV"}
+    ],
+    "docs": [
+      {"title": "ufw(8)", "url": "https://manpages.ubuntu.com/manpages/jammy/man8/ufw.8.html", "source": "Ubuntu"},
+      {"title": "firewalld(1)", "url": "https://man7.org/linux/man-pages/man1/firewall-cmd.1.html", "source": "man7.org"},
+      {"title": "sysctl(8)", "url": "https://man7.org/linux/man-pages/man8/sysctl.8.html", "source": "man7.org"}
+    ],
+    "articles": [
+      {"title": "Introduction to firewalld", "url": "https://www.redhat.com/sysadmin/introduction-firewalld", "source": "Red Hat"}
+    ]
+  },
+  "08": {
+    "youtube": [
+      {"title": "Bash scripting for beginners", "url": "https://www.youtube.com/watch?v=tK9Oc6AEnR4", "source": "Learn Linux TV"},
+      {"title": "cron jobs explained", "url": "https://www.youtube.com/watch?v=QaT1L-0mv0g", "source": "Learn Linux TV"}
+    ],
+    "docs": [
+      {"title": "bash(1)", "url": "https://man7.org/linux/man-pages/man1/bash.1.html", "source": "man7.org"},
+      {"title": "crontab(5)", "url": "https://man7.org/linux/man-pages/man5/crontab.5.html", "source": "man7.org"},
+      {"title": "at(1)", "url": "https://man7.org/linux/man-pages/man1/at.1.html", "source": "man7.org"}
+    ],
+    "articles": [
+      {"title": "Bash strict mode", "url": "https://www.digitalocean.com/community/tutorials/how-to-write-a-bash-script", "source": "DigitalOcean"}
+    ]
+  },
+  "09": {
+    "youtube": [
+      {"title": "Docker Compose in 12 minutes", "url": "https://www.youtube.com/watch?v=DM65_JyGxCo", "source": "Learn Linux TV"},
+      {"title": "LFCS Capstone-style deploy walkthrough", "url": "https://www.youtube.com/watch?v=3c-iBn73dDE", "source": "Learn Linux TV"}
+    ],
+    "docs": [
+      {"title": "Docker Compose specification", "url": "https://docs.docker.com/compose/compose-file/", "source": "Docker"},
+      {"title": "systemd.service(5)", "url": "https://man7.org/linux/man-pages/man5/systemd.service.5.html", "source": "man7.org"}
+    ],
+    "articles": [
+      {"title": "Docker security best practices", "url": "https://www.redhat.com/sysadmin/container-security", "source": "Red Hat"}
+    ]
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "rag_suite": [
+    {
+      "id": "grep-weak",
+      "prompt": "What grep flag shows only the matching part of each line for IPv4 addresses?",
+      "runner": "openwebui",
+      "expect_substrings": ["-o", "grep"]
+    },
+    {
+      "id": "compose-bind",
+      "prompt": "Why does the LFCS stack bind ports to FORGE_BIND_IP instead of 0.0.0.0?",
+      "runner": "openwebui",
+      "expect_substrings": ["tail", "tailnet"]
+    },
+    {
+      "id": "fstab-uuid",
+      "prompt": "Why use UUID in fstab instead of /dev/sdX?",
+      "runner": "openwebui",
+      "expect_substrings": ["UUID", "device"]
+    }
+  ],
+  "overlay_suite": [
+    {
+      "id": "day-context",
+      "prompt": "What is today's LFCS project and target node?",
+      "runner": "ollama",
+      "dynamic": true,
+      "expect_from_context": ["project", "node"]
+    },
+    {
+      "id": "cycle-context",
+      "prompt": "What program cycle am I in?",
+      "runner": "ollama",
+      "dynamic": true,
+      "expect_from_context": ["program_cycle"]
+    }
+  ]
+}

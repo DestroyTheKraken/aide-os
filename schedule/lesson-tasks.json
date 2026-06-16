@@ -1,0 +1,70 @@
+{
+  "00": [
+    "Run: man -k partition",
+    "Run: man 5 fstab",
+    "Find bash loop example in man bash"
+  ],
+  "01": [
+    "ssh kraken@node1",
+    "mkdir -p /projects/archive/2026/",
+    "Create symlink + hard link, verify"
+  ],
+  "02": [
+    "grep 'Failed password' /var/log/auth.log",
+    "awk to extract IPs → /tmp/threat_actors.txt",
+    "tar -czvf /backup/incident.tar.gz"
+  ],
+  "03": [
+    "groupadd dev_dept; useradd team members",
+    "chmod 2770 /shared/dev",
+    "setfacl + sudoers.d"
+  ],
+  "04": [
+    "Write /etc/systemd/system/myapp.service",
+    "systemctl enable --now myapp",
+    "Add limits.conf + sysctl.d"
+  ],
+  "05": [
+    "parted GPT on secondary disk",
+    "mkfs.xfs + blkid UUID",
+    "fstab entry + mount -a + reboot test"
+  ],
+  "06": [
+    "nmcli static IP",
+    "/etc/hosts entries",
+    "sshd_config.d hardening + NFS mount"
+  ],
+  "07": [
+    "firewalld default deny",
+    "sysctl ip_forward persist",
+    "MASQUERADE + port forward"
+  ],
+  "08": [
+    "Write /usr/local/bin/sysmaintenance.sh",
+    "set -euo pipefail",
+    "crontab 0 0 * * *"
+  ],
+  "09": [
+    "sudo ./automation/secure-browser-forge.sh",
+    "Option 1 deploy on node3",
+    "Reboot + option 4 validate"
+  ],
+  "mix": [
+    "Set timer for {duration} minutes",
+    "No internet — man pages only",
+    "Document every command in study journal"
+  ],
+  "—": [
+    "Review notifications/study-journal.log",
+    "Re-run weakest project verification",
+    "Update VALIDATION.md evidence"
+  ],
+  "_fallback": [
+    "Open Study_Projects/{project}.md",
+    "Complete phase {phase}",
+    "Log results in study journal"
+  ],
+  "_templates": {
+    "mix": "Set timer for {duration} minutes"
+  }
+}

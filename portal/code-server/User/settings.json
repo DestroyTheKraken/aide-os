@@ -1,0 +1,8 @@
+{
+  "workbench.colorTheme": "AIOS Kanagawa Wave",
+  "workbench.preferredDarkColorTheme": "AIOS Kanagawa Wave",
+  "window.autoDetectColorScheme": false,
+  "editor.fontFamily": "'Fira Code', 'SF Mono', ui-monospace, monospace",
+  "editor.fontSize": 14,
+  "terminal.integrated.fontFamily": "'Fira Code', 'SF Mono', ui-monospace, monospace"
+}

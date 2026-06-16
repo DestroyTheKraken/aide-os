@@ -1,0 +1,102 @@
+/* AIOS dashboard themes — sourced from portal/static/themes/*.toml */
+
+:root,
+[data-theme="kanagawa-wave"] {
+  --bg: #1f1f28;
+  --card: #16161d;
+  --card-hover: #2a2a37;
+  --accent: #7e9cd8;
+  --accent-dim: #7fb4ca;
+  --purple: #957fb8;
+  --green: #98bb6c;
+  --text: #dcd7ba;
+  --text-dim: #c8c093;
+  --muted: #727169;
+  --border: #363646;
+  --red: #c34043;
+  --yellow: #e6c384;
+  --orange: #ffa066;
+  --pink: #d27e99;
+  --float: #223249;
+  --selection: #2d4f67;
+}
+
+[data-theme="rose-pine"] {
+  --bg: #1f1d2e;
+  --card: #26233a;
+  --card-hover: #2f2c40;
+  --accent: #c4a7e7;
+  --accent-dim: #9ccfd8;
+  --purple: #c4a7e7;
+  --green: #31748f;
+  --text: #e0def4;
+  --text-dim: #908caa;
+  --muted: #908caa;
+  --border: #403d52;
+  --red: #eb6f92;
+  --yellow: #f6c177;
+  --orange: #ebbcba;
+  --pink: #ebbcba;
+  --float: #2f2c40;
+  --selection: #2f2c40;
+}
+
+[data-theme="gotham"] {
+  --bg: #0c1014;
+  --card: #11151c;
+  --card-hover: #0a3749;
+  --accent: #33859e;
+  --accent-dim: #195466;
+  --purple: #4e5166;
+  --green: #2aa889;
+  --text: #99d1ce;
+  --text-dim: #33859e;
+  --muted: #195466;
+  --border: #0a3749;
+  --red: #c23127;
+  --yellow: #edb443;
+  --orange: #edb443;
+  --pink: #4e5166;
+  --float: #0a3749;
+  --selection: #0a3749;
+}
+
+[data-theme="panda"] {
+  --bg: #292a2b;
+  --card: #1d1e1f;
+  --card-hover: #363738;
+  --accent: #45a9f9;
+  --accent-dim: #6fc1ff;
+  --purple: #b084eb;
+  --green: #19f9d8;
+  --text: #cccccc;
+  --text-dim: #cdcdcd;
+  --muted: #757575;
+  --border: #434445;
+  --red: #ff2c6d;
+  --yellow: #ffb86c;
+  --orange: #ffb86c;
+  --pink: #ff75b5;
+  --float: #363738;
+  --selection: #5f4e3b;
+}
+
+[data-theme="posterpole"] {
+  --bg: #25222a;
+  --card: #2c2c30;
+  --card-hover: #35353a;
+  --accent: #8a99a8;
+  --accent-dim: #6c7f93;
+  --purple: #b894af;
+  --green: #92a38f;
+  --text: #c6c0b9;
+  --text-dim: #afa79d;
+  --muted: #a5a59c;
+  --border: #4d4d4d;
+  --red: #a97070;
+  --yellow: #cc9166;
+  --orange: #cc9166;
+  --pink: #b894af;
+  --float: #35353a;
+  --selection: #4d4d4d;
+}

@@ -1,0 +1,51 @@
+# AIDE_OS LinkBoard — Gethomepage-compatible style sketch
+# Prefer importing the JSON (full fidelity). YAML is a readable backup.
+
+- AI — Grok Web + Build:
+    - Grok Web:
+        href: https://grok.com
+        description: Plan · search · brainstorm
+        icon: mdi-web
+    - Grok Build docs:
+        href: https://docs.x.ai/build/overview
+        description: CLI on um690
+        icon: mdi-book-open-variant
+    - Nextcloud Files:
+        href: https://um690.taile52ad9.ts.net/apps/files/
+        description: Shared memory
+        icon: mdi-folder-cloud
+
+- Platform services:
+    - Nextcloud:
+        href: https://um690.taile52ad9.ts.net/
+        ping: https://um690.taile52ad9.ts.net/status.php
+        icon: mdi-cloud
+    - LinkBoard:
+        href: https://um690.taile52ad9.ts.net/apps/linkboard/
+        icon: mdi-view-dashboard
+    - Ops Center (legacy):
+        href: https://um690.taile52ad9.ts.net/ops/
+        icon: mdi-console-network
+    - Longhorn:
+        href: https://um690.taile52ad9.ts.net/longhorn/
+        icon: mdi-harddisk
+    - Valley Tech:
+        href: https://um690.taile52ad9.ts.net/vts/
+        icon: mdi-briefcase
+    - Traefik:
+        href: https://um690.taile52ad9.ts.net/dashboard/
+        icon: mdi-router-network
+    - Tailscale:
+        href: https://login.tailscale.com/admin/machines
+        icon: mdi-lan
+
+- Lab machines:
+    - um690: 192.168.20.100
+    - fam-media: 192.168.20.104
+    - node1: 192.168.20.101
+    - node2: 192.168.20.102
+
+- Knowledge & sessions:
+    - AIDE_OS: https://um690.taile52ad9.ts.net/apps/files/?dir=/AIDE_OS
+    - Sessions: https://um690.taile52ad9.ts.net/apps/files/?dir=/AIDE_OS/sessions
+    - Grok design: https://um690.taile52ad9.ts.net/apps/files/?dir=/AIDE_OS/docs/grok-integration

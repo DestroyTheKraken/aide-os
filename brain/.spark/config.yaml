@@ -1,0 +1,36 @@
+version: 1
+engine:
+  debounce_ms: 300
+  results:
+    add_blank_lines: true
+ai:
+  defaultProvider: grok-http
+  providers:
+    grok-http:
+      type: grok
+      model: grok-4.5
+      maxTokens: 8192
+      temperature: 0.7
+      options:
+        baseUrl: https://cli-chat-proxy.grok.com/v1
+        authMode: session_then_api_key
+        authJsonPath: ~/.grok/auth.json
+        stream: true
+        timeoutMs: 120000
+    claude-client:
+      type: anthropic
+      model: claude-sonnet-4-5-20250929
+      maxTokens: 4096
+      temperature: 0.7
+    claude-agent:
+      type: anthropic
+      model: claude-sonnet-4-5-20250929
+      maxTokens: 4096
+      temperature: 0.7
+logging:
+  level: info
+  console: true
+features:
+  slash_commands: true
+  chat_assistant: true
+  trigger_automation: true

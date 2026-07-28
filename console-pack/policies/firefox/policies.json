@@ -1,0 +1,15 @@
+{
+  "policies": {
+    "Homepage": {
+      "URL": "https://um690.taile52ad9.ts.net/",
+      "Locked": false,
+      "StartPage": "homepage"
+    },
+    "OverrideFirstRunPage": "",
+    "OverridePostUpdatePage": "",
+    "DontCheckDefaultBrowser": true,
+    "DisableFirefoxStudies": true,
+    "DisableTelemetry": true,
+    "DisplayBookmarksToolbar": "never"
+  }
+}

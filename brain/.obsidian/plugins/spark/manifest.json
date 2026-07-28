@@ -1,0 +1,10 @@
+{
+	"id": "spark",
+	"name": "Spark Assistant",
+	"version": "0.3.8",
+	"minAppVersion": "1.6.0",
+	"description": "AI-powered automation with slash commands, chat widget, and intelligent workflows.",
+	"author": "CrossGenAI",
+	"authorUrl": "https://crossgen-ai.com",
+	"isDesktopOnly": true
+}

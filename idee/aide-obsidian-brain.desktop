@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=GrokAide Brain
+Comment=Obsidian Second Brain — LFCS / AIDE_OS
+Exec=/home/kraken/AIDE_OS/idee/open-brain-vault.sh
+Icon=obsidian
+Terminal=false
+Categories=Education;Office;
+StartupWMClass=obsidian

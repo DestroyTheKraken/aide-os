@@ -1,0 +1,14 @@
+{
+  "alwaysUpdateLinks": true,
+  "showUnsupportedFiles": true,
+  "uriCallbacks": true,
+  "showLineNumber": true,
+  "strictLineBreaks": false,
+  "readableLineLength": true,
+  "defaultViewMode": "preview",
+  "newFileLocation": "folder",
+  "newFileFolderPath": "sessions",
+  "attachmentFolderPath": "resources/attachments",
+  "useMarkdownLinks": false,
+  "showFrontmatter": true
+}

@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Tubi
+Comment=AIDE_OS system app — Tubi streaming
+Exec=firefox --kiosk --new-window https://tubitv.com/
+Icon=video-x-generic
+Terminal=false
+Categories=AudioVideo;AIDE-OS;System;
+StartupNotify=true
+X-AIDE-OS-SystemApp=true

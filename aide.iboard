@@ -1,0 +1,33 @@
+{
+  "version": 3,
+  "layout": "grid",
+  "cards": [
+    {
+      "id": "90b41e6d-399d-4089-9634-f89f05e8d8a9",
+      "kind": "tile",
+      "label": "aide",
+      "icon": "lucide-airplay",
+      "color": "#EAB308",
+      "subtitle": "aide-dash",
+      "target": {
+        "kind": "folder",
+        "path": "AIDE_OS"
+      },
+      "order": 0
+    },
+    {
+      "id": "4290bc7f-f77a-41ff-873e-3e68ab75955a",
+      "kind": "tile",
+      "label": "Grok",
+      "icon": "lucide-app-window",
+      "color": "#44403C",
+      "subtitle": "Template for GrokCLI Prompts",
+      "target": {
+        "kind": "note",
+        "path": "AIDE_OS/PROMPT.md"
+      },
+      "order": 1
+    }
+  ],
+  "connections": []
+}

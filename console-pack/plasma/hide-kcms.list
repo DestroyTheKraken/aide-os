@@ -1,0 +1,7 @@
+# KCM plugin IDs / desktop names to hide after --phase=harden
+# Iterative: add lines as you lock down UI. Dev phase ignores this file.
+# Examples (Plasma 6 — verify on target with: ls /usr/share/kcm*/ /usr/share/applications/kcm*)
+# kcm_users
+# kcm_sddm
+# kcm_updates
+# kcm_flatpak

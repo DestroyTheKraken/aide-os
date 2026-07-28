@@ -1,0 +1,31 @@
+# Obsidian runtime
+brain/.obsidian/workspace
+brain/.obsidian/workspace.json
+brain/.obsidian/workspace-mobile.json
+brain/.obsidian/workspaces.json
+brain/.obsidian/cache
+brain/.obsidian/plugins/*/data.json
+
+# Spark runtime queues / logs (keep config + agents)
+brain/.spark/chat-queue/
+brain/.spark/chat-results/
+brain/.spark/logs/
+brain/.spark/history.json
+brain/.spark/notifications.jsonl
+brain/.spark/registry.json
+brain/.spark/engine.pid
+brain/.spark/reload-status.json
+brain/.spark/backups/
+
+# Secrets & OS junk
+**/.env
+**/*secret*
+**/*credentials*
+*.p12
+.DS_Store
+*~
+
+# Large / local
+resources/attachments/
+*.img
+*.img.xz

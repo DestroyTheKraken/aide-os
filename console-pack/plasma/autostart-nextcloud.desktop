@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=AIDE Nextcloud Console
+Comment=Open Nextcloud as console home on login
+Exec=firefox --kiosk --new-window https://um690.taile52ad9.ts.net/
+X-KDE-autostart-phase=2
+X-GNOME-Autostart-enabled=true
+OnlyShowIn=KDE;

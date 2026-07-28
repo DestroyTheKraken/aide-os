@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=GrokAide Lab Terminal
+Comment=Terminal in LFCS bootcamp folder
+Exec=gnome-terminal --working-directory=/home/kraken/AIDE_OS/brain/bootcamp/lfcs
+Icon=utilities-terminal
+Terminal=false
+Categories=Education;System;

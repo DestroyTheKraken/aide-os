@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=X
+Comment=AIDE_OS system app — X (Twitter)
+Exec=firefox --kiosk --new-window https://x.com/
+Icon=web-browser
+Terminal=false
+Categories=Network;AIDE-OS;System;
+StartupNotify=true
+X-AIDE-OS-SystemApp=true

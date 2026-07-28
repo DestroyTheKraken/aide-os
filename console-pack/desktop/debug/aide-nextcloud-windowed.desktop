@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Nextcloud (windowed)
+Comment=Debug — non-kiosk Nextcloud
+Exec=firefox --new-window https://um690.taile52ad9.ts.net/
+Icon=folder-cloud
+Terminal=false
+Categories=Network;AIDE-OS;Debug;
+NoDisplay=false
+X-AIDE-OS-SystemApp=false

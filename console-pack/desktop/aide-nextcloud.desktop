@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Nextcloud
+Comment=AIDE_OS system app — files & console home
+Exec=firefox --kiosk --new-window https://um690.taile52ad9.ts.net/
+Icon=folder-cloud
+Terminal=false
+Categories=Network;AIDE-OS;System;
+StartupNotify=true
+X-AIDE-OS-SystemApp=true

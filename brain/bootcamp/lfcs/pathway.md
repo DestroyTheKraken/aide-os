@@ -1,43 +1,25 @@
 ---
 tags: [lfcs, pathway]
 date: 2026-07-27
-status: draft
+status: active
 ---
 
-# LFCS pathway (scaffold)
+# LFCS pathway (beginner → exam)
 
 > [!summary] TL;DR
-> ~8–12 week outline. Adjust pace; finish labs before expanding notes.
+> Finish D01–D04 before networking depth; storage on a VM; media collab before finals.
 
-> [!todo] Next
-> - [ ] Mark your target exam window (or “skills first, no date”)
+| Week | Pack | Outcome |
+|------|------|---------|
+| 1 | D01 | FHS + inspect without breaking |
+| 2 | D02 | Modes + sandbox chmod |
+| 3 | D03–D04 | Processes + systemd/journal |
+| 4 | D05 | Network inspect |
+| 5 | D06 | Storage inspect + VM practice plan |
+| 6 | D07–D08 | Security concepts + troubleshoot drills |
+| 7+ | Mixed + media finals | Exam-map green |
 
----
-
-## Weeks (flexible)
-
-| Week | Focus | Labs |
-|------|--------|------|
-| 1 | Filesystem tree, navigation, text tools | LAB-01 |
-| 2 | Users, groups, ownership, modes | LAB-02 |
-| 3 | systemd units, journald | LAB-03 |
-| 4 | Networking: ip, DNS, ssh basics | (stub) |
-| 5 | Disks, mounts, fstab (prefer VM) | (stub) |
-| 6 | Firewall, SSH hardening concepts | (stub) |
-| 7 | Logs, process control, rescue thinking | (stub) |
-| 8+ | Mixed practice + Canonical intro | Core/Server notes |
-
-## Rules
-
-1. One domain active at a time when possible.
-2. Every lab: **host** + **risk** at the top.
-3. Destructive practice → disposable VM, not um690 production paths.
-4. Debrief 3 bullets after each lab.
-
-## Official references
-
-- Linux Foundation training portal (LFS207 / LFCS materials you own access to)
-- `man 7 hier`, `man systemd`, Ubuntu Server guide
+Then: [[bootcamp/canonical/00-MOC|Canonical Academy track]]
 
 ---
 

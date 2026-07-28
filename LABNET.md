@@ -32,11 +32,11 @@ See **`/mnt/systems_admin/shared/memory/SYSTEM-FOCUS.md`**.
 | **`.101`** | **node1** | `d8:cb:8a:01:7a:89` | k3s **worker** | Ubuntu 26.04 · M93p | `kraken@` mesh | `100.69.243.112` · `node1…` |
 | **`.102`** | **node2** | `44:8a:5b:dd:a0:c5` | k3s **worker** | Ubuntu 26.04 · M93p | `kraken@` mesh | `100.82.68.92` · `node2…` |
 | **`.103`** | **Samsung TV** | `20:15:de:c6:fe:f6` | Display / media | Samsung | no SSH | — |
-| **`.104`** | **fam-media** | `d8:cb:8a:86:c8:02` | **HickMedia Console dev** (Path C / Core) | Ubuntu 26.04 → Core · **M93p** · `joshua` then console admin | `ssh fam-media` / `fam-media-ts` | `100.119.236.78` · `fam-media` |
+| **`.111`** | **fam-media** | `d8:cb:8a:86:c8:02` | **HickMedia Console dev** (Path C / Core) | Ubuntu 26.04 → Core · **M93p** · `joshua` then console admin | `ssh fam-media` / `fam-media-ts` | `100.119.236.78` · `fam-media` |
 | **`.105`–`.120`** | — | — | empty this scan | — | — | — |
 
 **Note:** `.106` was an early intended IP; MVP is pinned at **`.104`**.  
-**VyOS DHCP static-mapping `fam-media`:** `192.168.20.104` ↔ MAC `d8:cb:8a:86:c8:02` (applied 2026-07-12). Host still uses DHCP client; router always offers `.104`.
+**VyOS DHCP static-mapping `fam-media`:** `192.168.20.111` ↔ MAC `d8:cb:8a:86:c8:02` (applied 2026-07-12). Host still uses DHCP client; router always offers `.111` (updated 2026-07-27).
 
 ---
 
@@ -49,7 +49,7 @@ See **`/mnt/systems_admin/shared/memory/SYSTEM-FOCUS.md`**.
 | **AIDE work** | Continues under `~/AIDE_OS` + Edbuntu docs — **not** on this box as product host |
 | **Hostname** | `fam-media` |
 | **Hardware** | Lenovo ThinkCentre M93p · i5-4570T (4t) · 16 GiB RAM · 238 G disk (100 G LV root) |
-| **LAN** | `eno1` `192.168.20.104/24` · MAC `d8:cb:8a:86:c8:02` (may be offline; use TS) |
+| **LAN** | `eno1` `192.168.20.111/24` · MAC `d8:cb:8a:86:c8:02` (may be offline; use TS) |
 | **Tailscale** | `100.119.236.78` · `ssh fam-media-ts` |
 | **Primary user** | `joshua` until Core reimage |
 | **Console guide** | `~/HickMedia/docs/CONSOLE-V2-INSTALL-FAM-MEDIA.md` |
@@ -58,7 +58,7 @@ See **`/mnt/systems_admin/shared/memory/SYSTEM-FOCUS.md`**.
 ### Access from um690
 
 ```bash
-ssh fam-media          # LAN .104
+ssh fam-media          # LAN .111  (user jhick1585)
 ssh fam-media-ts       # Tailscale
 ssh mvp                # alias
 ```
@@ -74,7 +74,7 @@ switch
 ├── node1                  .101
 ├── node2                  .102
 ├── Samsung TV             .103
-├── fam-media              .104   ← HickMedia Console dev
+├── fam-media              .111   ← HickMedia Console dev
 └── USB hub (+ j-tab)      no dedicated LabNET IP this scan
 ```
 
@@ -90,7 +90,7 @@ switch
 | um690 | `.100` | `58:47:ca:70:aa:02` |
 | node1 | `.101` | `d8:cb:8a:01:7a:89` |
 | node2 | `.102` | `44:8a:5b:dd:a0:c5` |
-| **fam-media** | **`.104`** | **`d8:cb:8a:86:c8:02`** |
+| **fam-media** | **`.111`** | **`d8:cb:8a:86:c8:02`** |
 
 Optional: leave `.106` free or use for a future second console.
 
@@ -107,7 +107,7 @@ Optional: leave `.106` free or use for a future second console.
 | Template `scripts/phase0/ssh-config-template` | updated |
 | Tailscale joined | done (`fam-media`) |
 | UFW on MVP | present (rules dump pending sudo) |
-| VyOS DHCP static for `.104` | **done** 2026-07-12 (`static-mapping fam-media`) |
+| VyOS DHCP static for `.111` | **done** 2026-07-27 (`static-mapping fam-media`, was `.104`) |
 | Shared memory all seats | **`/mnt/systems_admin/shared/memory/`** (LABNET.md + MEMORY.md) |
 | kraken `~/.grok/memory` + AGENTS/skills | **done** |
 | joshua/vtech homes | seat script done (`install-seat-labnet.sh`) |

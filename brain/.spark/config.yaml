@@ -17,6 +17,19 @@ ai:
         authJsonPath: ~/.grok/auth.json
         stream: true
         timeoutMs: 120000
+
+    grok-cli:
+      type: grok
+      model: grok-4.5
+      maxTokens: 8192
+      temperature: 0.4
+      options:
+        binary: /home/kraken/.grok/bin/grok
+        maxTurns: 8
+        tools: read_file,grep,list_dir
+        disallowedTools: run_terminal_cmd,search_replace,Agent,spawn_subagent
+        yolo: false
+        timeoutMs: 120000
     claude-client:
       type: anthropic
       model: claude-sonnet-4-5-20250929

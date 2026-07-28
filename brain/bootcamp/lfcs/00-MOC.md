@@ -4,40 +4,42 @@ date: 2026-07-27
 status: active
 ---
 
-# LFCS — Map of Content
+# LFCS — Map of Content (Wave 2 packs)
 
 > [!summary] TL;DR
-> Structured prep for **LFCS** (LFS207-aligned domains). Scaffold only — deepen notes as you practice.
+> Beginner-first domain packs. Draft until media collab → then `status: final`.
 
 > [!todo] Next
-> - [ ] Complete [[bootcamp/lfcs/labs/LAB-01-filesystem-tree|Lab 01 — Filesystem tree]] (read-only on um690)
+> - [ ] Start [[bootcamp/lfcs/domains/D01-essential-commands/00-domain|D01]] Lab 01
 
 ---
 
-## Pathway
+## Domain packs
 
-See full outline: [[bootcamp/lfcs/pathway]]
+| Pack | Title | Status | Start |
+|------|-------|--------|-------|
+| D01 | Essential commands & FHS | draft | [[bootcamp/lfcs/domains/D01-essential-commands/00-domain]] |
+| D02 | Users, groups, permissions | draft | [[bootcamp/lfcs/domains/D02-users-permissions/00-domain]] |
+| D03 | Operation of running systems | draft | [[bootcamp/lfcs/domains/D03-running-systems/00-domain]] |
+| D04 | systemd services | draft | [[bootcamp/lfcs/domains/D04-systemd-services/00-domain]] |
+| D05 | Networking | draft | [[bootcamp/lfcs/domains/D05-networking/00-domain]] |
+| D06 | Storage (VM-first) | draft | [[bootcamp/lfcs/domains/D06-storage/00-domain]] |
+| D07 | Security | draft | [[bootcamp/lfcs/domains/D07-security/00-domain]] |
+| D08 | Troubleshooting | draft | [[bootcamp/lfcs/domains/D08-troubleshooting/00-domain]] |
 
-| Domain | Note | Starter lab | Status |
-|--------|------|-------------|--------|
-| Essential commands & filesystem | [[bootcamp/lfcs/domains/01-filesystem]] | [[bootcamp/lfcs/labs/LAB-01-filesystem-tree]] | ⬜ |
-| Users, groups, permissions | [[bootcamp/lfcs/domains/02-users-perms]] | [[bootcamp/lfcs/labs/LAB-02-users-groups]] | ⬜ |
-| Systemd & services | [[bootcamp/lfcs/domains/03-systemd]] | [[bootcamp/lfcs/labs/LAB-03-systemd-journal]] | ⬜ |
-| Networking basics | [[bootcamp/lfcs/domains/04-networking]] | — | ⬜ |
-| Storage & filesystems | [[bootcamp/lfcs/domains/05-storage]] | — | ⬜ |
-| Security essentials | [[bootcamp/lfcs/domains/06-security]] | — | ⬜ |
-| Troubleshooting | [[bootcamp/lfcs/domains/07-troubleshooting]] | — | ⬜ |
+Also: [[bootcamp/lfcs/pathway]] · [[bootcamp/lfcs/exam-map]]
 
-Exam map: [[bootcamp/lfcs/exam-map]]
+## Media / Surfing
 
-## After LFCS scaffold
+- How-to: [[resources/surfing-howto]]
+- Per-domain `media/MEDIA-QUEUE.md` → collab with Josh → `MEDIA.md`
 
-Canonical track lives under [[knw/platform/canonical/00-index]] (e.g. Ubuntu Core lab linked from product docs).
+## Grok
 
-## Grok tutor
-
-- Spark: ask **@LFCS Coach** or open Spark chat on a domain note
-- CLI: `cd ~/AIDE_OS && grok` for hands-on labs
+| Agent | Provider | Use |
+|-------|----------|-----|
+| LFCS Coach | grok-http | Teach / quiz |
+| LFCS Lab Agent | grok-cli | Read-only vault help |
 
 ---
 

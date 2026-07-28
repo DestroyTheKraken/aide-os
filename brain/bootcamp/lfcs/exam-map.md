@@ -4,23 +4,24 @@ date: 2026-07-27
 status: active
 ---
 
-# LFCS exam map (working)
+# LFCS exam map (Wave 2)
 
 > [!summary] TL;DR
-> Track practice coverage. Update **Last practiced** after each lab.
+> Skills ↔ packs. Official domain names: verify handbook when you schedule the exam.
 
-| Domain area | Vault note | Lab | Last practiced |
-|-------------|------------|-----|----------------|
-| Filesystem layout & navigation | [[bootcamp/lfcs/domains/01-filesystem]] | [[bootcamp/lfcs/labs/LAB-01-filesystem-tree]] | |
-| Users / groups / permissions | [[bootcamp/lfcs/domains/02-users-perms]] | [[bootcamp/lfcs/labs/LAB-02-users-groups]] | |
-| Services / systemd / logs | [[bootcamp/lfcs/domains/03-systemd]] | [[bootcamp/lfcs/labs/LAB-03-systemd-journal]] | |
-| Networking | [[bootcamp/lfcs/domains/04-networking]] | | |
-| Storage | [[bootcamp/lfcs/domains/05-storage]] | | |
-| Security | [[bootcamp/lfcs/domains/06-security]] | | |
-| Troubleshooting | [[bootcamp/lfcs/domains/07-troubleshooting]] | | |
+| Pack | Working domain | Primary labs | Last practiced |
+|------|----------------|--------------|----------------|
+| D01 | Essential commands / FHS | LAB-01 | |
+| D02 | Users / groups / perms | LAB-02 | |
+| D03 | Running systems | (process/package lessons) | |
+| D04 | Services / systemd | LAB-03 | |
+| D05 | Networking | LAB-04 | |
+| D06 | Storage | LAB-05 (read-only) + VM later | |
+| D07 | Security | (pending labs) | |
+| D08 | Troubleshooting | (pending scenarios) | |
 
 > [!tip]
-> Official exam blueprints change; treat this as a personal skills map, not a legal exam outline.
+> After each lab, set **Last practiced** and tick objectives in the domain pack.
 
 ---
 

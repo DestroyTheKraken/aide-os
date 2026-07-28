@@ -18,9 +18,11 @@ status: active
 
 | Link | Purpose |
 |------|---------|
-| [[bootcamp/lfcs/00-MOC]] | LFCS map + next action |
-| [[bootcamp/lfcs/pathway]] | Week / domain outline |
+| [[bootcamp/lfcs/00-MOC]] | LFCS domain packs (Wave 2) |
+| [[bootcamp/lfcs/pathway]] | Beginner week outline |
 | [[bootcamp/lfcs/exam-map]] | Domains ↔ labs |
+| [[bootcamp/canonical/00-MOC]] | Canonical Academy track |
+| [[resources/surfing-howto]] | YouTube/articles in Surfing |
 | [[resources/links]] | Official portals |
 | [[resources/grok-surfaces]] | Spark vs Buildian vs CLI |
 | [[templates/session-start]] | New study session |

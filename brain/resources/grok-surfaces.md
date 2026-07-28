@@ -11,6 +11,7 @@ status: active
 | Surface | Best for | Default safety |
 |---------|----------|----------------|
 | **Spark** (`grok-http`) | Explain, quiz, rewrite notes, plan steps | No host file tools |
+| **Spark** (`grok-cli` / LFCS Lab Agent) | Read-only vault agent turns | `read_file,grep,list_dir`; no yolo |
 | **Grok CLI** (`grok` TUI) | Labs, scripts, multi-step automation | Plan mode; approve tools |
 | **Buildian** | ACP chat inside Obsidian | **`permissionMode: default`** (not yolo) |
 

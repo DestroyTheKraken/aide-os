@@ -43,8 +43,37 @@ if [ -f "$HOME/AIDE_OS/brain/.spark/config.yaml" ]; then
   else
     bad "vault spark config missing grok-http default"
   fi
+  if grep -q 'grok-cli:' "$HOME/AIDE_OS/brain/.spark/config.yaml"; then
+    ok "vault spark config has grok-cli provider"
+  else
+    bad "vault spark config missing grok-cli"
+  fi
 else
   bad "missing vault .spark/config.yaml"
+fi
+
+if [ -f "$HOME/.spark/engine/dist/providers/grok/GrokCliProvider.js" ]; then
+  ok "GrokCliProvider.js present"
+else
+  bad "GrokCliProvider.js missing"
+fi
+
+if [ -d "$HOME/AIDE_OS/brain/.obsidian/plugins/surfing" ]; then
+  ok "Surfing plugin in brain vault"
+else
+  bad "Surfing plugin missing from brain"
+fi
+
+if [ -f "$HOME/AIDE_OS/brain/bootcamp/lfcs/domains/D01-essential-commands/00-domain.md" ]; then
+  ok "LFCS D01 pack present"
+else
+  bad "LFCS D01 pack missing"
+fi
+
+if [ -f "$HOME/AIDE_OS/brain/bootcamp/canonical/00-MOC.md" ]; then
+  ok "Canonical track MOC present"
+else
+  bad "Canonical track MOC missing"
 fi
 
 if command -v spark >/dev/null 2>&1; then

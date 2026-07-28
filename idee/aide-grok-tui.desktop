@@ -2,7 +2,7 @@
 Type=Application
 Name=GrokAide CLI
 Comment=Grok Build TUI — AIDE_OS seat
-Exec=gnome-terminal --working-directory=/home/kraken/AIDE_OS -- /home/kraken/.grok/bin/grok
+Exec=/home/kraken/AIDE_OS/idee/run-in-terminal.sh /home/kraken/AIDE_OS/idee/open-grok-tui.sh
 Icon=utilities-terminal
 Terminal=false
 Categories=Education;Development;

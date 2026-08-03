@@ -1,0 +1,890 @@
+{
+  "generated_at": "2026-06-16T01:15:58-05:00",
+  "datetime": {
+    "date": "Tuesday, June 16, 2026",
+    "time": "1:15 AM",
+    "timezone": "America/Chicago"
+  },
+  "program_day": 3,
+  "program_cycle": 1,
+  "program_total": 45,
+  "schedule": {
+    "project": "01",
+    "phase": "1-2",
+    "node": "node1",
+    "title": "Directory Sandbox \u2014 SSH & mkdir -p trees",
+    "duration_min": 60,
+    "domains": [
+      "Essential Commands"
+    ],
+    "weak_area": null,
+    "weak_areas_active": [],
+    "study_guide": "Study_Projects/01.md",
+    "study_guide_url": "/study/01.md"
+  },
+  "progress": {
+    "completed_days": [],
+    "completed_count": 0,
+    "total_days": 45,
+    "percent": 0.0
+  },
+  "monitoring": {
+    "tailscale": {
+      "self_ip": "100.81.13.95",
+      "peers_online": 6,
+      "peers_total": 8
+    },
+    "cluster": {
+      "nodes_up": 4,
+      "nodes_total": 4
+    },
+    "ara": {
+      "rag_status": "unknown",
+      "rag_synced_at": null,
+      "last_rag_ms": null,
+      "last_inference_ms": null,
+      "last_rag_eval_pass_rate": null
+    }
+  },
+  "days": [
+    {
+      "day": 1,
+      "project": "00",
+      "phase": "1-2",
+      "node": "um690",
+      "title": "Documentation Matrix \u2014 man & info fluency",
+      "duration_min": 45,
+      "domains": [
+        "Essential Commands"
+      ],
+      "weak_area": null,
+      "study_guide_url": "/study/00.md",
+      "completed": false,
+      "is_today": false,
+      "is_future": false
+    },
+    {
+      "day": 2,
+      "project": "00",
+      "phase": "3-4",
+      "node": "um690",
+      "title": "Documentation Matrix \u2014 /usr/share/doc & apt",
+      "duration_min": 45,
+      "domains": [
+        "Essential Commands"
+      ],
+      "weak_area": null,
+      "study_guide_url": "/study/00.md",
+      "completed": false,
+      "is_today": false,
+      "is_future": false
+    },
+    {
+      "day": 3,
+      "project": "01",
+      "phase": "1-2",
+      "node": "node1",
+      "title": "Directory Sandbox \u2014 SSH & mkdir -p trees",
+      "duration_min": 60,
+      "domains": [
+        "Essential Commands"
+      ],
+      "weak_area": null,
+      "study_guide_url": "/study/01.md",
+      "completed": false,
+      "is_today": true,
+      "is_future": false
+    },
+    {
+      "day": 4,
+      "project": "01",
+      "phase": "3-4",
+      "node": "node1",
+      "title": "Directory Sandbox \u2014 links & file lifecycle",
+      "duration_min": 60,
+      "domains": [
+        "Essential Commands"
+      ],
+      "weak_area": null,
+      "study_guide_url": "/study/01.md",
+      "completed": false,
+      "is_today": false,
+      "is_future": true
+    },
+    {
+      "day": 5,
+      "project": "02",
+      "phase": "1-2",
+      "node": "node1",
+      "title": "Log Analysis \u2014 grep Failed password",
+      "duration_min": 60,
+      "domains": [
+        "Essential Commands",
+        "Operations"
+      ],
+      "weak_area": "grep-awk-sed",
+      "study_guide_url": "/study/02.md",
+      "completed": false,
+      "is_today": false,
+      "is_future": true
+    },
+    {
+      "day": 6,
+      "project": "02",
+      "phase": "3-4",
+      "node": "um690",
+      "title": "Log Analysis \u2014 tar evidence archive",
+      "duration_min": 45,
+      "domains": [
+        "Essential Commands",
+        "Operations"
+      ],
+      "weak_area": "grep-awk-sed",
+      "study_guide_url": "/study/02.md",
+      "completed": false,
+      "is_today": false,
+      "is_future": true
+    },
+    {
+      "day": 7,
+      "project": "\u2014",
+      "phase": "review",
+      "node": "any",
+      "title": "WEEKLY REVIEW \u2014 redo weakest Project 00-02 task",
+      "duration_min": 30,
+      "domains": [
+        "Review"
+      ],
+      "weak_area": null,
+      "study_guide_url": "/guides/GETTING_STARTED.md",
+      "completed": false,
+      "is_today": false,
+      "is_future": true
+    },
+    {
+      "day": 8,
+      "project": "03",
+      "phase": "1-2",
+      "node": "node3",
+      "title": "Permissions \u2014 users, groups, SGID",
+      "duration_min": 60,
+      "domains": [
+        "Users & Groups"
+      ],
+      "weak_area": null,
+      "study_guide_url": "/study/03.md",
+      "completed": false,
+      "is_today": false,
+      "is_future": true
+    },
+    {
+      "day": 9,
+      "project": "03",
+      "phase": "3-4",
+      "node": "node3",
+      "title": "Permissions \u2014 ACLs & sudoers.d",
+      "duration_min": 60,
+      "domains": [
+        "Users & Groups"
+      ],
+      "weak_area": null,
+      "study_guide_url": "/study/03.md",
+      "completed": false,
+      "is_today": false,
+      "is_future": true
+    },
+    {
+      "day": 10,
+      "project": "04",
+      "phase": "1-2",
+      "node": "node1",
+      "title": "systemd \u2014 custom unit file",
+      "duration_min": 60,
+      "domains": [
+        "Operations"
+      ],
+      "weak_area": null,
+      "study_guide_url": "/study/04.md",
+      "completed": false,
+      "is_today": false,
+      "is_future": true
+    },
+    {
+      "day": 11,
+      "project": "04",
+      "phase": "3-4",
+      "node": "node1",
+      "title": "systemd \u2014 limits.conf & sysctl persistence",
+      "duration_min": 60,
+      "domains": [
+        "Operations"
+      ],
+      "weak_area": null,
+      "study_guide_url": "/study/04.md",
+      "completed": false,
+      "is_today": false,
+      "is_future": true
+    },
+    {
+      "day": 12,
+      "project": "05",
+      "phase": "1-2",
+      "node": "node3",
+      "title": "Storage \u2014 GPT partition & mkfs",
+      "duration_min": 75,
+      "domains": [
+        "Storage"
+      ],
+      "weak_area": null,
+      "study_guide_url": "/study/05.md",
+      "completed": false,
+      "is_today": false,
+      "is_future": true
+    },
+    {
+      "day": 13,
+      "project": "05",
+      "phase": "3-4",
+      "node": "node3",
+      "title": "Storage \u2014 fstab UUID & reboot test",
+      "duration_min": 75,
+      "domains": [
+        "Storage"
+      ],
+      "weak_area": null,
+      "study_guide_url": "/study/05.md",
+      "completed": false,
+      "is_today": false,
+      "is_future": true
+    },
+    {
+      "day": 14,
+      "project": "\u2014",
+      "phase": "review",
+      "node": "any",
+      "title": "WEEKLY REVIEW \u2014 persistence reboot drill",
+      "duration_min": 45,
+      "domains": [
+        "Review"
+      ],
+      "weak_area": null,
+      "study_guide_url": "/guides/GETTING_STARTED.md",
+      "completed": false,
+      "is_today": false,
+      "is_future": true
+    },
+    {
+      "day": 15,
+      "project": "06",
+      "phase": "1-2",
+      "node": "node2",
+      "title": "Networking \u2014 static IP & /etc/hosts",
+      "duration_min": 60,
+      "domains": [
+        "Networking"
+      ],
+      "weak_area": null,
+      "study_guide_url": "/study/06.md",
+      "completed": false,
+      "is_today": false,
+      "is_future": true
+    },
+    {
+      "day": 16,
+      "project": "06",
+      "phase": "3",
+      "node": "node2",
+      "title": "SSH hardening \u2014 PermitRootLogin no",
+      "duration_min": 60,
+      "domains": [
+        "Networking"
+      ],
+      "weak_area": null,
+      "study_guide_url": "/study/06.md",
+      "completed": false,
+      "is_today": false,
+      "is_future": true
+    },
+    {
+      "day": 17,
+      "project": "06",
+      "phase": "4",
+      "node": "node1",
+      "title": "Remote storage \u2014 NFS or SSHFS mount",
+      "duration_min": 75,
+      "domains": [
+        "Networking",
+        "Storage"
+      ],
+      "weak_area": null,
+      "study_guide_url": "/study/06.md",
+      "completed": false,
+      "is_today": false,
+      "is_future": true
+    },
+    {
+      "day": 18,
+      "project": "07",
+      "phase": "1-2",
+      "node": "node2",
+      "title": "Firewall \u2014 firewalld/ufw default deny",
+      "duration_min": 60,
+      "domains": [
+        "Networking"
+      ],
+      "weak_area": null,
+      "study_guide_url": "/study/07.md",
+      "completed": false,
+      "is_today": false,
+      "is_future": true
+    },
+    {
+      "day": 19,
+      "project": "07",
+      "phase": "3-4",
+      "node": "node2",
+      "title": "NAT & port forward \u2014 sysctl ip_forward",
+      "duration_min": 75,
+      "domains": [
+        "Networking"
+      ],
+      "weak_area": null,
+      "study_guide_url": "/study/07.md",
+      "completed": false,
+      "is_today": false,
+      "is_future": true
+    },
+    {
+      "day": 20,
+      "project": "08",
+      "phase": "1-2",
+      "node": "um690",
+      "title": "Shell scripting \u2014 set -euo pipefail",
+      "duration_min": 60,
+      "domains": [
+        "Operations"
+      ],
+      "weak_area": null,
+      "study_guide_url": "/study/08.md",
+      "completed": false,
+      "is_today": false,
+      "is_future": true
+    },
+    {
+      "day": 21,
+      "project": "\u2014",
+      "phase": "review",
+      "node": "any",
+      "title": "WEEKLY REVIEW \u2014 timed 30-min exam drill",
+      "duration_min": 30,
+      "domains": [
+        "Review"
+      ],
+      "weak_area": null,
+      "study_guide_url": "/guides/GETTING_STARTED.md",
+      "completed": false,
+      "is_today": false,
+      "is_future": true
+    },
+    {
+      "day": 22,
+      "project": "08",
+      "phase": "3-4",
+      "node": "um690",
+      "title": "cron & at \u2014 midnight maintenance job",
+      "duration_min": 60,
+      "domains": [
+        "Operations"
+      ],
+      "weak_area": null,
+      "study_guide_url": "/study/08.md",
+      "completed": false,
+      "is_today": false,
+      "is_future": true
+    },
+    {
+      "day": 23,
+      "project": "09",
+      "phase": "1-2",
+      "node": "node3",
+      "title": "Capstone \u2014 forgesvc & SSH hardening",
+      "duration_min": 60,
+      "domains": [
+        "Capstone"
+      ],
+      "weak_area": null,
+      "study_guide_url": "/study/09.md",
+      "completed": false,
+      "is_today": false,
+      "is_future": true
+    },
+    {
+      "day": 24,
+      "project": "09",
+      "phase": "3",
+      "node": "node3",
+      "title": "Capstone \u2014 Docker Compose deploy",
+      "duration_min": 75,
+      "domains": [
+        "Capstone"
+      ],
+      "weak_area": "docker-compose",
+      "study_guide_url": "/study/09.md",
+      "completed": false,
+      "is_today": false,
+      "is_future": true
+    },
+    {
+      "day": 25,
+      "project": "09",
+      "phase": "4",
+      "node": "node3",
+      "title": "Capstone \u2014 firewalld tailnet-only rules",
+      "duration_min": 60,
+      "domains": [
+        "Capstone"
+      ],
+      "weak_area": null,
+      "study_guide_url": "/study/09.md",
+      "completed": false,
+      "is_today": false,
+      "is_future": true
+    },
+    {
+      "day": 26,
+      "project": "09",
+      "phase": "5",
+      "node": "node3",
+      "title": "Capstone \u2014 validation & reboot proof",
+      "duration_min": 90,
+      "domains": [
+        "Capstone"
+      ],
+      "weak_area": "docker-compose",
+      "study_guide_url": "/study/09.md",
+      "completed": false,
+      "is_today": false,
+      "is_future": true
+    },
+    {
+      "day": 27,
+      "project": "09",
+      "phase": "5",
+      "node": "node1",
+      "title": "Capstone \u2014 cross-node tailnet access test",
+      "duration_min": 45,
+      "domains": [
+        "Capstone"
+      ],
+      "weak_area": null,
+      "study_guide_url": "/study/09.md",
+      "completed": false,
+      "is_today": false,
+      "is_future": true
+    },
+    {
+      "day": 28,
+      "project": "\u2014",
+      "phase": "review",
+      "node": "any",
+      "title": "WEEKLY REVIEW \u2014 full capstone re-deploy from memory",
+      "duration_min": 90,
+      "domains": [
+        "Review"
+      ],
+      "weak_area": null,
+      "study_guide_url": "/guides/GETTING_STARTED.md",
+      "completed": false,
+      "is_today": false,
+      "is_future": true
+    },
+    {
+      "day": 29,
+      "project": "mix",
+      "phase": "drill",
+      "node": "node1",
+      "title": "Exam Drill \u2014 Essential Commands (timed 45m)",
+      "duration_min": 45,
+      "domains": [
+        "Essential Commands"
+      ],
+      "weak_area": null,
+      "study_guide_url": "/guides/GETTING_STARTED.md",
+      "completed": false,
+      "is_today": false,
+      "is_future": true
+    },
+    {
+      "day": 30,
+      "project": "mix",
+      "phase": "drill",
+      "node": "node3",
+      "title": "Exam Drill \u2014 Storage + Users (timed 45m)",
+      "duration_min": 45,
+      "domains": [
+        "Storage",
+        "Users & Groups"
+      ],
+      "weak_area": null,
+      "study_guide_url": "/guides/GETTING_STARTED.md",
+      "completed": false,
+      "is_today": false,
+      "is_future": true
+    },
+    {
+      "day": 31,
+      "project": "mix",
+      "phase": "drill",
+      "node": "node2",
+      "title": "Exam Drill \u2014 Networking (timed 45m)",
+      "duration_min": 45,
+      "domains": [
+        "Networking"
+      ],
+      "weak_area": null,
+      "study_guide_url": "/guides/GETTING_STARTED.md",
+      "completed": false,
+      "is_today": false,
+      "is_future": true
+    },
+    {
+      "day": 32,
+      "project": "mix",
+      "phase": "drill",
+      "node": "node1",
+      "title": "Exam Drill \u2014 Operations/systemd (timed 45m)",
+      "duration_min": 45,
+      "domains": [
+        "Operations"
+      ],
+      "weak_area": null,
+      "study_guide_url": "/guides/GETTING_STARTED.md",
+      "completed": false,
+      "is_today": false,
+      "is_future": true
+    },
+    {
+      "day": 33,
+      "project": "mix",
+      "phase": "drill",
+      "node": "node3",
+      "title": "Exam Drill \u2014 Capstone scenario (timed 90m)",
+      "duration_min": 90,
+      "domains": [
+        "All"
+      ],
+      "weak_area": null,
+      "study_guide_url": "/guides/GETTING_STARTED.md",
+      "completed": false,
+      "is_today": false,
+      "is_future": true
+    },
+    {
+      "day": 34,
+      "project": "\u2014",
+      "phase": "rest",
+      "node": "any",
+      "title": "REST \u2014 read man pages only, no lab",
+      "duration_min": 20,
+      "domains": [
+        "Recovery"
+      ],
+      "weak_area": null,
+      "study_guide_url": "/guides/GETTING_STARTED.md",
+      "completed": false,
+      "is_today": false,
+      "is_future": true
+    },
+    {
+      "day": 35,
+      "project": "\u2014",
+      "phase": "review",
+      "node": "any",
+      "title": "FINAL REVIEW \u2014 weakest domain remediation",
+      "duration_min": 60,
+      "domains": [
+        "Review"
+      ],
+      "weak_area": null,
+      "study_guide_url": "/guides/GETTING_STARTED.md",
+      "completed": false,
+      "is_today": false,
+      "is_future": true
+    },
+    {
+      "day": 36,
+      "project": "00",
+      "phase": "remix",
+      "node": "um690",
+      "title": "Cycle 2 \u2014 speed run Documentation Matrix",
+      "duration_min": 30,
+      "domains": [
+        "Essential Commands"
+      ],
+      "weak_area": null,
+      "study_guide_url": "/study/00.md",
+      "completed": false,
+      "is_today": false,
+      "is_future": true
+    },
+    {
+      "day": 37,
+      "project": "03",
+      "phase": "remix",
+      "node": "node3",
+      "title": "Cycle 2 \u2014 ACL + sudoers under time pressure",
+      "duration_min": 45,
+      "domains": [
+        "Users & Groups"
+      ],
+      "weak_area": null,
+      "study_guide_url": "/study/03.md",
+      "completed": false,
+      "is_today": false,
+      "is_future": true
+    },
+    {
+      "day": 38,
+      "project": "05",
+      "phase": "remix",
+      "node": "node3",
+      "title": "Cycle 2 \u2014 fstab from blank disk",
+      "duration_min": 60,
+      "domains": [
+        "Storage"
+      ],
+      "weak_area": null,
+      "study_guide_url": "/study/05.md",
+      "completed": false,
+      "is_today": false,
+      "is_future": true
+    },
+    {
+      "day": 39,
+      "project": "07",
+      "phase": "remix",
+      "node": "node2",
+      "title": "Cycle 2 \u2014 firewall + NAT gateway",
+      "duration_min": 60,
+      "domains": [
+        "Networking"
+      ],
+      "weak_area": null,
+      "study_guide_url": "/study/07.md",
+      "completed": false,
+      "is_today": false,
+      "is_future": true
+    },
+    {
+      "day": 40,
+      "project": "08",
+      "phase": "remix",
+      "node": "um690",
+      "title": "Cycle 2 \u2014 write maintenance script from scratch",
+      "duration_min": 60,
+      "domains": [
+        "Operations"
+      ],
+      "weak_area": "git-lfcs",
+      "study_guide_url": "/study/08.md",
+      "completed": false,
+      "is_today": false,
+      "is_future": true
+    },
+    {
+      "day": 41,
+      "project": "09",
+      "phase": "remix",
+      "node": "node3",
+      "title": "Cycle 2 \u2014 capstone full deploy timed 60m",
+      "duration_min": 60,
+      "domains": [
+        "Capstone"
+      ],
+      "weak_area": "git-lfcs",
+      "study_guide_url": "/study/09.md",
+      "completed": false,
+      "is_today": false,
+      "is_future": true
+    },
+    {
+      "day": 42,
+      "project": "\u2014",
+      "phase": "review",
+      "node": "any",
+      "title": "Mock Exam Day \u2014 all domains, 2 hours",
+      "duration_min": 120,
+      "domains": [
+        "All"
+      ],
+      "weak_area": null,
+      "study_guide_url": "/guides/GETTING_STARTED.md",
+      "completed": false,
+      "is_today": false,
+      "is_future": true
+    },
+    {
+      "day": 43,
+      "project": "\u2014",
+      "phase": "remediate",
+      "node": "any",
+      "title": "Remediate mock exam gaps",
+      "duration_min": 90,
+      "domains": [
+        "Review"
+      ],
+      "weak_area": null,
+      "study_guide_url": "/guides/GETTING_STARTED.md",
+      "completed": false,
+      "is_today": false,
+      "is_future": true
+    },
+    {
+      "day": 44,
+      "project": "09",
+      "phase": "final",
+      "node": "node3",
+      "title": "Final capstone \u2014 deploy + reboot + validate",
+      "duration_min": 90,
+      "domains": [
+        "Capstone"
+      ],
+      "weak_area": null,
+      "study_guide_url": "/study/09.md",
+      "completed": false,
+      "is_today": false,
+      "is_future": true
+    },
+    {
+      "day": 45,
+      "project": "\u2014",
+      "phase": "graduate",
+      "node": "any",
+      "title": "GRADUATION \u2014 archive evidence, schedule exam",
+      "duration_min": 30,
+      "domains": [
+        "All"
+      ],
+      "weak_area": null,
+      "study_guide_url": "/guides/GETTING_STARTED.md",
+      "completed": false,
+      "is_today": false,
+      "is_future": true
+    }
+  ],
+  "guidance": "# LFCS Daily Guidance \u2014 2026-06-16\n\n**Program day 3 of 45** | **~60 min** | **Node: node1** (`100.75.124.36`)\n\n---\n\n## Today's Focus: Directory Sandbox \u2014 SSH & mkdir -p trees\n\n| Field | Value |\n|-------|-------|\n| Project | 01 |\n| Phase | 1-2 |\n| LFCS Domains | Essential Commands |\n| Target node | **node1** (100.75.124.36) |\n| Study guide | `Study_Projects/01.md` |\n\n---\n\n## Step-by-Step (do in order)\n\n1. ssh kraken@node1\n2. mkdir -p /projects/archive/2026/\n3. Create symlink + hard link, verify\n\n---\n\n## Connect via Termius\n\n```bash\nssh kraken@100.75.124.36\n```\n\n---\n\n## LFCS Exam Tip\n> visudo -c after every sudoers.d edit.\n\n---\n## End-of-Session Checklist\n\n- [ ] Completed all steps above\n- [ ] Verified persistence (or scheduled reboot test)\n- [ ] Logged blockers in study journal\n- [ ] Append: `echo '2026-06-16 Project 01 phase 1-2 DONE' >> notifications/study-journal.log`\n\n---\n*Generated 2026-06-16 06:15:58 by lfcs-daily-guidance.sh*",
+  "resources": {
+    "youtube": [
+      {
+        "title": "Learn Linux TV \u2014 LFCS 2024 Playlist",
+        "url": "https://www.youtube.com/playlist?list=PLT98CRW-1Vz6Wv4xLiVapcfKqN8v_9yYj",
+        "source": "Learn Linux TV"
+      },
+      {
+        "title": "Linux Foundation \u2014 LFCS Exam",
+        "url": "https://training.linuxfoundation.org/certification/linux-foundation-certified-sysadmin-lfcs/",
+        "source": "Linux Foundation"
+      },
+      {
+        "title": "Linux File Permissions & Ownership",
+        "url": "https://www.youtube.com/watch?v=LnKoncb-tKs",
+        "source": "Learn Linux TV"
+      },
+      {
+        "title": "Hard Links vs Soft Links",
+        "url": "https://www.youtube.com/watch?v=3waHdRiW57c",
+        "source": "Learn Linux TV"
+      }
+    ],
+    "docs": [
+      {
+        "title": "LFCS Exam Objectives (PDF)",
+        "url": "https://assets.linuxfoundation.org//LFCS_Exam_Objectives_2024_v4.0.pdf",
+        "source": "Linux Foundation"
+      },
+      {
+        "title": "man-pages project",
+        "url": "https://www.man7.org/linux/man-pages/",
+        "source": "man7.org"
+      },
+      {
+        "title": "mkdir(1)",
+        "url": "https://man7.org/linux/man-pages/man1/mkdir.1.html",
+        "source": "man7.org"
+      },
+      {
+        "title": "ln(1)",
+        "url": "https://man7.org/linux/man-pages/man1/ln.1.html",
+        "source": "man7.org"
+      },
+      {
+        "title": "find(1)",
+        "url": "https://man7.org/linux/man-pages/man1/find.1.html",
+        "source": "man7.org"
+      }
+    ],
+    "articles": [
+      {
+        "title": "How To Use Linux man Pages",
+        "url": "https://www.digitalocean.com/community/tutorials/how-to-use-linux-man-pages",
+        "source": "DigitalOcean"
+      },
+      {
+        "title": "Linux Directory Structure Explained",
+        "url": "https://www.digitalocean.com/community/tutorials/linux-directory-structure-explained",
+        "source": "DigitalOcean"
+      }
+    ]
+  },
+  "urls": {
+    "portal": "http://100.81.13.95:3080/",
+    "browser": "https://100.81.13.95:3001/",
+    "ide": "/ide/",
+    "ara": "http://100.81.13.95:3082/"
+  },
+  "ara": {
+    "name": "Ara",
+    "tagline": "AIOS Education IDE",
+    "subtitle": "Your personal Linux study assistant",
+    "model": "Ara",
+    "coder_model": "qwen2.5-coder:7b",
+    "mvp": "LFCS Linux System Administration",
+    "knowledge_base": "ara_tutor",
+    "host": "um690",
+    "session_preamble": "LFCS Day 3/45 (cycle 1): Project 01, phase 1-2, node node1. Directory Sandbox \u2014 SSH & mkdir -p trees",
+    "rag_status": "unknown",
+    "rag_synced_at": null
+  },
+  "workspace": {
+    "username": "lfcs",
+    "url": "/ide/",
+    "hint": "Password: see notifications/tablet-credentials.txt on um690 (SSH via Termius). Same as Mullvad Lab Browser.",
+    "password_source": "tablet-credentials.txt"
+  },
+  "cluster": [
+    {
+      "name": "um690",
+      "tailscale_ip": "100.81.13.95",
+      "lfcs_role": "control-plane",
+      "reachable": true
+    },
+    {
+      "name": "node1",
+      "tailscale_ip": "100.75.124.36",
+      "lfcs_role": "primary-worker",
+      "reachable": true
+    },
+    {
+      "name": "node2",
+      "tailscale_ip": "100.104.54.20",
+      "lfcs_role": "edge-gateway",
+      "reachable": true
+    },
+    {
+      "name": "node3",
+      "tailscale_ip": "100.82.177.52",
+      "lfcs_role": "storage-forge",
+      "reachable": true
+    }
+  ]
+}

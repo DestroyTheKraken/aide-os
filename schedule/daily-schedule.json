@@ -1,0 +1,59 @@
+{
+  "program": "LFCS Exam Preparation — 45-Day Structured Cycle",
+  "start_date": "2026-06-14",
+  "timezone": "America/Chicago",
+  "notification_time": "07:00",
+  "days": [
+    {"day": 1,  "project": "00", "phase": "1-2", "node": "um690",  "title": "Documentation Matrix — man & info fluency", "domains": ["Essential Commands"], "duration_min": 45},
+    {"day": 2,  "project": "00", "phase": "3-4", "node": "um690",  "title": "Documentation Matrix — /usr/share/doc & apt", "domains": ["Essential Commands"], "duration_min": 45},
+    {"day": 3,  "project": "01", "phase": "1-2", "node": "node1",  "title": "Directory Sandbox — SSH & mkdir -p trees", "domains": ["Essential Commands"], "duration_min": 60},
+    {"day": 4,  "project": "01", "phase": "3-4", "node": "node1",  "title": "Directory Sandbox — links & file lifecycle", "domains": ["Essential Commands"], "duration_min": 60},
+    {"day": 5,  "project": "02", "phase": "1-2", "node": "node1",  "title": "Log Analysis — grep Failed password", "domains": ["Essential Commands", "Operations"], "duration_min": 60, "weak_area": "grep-awk-sed"},
+    {"day": 6,  "project": "02", "phase": "3-4", "node": "um690",  "title": "Log Analysis — tar evidence archive", "domains": ["Essential Commands", "Operations"], "duration_min": 45, "weak_area": "grep-awk-sed"},
+    {"day": 7,  "project": "—",  "phase": "review", "node": "any", "title": "WEEKLY REVIEW — redo weakest Project 00-02 task", "domains": ["Review"], "duration_min": 30},
+
+    {"day": 8,  "project": "03", "phase": "1-2", "node": "node3",  "title": "Permissions — users, groups, SGID", "domains": ["Users & Groups"], "duration_min": 60},
+    {"day": 9,  "project": "03", "phase": "3-4", "node": "node3",  "title": "Permissions — ACLs & sudoers.d", "domains": ["Users & Groups"], "duration_min": 60},
+    {"day": 10, "project": "04", "phase": "1-2", "node": "node1",  "title": "systemd — custom unit file", "domains": ["Operations"], "duration_min": 60},
+    {"day": 11, "project": "04", "phase": "3-4", "node": "node1",  "title": "systemd — limits.conf & sysctl persistence", "domains": ["Operations"], "duration_min": 60},
+    {"day": 12, "project": "05", "phase": "1-2", "node": "node3",  "title": "Storage — GPT partition & mkfs", "domains": ["Storage"], "duration_min": 75},
+    {"day": 13, "project": "05", "phase": "3-4", "node": "node3",  "title": "Storage — fstab UUID & reboot test", "domains": ["Storage"], "duration_min": 75},
+    {"day": 14, "project": "—",  "phase": "review", "node": "any", "title": "WEEKLY REVIEW — persistence reboot drill", "domains": ["Review"], "duration_min": 45},
+
+    {"day": 15, "project": "06", "phase": "1-2", "node": "node2",  "title": "Networking — static IP & /etc/hosts", "domains": ["Networking"], "duration_min": 60},
+    {"day": 16, "project": "06", "phase": "3",   "node": "node2",  "title": "SSH hardening — PermitRootLogin no", "domains": ["Networking"], "duration_min": 60},
+    {"day": 17, "project": "06", "phase": "4",   "node": "node1",  "title": "Remote storage — NFS or SSHFS mount", "domains": ["Networking", "Storage"], "duration_min": 75},
+    {"day": 18, "project": "07", "phase": "1-2", "node": "node2",  "title": "Firewall — firewalld/ufw default deny", "domains": ["Networking"], "duration_min": 60},
+    {"day": 19, "project": "07", "phase": "3-4", "node": "node2",  "title": "NAT & port forward — sysctl ip_forward", "domains": ["Networking"], "duration_min": 75},
+    {"day": 20, "project": "08", "phase": "1-2", "node": "um690",  "title": "Shell scripting — set -euo pipefail", "domains": ["Operations"], "duration_min": 60},
+    {"day": 21, "project": "—",  "phase": "review", "node": "any", "title": "WEEKLY REVIEW — timed 30-min exam drill", "domains": ["Review"], "duration_min": 30},
+
+    {"day": 22, "project": "08", "phase": "3-4", "node": "um690",  "title": "cron & at — midnight maintenance job", "domains": ["Operations"], "duration_min": 60},
+    {"day": 23, "project": "09", "phase": "1-2", "node": "node3",  "title": "Capstone — forgesvc & SSH hardening", "domains": ["Capstone"], "duration_min": 60},
+    {"day": 24, "project": "09", "phase": "3",   "node": "node3",  "title": "Capstone — Docker Compose deploy", "domains": ["Capstone"], "duration_min": 75, "weak_area": "docker-compose"},
+    {"day": 25, "project": "09", "phase": "4",   "node": "node3",  "title": "Capstone — firewalld tailnet-only rules", "domains": ["Capstone"], "duration_min": 60},
+    {"day": 26, "project": "09", "phase": "5",   "node": "node3",  "title": "Capstone — validation & reboot proof", "domains": ["Capstone"], "duration_min": 90, "weak_area": "docker-compose"},
+    {"day": 27, "project": "09", "phase": "5",   "node": "node1",  "title": "Capstone — cross-node tailnet access test", "domains": ["Capstone"], "duration_min": 45},
+    {"day": 28, "project": "—",  "phase": "review", "node": "any", "title": "WEEKLY REVIEW — full capstone re-deploy from memory", "domains": ["Review"], "duration_min": 90},
+
+    {"day": 29, "project": "mix", "phase": "drill", "node": "node1", "title": "Exam Drill — Essential Commands (timed 45m)", "domains": ["Essential Commands"], "duration_min": 45},
+    {"day": 30, "project": "mix", "phase": "drill", "node": "node3", "title": "Exam Drill — Storage + Users (timed 45m)", "domains": ["Storage", "Users & Groups"], "duration_min": 45},
+    {"day": 31, "project": "mix", "phase": "drill", "node": "node2", "title": "Exam Drill — Networking (timed 45m)", "domains": ["Networking"], "duration_min": 45},
+    {"day": 32, "project": "mix", "phase": "drill", "node": "node1", "title": "Exam Drill — Operations/systemd (timed 45m)", "domains": ["Operations"], "duration_min": 45},
+    {"day": 33, "project": "mix", "phase": "drill", "node": "node3", "title": "Exam Drill — Capstone scenario (timed 90m)", "domains": ["All"], "duration_min": 90},
+    {"day": 34, "project": "—",  "phase": "rest",  "node": "any", "title": "REST — read man pages only, no lab", "domains": ["Recovery"], "duration_min": 20},
+    {"day": 35, "project": "—",  "phase": "review", "node": "any", "title": "FINAL REVIEW — weakest domain remediation", "domains": ["Review"], "duration_min": 60},
+
+    {"day": 36, "project": "00", "phase": "remix", "node": "um690",  "title": "Cycle 2 — speed run Documentation Matrix", "domains": ["Essential Commands"], "duration_min": 30},
+    {"day": 37, "project": "03", "phase": "remix", "node": "node3",  "title": "Cycle 2 — ACL + sudoers under time pressure", "domains": ["Users & Groups"], "duration_min": 45},
+    {"day": 38, "project": "05", "phase": "remix", "node": "node3",  "title": "Cycle 2 — fstab from blank disk", "domains": ["Storage"], "duration_min": 60},
+    {"day": 39, "project": "07", "phase": "remix", "node": "node2",  "title": "Cycle 2 — firewall + NAT gateway", "domains": ["Networking"], "duration_min": 60},
+    {"day": 40, "project": "08", "phase": "remix", "node": "um690",  "title": "Cycle 2 — write maintenance script from scratch", "domains": ["Operations"], "duration_min": 60, "weak_area": "git-lfcs"},
+    {"day": 41, "project": "09", "phase": "remix", "node": "node3",  "title": "Cycle 2 — capstone full deploy timed 60m", "domains": ["Capstone"], "duration_min": 60, "weak_area": "git-lfcs"},
+    {"day": 42, "project": "—",  "phase": "review", "node": "any", "title": "Mock Exam Day — all domains, 2 hours", "domains": ["All"], "duration_min": 120},
+
+    {"day": 43, "project": "—",  "phase": "remediate", "node": "any", "title": "Remediate mock exam gaps", "domains": ["Review"], "duration_min": 90},
+    {"day": 44, "project": "09",  "phase": "final", "node": "node3",  "title": "Final capstone — deploy + reboot + validate", "domains": ["Capstone"], "duration_min": 90},
+    {"day": 45, "project": "—",  "phase": "graduate", "node": "any", "title": "GRADUATION — archive evidence, schedule exam", "domains": ["All"], "duration_min": 30}
+  ]
+}

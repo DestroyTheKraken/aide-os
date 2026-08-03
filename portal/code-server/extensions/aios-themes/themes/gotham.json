@@ -1,0 +1,28 @@
+{
+  "name": "AIOS Gotham",
+  "type": "dark",
+  "colors": {
+    "editor.background": "#0c1014",
+    "editor.foreground": "#99d1ce",
+    "editor.selectionBackground": "#0a3749",
+    "editorLineNumber.foreground": "#195466",
+    "sideBar.background": "#11151c",
+    "activityBar.background": "#11151c",
+    "activityBar.activeBorder": "#33859e",
+    "titleBar.activeBackground": "#11151c",
+    "statusBar.background": "#11151c",
+    "panel.background": "#0c1014",
+    "terminal.background": "#0c1014"
+  },
+  "tokenColors": [
+    { "scope": ["comment"], "settings": { "foreground": "#195466", "fontStyle": "italic" } },
+    { "scope": ["string"], "settings": { "foreground": "#2aa889" } },
+    { "scope": ["constant.numeric"], "settings": { "foreground": "#edb443" } },
+    { "scope": ["keyword", "storage.type"], "settings": { "foreground": "#33859e" } },
+    { "scope": ["entity.name.function", "support.function"], "settings": { "foreground": "#33859e" } },
+    { "scope": ["entity.name.type", "support.type"], "settings": { "foreground": "#edb443" } },
+    { "scope": ["variable"], "settings": { "foreground": "#99d1ce" } },
+    { "scope": ["entity.name.tag"], "settings": { "foreground": "#33859e" } },
+    { "scope": ["support.class"], "settings": { "foreground": "#4e5166" } }
+  ]
+}

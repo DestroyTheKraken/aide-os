@@ -1,0 +1,237 @@
+# =============================================================================
+# LFCS Learning Backend — um690 control plane
+#
+# TABLET WORKFLOW:
+#   1. Open LFCS Portal:  http://<tailscale-ip>:3080  (daily dashboard)
+#   2. Open Mullvad Browser: https://<tailscale-ip>:3001  (secure Firefox lab)
+#
+# SECURITY: ports bind to Tailscale IP only. ufw rules applied by deploy script.
+# =============================================================================
+
+services:
+  # ---------------------------------------------------------------------------
+  # LFCS Learning Portal — daily dashboard, guides, cluster status
+  # ---------------------------------------------------------------------------
+  lfcs-portal:
+    image: nginx:alpine
+    container_name: lfcs-portal
+    hostname: lfcs-portal
+    restart: unless-stopped
+
+    ports:
+      - "${FORGE_BIND_IP:?Set FORGE_BIND_IP}:3080:80"
+
+    volumes:
+      - ${LFCS_ROOT}/portal/www:/usr/share/nginx/html:ro
+      - ${LFCS_ROOT}/portal/static:/usr/share/nginx/static:ro
+      - ${LFCS_ROOT}/guides:/srv/lfcs/guides:ro
+      - ${LFCS_ROOT}/Study_Projects:/srv/lfcs/study:ro
+      - ${LFCS_ROOT}/portal/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+
+    healthcheck:
+      # nginx:alpine has no wget/curl — use pid check
+      test: ["CMD-SHELL", "test -s /run/nginx.pid && kill -0 $(cat /run/nginx.pid)"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+    depends_on:
+      lfcs-ide:
+        condition: service_started
+      lfcs-openwebui:
+        condition: service_started
+
+    networks:
+      - lfcs-net
+
+  # ---------------------------------------------------------------------------
+  # Ollama — local LLM runtime (LFCS tutor). CPU on um690 — modest limits.
+  # Direct API (tailnet): http://<tailscale-ip>:11434
+  # ---------------------------------------------------------------------------
+  lfcs-ollama:
+    image: ollama/ollama:latest
+    container_name: lfcs-ollama
+    hostname: lfcs-ollama
+    restart: unless-stopped
+
+    environment:
+      - TZ=${TZ:-America/Chicago}
+      - OLLAMA_HOST=0.0.0.0:11434
+      - OLLAMA_KEEP_ALIVE=5m
+      - OLLAMA_MAX_LOADED_MODELS=1
+      - OLLAMA_NUM_PARALLEL=1
+      - OLLAMA_MAX_QUEUE=2
+
+    ports:
+      - "${FORGE_BIND_IP}:11434:11434"
+
+    volumes:
+      - ollama-data:/root/.ollama
+
+    mem_limit: 10g
+    cpus: 12
+
+    healthcheck:
+      test: ["CMD-SHELL", "ollama list >/dev/null 2>&1 || exit 1"]
+      interval: 30s
+      timeout: 15s
+      retries: 5
+      start_period: 45s
+
+    networks:
+      - lfcs-net
+
+  # ---------------------------------------------------------------------------
+  # Open WebUI — Ara chat backend on um690 (dedicated port avoids /static/ clash with portal)
+  # Access: http://<tailscale-ip>:3082/  or dashboard → Ara sidebar
+  # ---------------------------------------------------------------------------
+  lfcs-openwebui:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: lfcs-openwebui
+    hostname: lfcs-openwebui
+    restart: unless-stopped
+
+    environment:
+      - TZ=${TZ:-America/Chicago}
+      - WEBUI_AUTH=false
+      - ENABLE_SIGNUP=false
+      - ENABLE_OLLAMA_API=true
+      - OLLAMA_BASE_URL=http://lfcs-ollama:11434
+      - WEBUI_SECRET_KEY=${OPENWEBUI_SECRET_KEY:-lfcs-openwebui-tailnet}
+      - WEBUI_URL=http://${FORGE_BIND_IP:?Set FORGE_BIND_IP}:3082
+      - CORS_ALLOW_ORIGIN=http://${FORGE_BIND_IP}:3080;http://${FORGE_BIND_IP}:3082
+      - DEFAULT_MODELS=Ara,qwen2.5-coder:7b
+      - HOST=0.0.0.0
+      - RAG_TOP_K=${RAG_TOP_K:-5}
+      - ENABLE_RAG_WEB_SEARCH=${ENABLE_RAG_WEB_SEARCH:-false}
+      - ENABLE_NATIVE_FUNCTION_CALLING=false
+
+    ports:
+      - "${FORGE_BIND_IP}:3082:8080"
+
+    volumes:
+      - openwebui-data:/app/backend/data
+      - ${LFCS_ROOT:-/home/kraken/Projects/aios-ed}/ara_tutor:/app/backend/data/ara_tutor:ro
+
+    depends_on:
+      lfcs-ollama:
+        condition: service_healthy
+
+    healthcheck:
+      test: ["CMD-SHELL", "curl -sf http://localhost:8080/health || curl -sf http://localhost:8080/ || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 90s
+
+    networks:
+      - lfcs-net
+
+  # ---------------------------------------------------------------------------
+  # LFCS Workspace IDE — code-server (browser VS Code for daily projects)
+  # Access: http://<tailscale-ip>:3080/ide/  or Workspace tab in dashboard
+  # ---------------------------------------------------------------------------
+  lfcs-ide:
+    image: codercom/code-server:latest
+    container_name: lfcs-ide
+    hostname: lfcs-ide
+    restart: unless-stopped
+
+    environment:
+      - TZ=${TZ:-America/Chicago}
+      - PASSWORD=${FORGE_WEB_PASSWORD:?Set FORGE_WEB_PASSWORD}
+      - CS_BASE_PATH=/ide
+      - CS_DISABLE_FRAME_ANCESTORS=true
+      - CS_DISABLE_GETTING_STARTED_OVERRIDE=true
+
+    volumes:
+      - ${LFCS_ROOT}:/home/coder/LFCS
+      - ${LFCS_ROOT}/portal/code-server/User:/home/coder/.local/share/code-server/User
+      - ${LFCS_ROOT}/portal/code-server/extensions/aios-themes:/home/coder/.local/share/code-server/extensions/aios-themes
+
+    command:
+      - /bin/sh
+      - -lc
+      - |
+        code-server --install-extension /home/coder/.local/share/code-server/extensions/aios-themes 2>/dev/null || true
+        exec code-server --bind-addr 0.0.0.0:8080 --auth password /home/coder/LFCS
+
+    healthcheck:
+      test: ["CMD-SHELL", "curl -sf http://localhost:8080/ide/ || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+
+    networks:
+      - lfcs-net
+
+  # ---------------------------------------------------------------------------
+  # Mullvad Browser — privacy-focused Firefox (linuxserver)
+  # Your daily exam-simulation workspace inside the tailnet
+  # ---------------------------------------------------------------------------
+  mullvad-browser:
+    image: lscr.io/linuxserver/mullvad-browser:latest
+    container_name: secure-browser-forge
+    hostname: secure-browser-forge
+    restart: unless-stopped
+
+    environment:
+      - PUID=${FORGE_PUID:-1000}
+      - PGID=${FORGE_PGID:-1000}
+      - TZ=${TZ:-America/Chicago}
+      - CUSTOM_USER=${FORGE_WEB_USER:-lfcs}
+      - PASSWORD=${FORGE_WEB_PASSWORD:?Set FORGE_WEB_PASSWORD}
+      - TITLE=LFCS Lab Browser
+      # X11 mode (no GPU on um690) — Wayland causes instability
+      - PIXELFLUX_WAYLAND=false
+      # Responsive streaming: fixed 16:9 server canvas + CSS scaling to ANY client viewport
+      # (prevents tablet resize crash while fitting mobile + desktop)
+      - MAX_RES=1280x720
+      - SELKIES_MANUAL_WIDTH=1280
+      - SELKIES_MANUAL_HEIGHT=720
+      - SELKIES_FORCE_ALIGNED_RESOLUTION=true
+      - SELKIES_USE_CSS_SCALING=true
+      - SELKIES_USE_BROWSER_CURSORS=true
+      - SELKIES_FRAMERATE=30
+      - DISABLE_IPV6=true
+
+    volumes:
+      - forge-config:/config
+      # Seed Firefox bookmarks on first run
+      - ${LFCS_ROOT}/portal/bookmarks.html:/defaults/bookmarks.html:ro
+
+    ports:
+      - "${FORGE_BIND_IP}:3001:3001"
+
+    shm_size: "2gb"
+
+    security_opt:
+      - seccomp:unconfined
+
+    depends_on:
+      lfcs-portal:
+        condition: service_started
+
+    healthcheck:
+      test: ["CMD-SHELL", "curl -kf https://localhost:3001/ || exit 1"]
+      interval: 60s
+      timeout: 15s
+      retries: 5
+      start_period: 180s
+
+    networks:
+      - lfcs-net
+
+networks:
+  lfcs-net:
+    driver: bridge
+
+volumes:
+  forge-config:
+    name: secure-browser-forge-config
+  openwebui-data:
+    name: lfcs-openwebui-data
+  ollama-data:
+    name: lfcs-ollama-data

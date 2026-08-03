@@ -1,0 +1,11 @@
+{
+  "name": "lfcs-portal",
+  "private": true,
+  "description": "LFCS dashboard static assets",
+  "scripts": {
+    "vendor:icons": "mkdir -p static/vendor/bootstrap-icons/fonts && cp node_modules/bootstrap-icons/font/bootstrap-icons.css static/vendor/bootstrap-icons/ && cp node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff2 static/vendor/bootstrap-icons/fonts/"
+  },
+  "dependencies": {
+    "bootstrap-icons": "^1.11.3"
+  }
+}

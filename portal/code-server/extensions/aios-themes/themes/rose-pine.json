@@ -1,0 +1,28 @@
+{
+  "name": "AIOS Rosé Pine",
+  "type": "dark",
+  "colors": {
+    "editor.background": "#1f1d2e",
+    "editor.foreground": "#e0def4",
+    "editor.selectionBackground": "#2f2c40",
+    "editorLineNumber.foreground": "#908caa",
+    "sideBar.background": "#26233a",
+    "activityBar.background": "#26233a",
+    "activityBar.activeBorder": "#c4a7e7",
+    "titleBar.activeBackground": "#26233a",
+    "statusBar.background": "#26233a",
+    "panel.background": "#1f1d2e",
+    "terminal.background": "#1f1d2e"
+  },
+  "tokenColors": [
+    { "scope": ["comment"], "settings": { "foreground": "#908caa", "fontStyle": "italic" } },
+    { "scope": ["string"], "settings": { "foreground": "#31748f" } },
+    { "scope": ["constant.numeric"], "settings": { "foreground": "#f6c177" } },
+    { "scope": ["keyword", "storage.type"], "settings": { "foreground": "#9ccfd8" } },
+    { "scope": ["entity.name.function", "support.function"], "settings": { "foreground": "#c4a7e7" } },
+    { "scope": ["entity.name.type", "support.type"], "settings": { "foreground": "#f6c177" } },
+    { "scope": ["variable"], "settings": { "foreground": "#e0def4" } },
+    { "scope": ["entity.name.tag"], "settings": { "foreground": "#9ccfd8" } },
+    { "scope": ["support.class"], "settings": { "foreground": "#c4a7e7" } }
+  ]
+}

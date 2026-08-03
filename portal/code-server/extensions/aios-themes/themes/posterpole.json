@@ -1,0 +1,28 @@
+{
+  "name": "AIOS Posterpole",
+  "type": "dark",
+  "colors": {
+    "editor.background": "#25222a",
+    "editor.foreground": "#c6c0b9",
+    "editor.selectionBackground": "#4d4d4d",
+    "editorLineNumber.foreground": "#a5a59c",
+    "sideBar.background": "#2c2c30",
+    "activityBar.background": "#2c2c30",
+    "activityBar.activeBorder": "#8a99a8",
+    "titleBar.activeBackground": "#2c2c30",
+    "statusBar.background": "#2c2c30",
+    "panel.background": "#25222a",
+    "terminal.background": "#25222a"
+  },
+  "tokenColors": [
+    { "scope": ["comment"], "settings": { "foreground": "#a5a59c", "fontStyle": "italic" } },
+    { "scope": ["string"], "settings": { "foreground": "#92a38f" } },
+    { "scope": ["constant.numeric"], "settings": { "foreground": "#cc9166" } },
+    { "scope": ["keyword", "storage.type"], "settings": { "foreground": "#6c7f93" } },
+    { "scope": ["entity.name.function", "support.function"], "settings": { "foreground": "#8a99a8" } },
+    { "scope": ["entity.name.type", "support.type"], "settings": { "foreground": "#cc9166" } },
+    { "scope": ["variable"], "settings": { "foreground": "#c6c0b9" } },
+    { "scope": ["entity.name.tag"], "settings": { "foreground": "#6c7f93" } },
+    { "scope": ["support.class"], "settings": { "foreground": "#b894af" } }
+  ]
+}

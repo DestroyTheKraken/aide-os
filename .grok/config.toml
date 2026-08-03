@@ -1,0 +1,12 @@
+# AIOS Education IDE — project-scoped Grok config
+
+[agent]
+name = "grok-build"
+
+[subagents]
+enabled = true
+
+[subagents.toggle]
+project-overview = true
+project-roadmap = true
+goals-readiness = true

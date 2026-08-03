@@ -15,10 +15,10 @@ level: beginner
 
 ## Contents
 
-- [[bootcamp/lfcs/domains/D03-running-systems/objectives]]
+- [[bootcamp/01_lfcs/domains/D03-running-systems/objectives]]
 - Lessons (see folder)
 - Labs (see folder)
-- [[bootcamp/lfcs/domains/D03-running-systems/media/MEDIA-QUEUE]]
+- [[bootcamp/01_lfcs/domains/D03-running-systems/media/MEDIA-QUEUE]]
 
 ---
 

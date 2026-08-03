@@ -9,7 +9,7 @@ status: active
 > Know the FHS tree, navigate confidently, inspect files without destroying them.
 
 > [!todo] Next
-> - [ ] [[bootcamp/lfcs/labs/LAB-01-filesystem-tree]]
+> - [ ] [[bootcamp/01_lfcs/labs/LAB-01-filesystem-tree]]
 
 ## Objectives
 
@@ -19,7 +19,7 @@ status: active
 
 ## Labs
 
-- [[bootcamp/lfcs/labs/LAB-01-filesystem-tree]]
+- [[bootcamp/01_lfcs/labs/LAB-01-filesystem-tree]]
 
 ## Official / man
 

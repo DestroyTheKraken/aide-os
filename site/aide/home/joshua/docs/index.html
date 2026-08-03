@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Docs · Destroy The Kraken Lab Portfolio</title>
+  <link rel="icon" type="image/png" href="../assets/img/dtk-logo.png" />
+  <link rel="stylesheet" href="../assets/style.css" />
+</head>
+<body>
+  <div class="sky" aria-hidden="true"></div>
+  <div class="stars" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="brand-bar">
+      <a class="brand" href="../">
+        <img src="../assets/img/dtk-logo.png" alt="Destroy The Kraken" width="42" height="42" />
+        <div class="brand-text">
+          <strong>Destroy The Kraken</strong>
+          <span>Docs</span>
+        </div>
+      </a>
+      <nav class="nav">
+        <a href="../">Home</a>
+        <a href="../projects/">Projects</a>
+        <a href="../skills/">Skills</a>
+        <a href="./">Docs</a>
+        <a class="cta" href="https://www.destroythekraken.com">DTK Site</a>
+      </nav>
+    </div>
+
+    <section class="card">
+      <p class="eyebrow">Public pointers</p>
+      <h2>Documentation</h2>
+      <p>Full ops specs stay in private lab trees. Public links and product boundaries:</p>
+      <ul>
+        <li><a href="https://www.destroythekraken.com">Destroy The Kraken</a> — brand &amp; rural IT</li>
+        <li><a href="https://www.destroythekraken.com/lab-notes.html">How I build &amp; document</a></li>
+        <li><a href="https://documentation.ubuntu.com/core/">Ubuntu Core documentation</a></li>
+        <li><a href="https://trainingportal.linuxfoundation.org/">Linux Foundation training</a> (LFCS path)</li>
+      </ul>
+      <p class="note">
+        Lab-only (not published here): design docs under <code>AIDE_OS/docs/design/</code>,
+        portfolio map <code>docs/portfolio/</code>, USAGE-LOG under <code>docs/ops/</code>.
+        No school-SKU. No student PII. No management IPs.
+      </p>
+      <p><a href="../">← Portfolio home</a></p>
+    </section>
+
+    <footer class="foot">
+      <p>© <span id="y"></span> Joshua Hickman · Destroy The Kraken</p>
+    </footer>
+  </div>
+  <script>document.getElementById("y").textContent = new Date().getFullYear();</script>
+</body>
+</html>

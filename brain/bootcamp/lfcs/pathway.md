@@ -19,7 +19,7 @@ status: active
 | 6 | D07–D08 | Security concepts + troubleshoot drills |
 | 7+ | Mixed + media finals | Exam-map green |
 
-Then: [[bootcamp/canonical/00-MOC|Canonical Academy track]]
+Then: [[bootcamp/02_canonical/00-MOC|Canonical Academy track]]
 
 ---
 

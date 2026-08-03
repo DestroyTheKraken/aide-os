@@ -1,0 +1,77 @@
+#!/usr/bin/env bash
+# aide-evac — Preemptive readiness OR real evacuation path
+#
+# STATUS MODEL
+#   Default: --ready  → NOT assuming active evacuation.
+#   Escalation: --go  → you are leaving; adds graceful halt path.
+#
+# Usage:
+#   aide-evac              # same as --ready
+#   aide-evac --ready      # full 911 + dual-backup (preemptive)
+#   aide-evac --go         # ready + aide-halt --execute (confirm)
+#   aide-evac --go --yes   # non-interactive halt after pack
+#   aide-evac --help
+set -euo pipefail
+
+export PATH="${HOME}/.local/bin:${HOME}/AIDE_OS/bin:${PATH}"
+
+MODE="ready"
+YES=0
+
+for a in "$@"; do
+  case "$a" in
+    --ready) MODE="ready" ;;
+    --go) MODE="go" ;;
+    --yes|-y) YES=1 ;;
+    --help|-h)
+      sed -n '2,16p' "$0"
+      exit 0
+      ;;
+  esac
+done
+
+log(){ echo "[aide-evac $(date -Iseconds)] $*"; }
+ok(){ echo "[aide-evac] OK  $*"; }
+
+echo
+echo "╔══════════════════════════════════════════════════════════╗"
+echo "║  GrokAide EVAC / readiness                               ║"
+echo "║  Mode: ${MODE}                                           ║"
+if [[ "$MODE" == "ready" ]]; then
+  echo "║  Preemptive only — NOT treating this as active leave     ║"
+else
+  echo "║  GO — escalation path (pack + graceful halt)             ║"
+fi
+echo "╚══════════════════════════════════════════════════════════╝"
+echo
+
+log "1/3 aide-heal baseline"
+aide-heal || log "health degraded — packing anyway"
+
+log "2/3 aide-911 full pack → NAS"
+aide-911 || log "911 non-zero — dual-backup may still use prior LATEST"
+
+log "3/3 aide-dual-backup (NAS SECURE + GITHUB-SAFE + PC mirror)"
+aide-dual-backup || log "dual-backup issues — check NAS"
+
+ok "Readiness pack complete"
+echo "  Pack:    /mnt/systems_admin/um690/EMERGENCY-POWER-LATEST"
+echo "  SECURE:  /mnt/systems_admin/kraken/backups/SECURE-LATEST"
+echo "  SAFE:    /mnt/systems_admin/kraken/backups/GITHUB-SAFE-LATEST"
+echo "  PC:      ~/EVAC-READY"
+echo "  Menu:    aide-menu  (Ghostty Ctrl+Shift+A)"
+echo
+
+if [[ "$MODE" == "go" ]]; then
+  log "GO: invoking graceful halt path"
+  if [[ "$YES" -eq 1 ]]; then
+    aide-halt --execute --yes
+  else
+    aide-halt --execute
+  fi
+else
+  log "READY only — no shutdown. If escalation starts:  aide-evac --go"
+  log "Drill halt plan anytime:  aide-halt   (dry-run)"
+fi
+
+exit 0

@@ -11,8 +11,8 @@ status: draft
 | Area | Official entry | Vault |
 |------|----------------|-------|
 | Academy home | https://canonical.com/academy | this track |
-| Ubuntu Server docs | https://ubuntu.com/server/docs | [[bootcamp/canonical/pathways/ubuntu-server]] |
-| Ubuntu Core docs | https://documentation.ubuntu.com/core/ | [[bootcamp/canonical/pathways/ubuntu-core]] |
+| Ubuntu Server docs | https://ubuntu.com/server/docs | [[ubuntu-server]] |
+| Ubuntu Core docs | https://documentation.ubuntu.com/core/ | [[ubuntu-core]] |
 | Desktop | https://ubuntu.com/desktop | optional later |
 | Product portfolio | https://canonical.com/ | overview modules |
 

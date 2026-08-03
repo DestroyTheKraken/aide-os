@@ -1,0 +1,72 @@
+# AIDE_OS product config tree (schema stub)
+# On Core this maps to snap common data; on classic-shim to ~/.config/aide-os/
+
+version: 1
+root: aide://
+
+nodes:
+  profile:
+    description: Active policy pack (open vs locked ecosystem)
+    type: enum
+    values: [open, google, microsoft, canonical, education-lfcs, grokaide-dev]
+    risk: medium
+
+  desktop.theme:
+    description: Terminal / chrome theme pack
+    type: enum
+    values: [hickmedia-dracula-neon-obsidian, nes-markdown-learn]
+    risk: low
+
+  desktop.terminal:
+    description: Preferred terminal emulator
+    type: enum
+    values: [ghostty, ptyxis, gnome-terminal]
+    risk: low
+
+  learning.track:
+    description: Primary learning pathway
+    type: enum
+    values: [lfcs, canonical, web, uiux, cloud]
+    risk: low
+
+  learning.vault:
+    description: Obsidian vault path
+    type: path
+    default: ~/AIDE_OS/brain
+    risk: low
+
+  network.tailscale:
+    description: Tailscale expected for companions
+    type: bool
+    default: true
+    risk: medium
+
+  ai.provider:
+    description: Local AI executor plug
+    type: enum
+    values: [grok, local, none]
+    risk: medium
+
+  ai.permission_mode:
+    description: Tool permission default (product forbids permanent yolo)
+    type: enum
+    values: [default, auto]
+    risk: high
+
+  security.auto_heal:
+    description: Allowlisted self-heal enabled
+    type: bool
+    default: false
+    risk: high
+
+  iot.hub:
+    description: Home automation / sensory hub integration (capability)
+    type: enum
+    values: [none, home-assistant, matter-bridge]
+    risk: medium
+
+  iot.family_safe_mode:
+    description: Restrict automations to family/ethics allowlist
+    type: bool
+    default: true
+    risk: low

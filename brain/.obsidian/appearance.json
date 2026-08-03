@@ -1,6 +1,14 @@
 {
-  "cssTheme": "Obuntu",
+  "cssTheme": "Cyber Glow",
   "baseFontSize": 16,
   "theme": "obsidian",
-  "accentColor": "#710404"
+  "accentColor": "#c3e4e9",
+  "enabledCssSnippets": [
+    "grokaide-starfield"
+  ],
+  "translucency": false,
+  "showRibbon": false,
+  "nativeMenus": true,
+  "baseFontSizeAction": true,
+  "showViewHeader": false
 }

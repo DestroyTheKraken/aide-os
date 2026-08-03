@@ -1,0 +1,28 @@
+# GrokAide — Electric Neon Muted Dystopia
+# Void hull + cooled cyan/magenta (not candy-rave). Focus-friendly for LFCS + GrokBuild.
+#
+# bg #07060c · panel #0e0d14 · cyan #3d9ea8 · mag #a84d8c · purple #7a6a9e
+# text #a8b0c4 · dim #5c6478 · warn #c47a5a
+
+palette = 0=#0e0d14
+palette = 1=#a84d6e
+palette = 2=#4a8f6a
+palette = 3=#a89050
+palette = 4=#4a7a9e
+palette = 5=#7a6a9e
+palette = 6=#3d9ea8
+palette = 7=#a8b0c4
+palette = 8=#3a3848
+palette = 9=#c45a88
+palette = 10=#5aaa7a
+palette = 11=#c4a860
+palette = 12=#5a8ab8
+palette = 13=#9a7ab8
+palette = 14=#50c0c8
+palette = 15=#d0d4e0
+background = #07060c
+foreground = #a8b0c4
+cursor-color = #3d9ea8
+cursor-text = #07060c
+selection-background = #1a1830
+selection-foreground = #d0d4e0

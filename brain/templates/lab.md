@@ -18,7 +18,7 @@ risk: read-only
 |-------|--------|
 | **Host** | um690 / VM |
 | **Risk** | read-only / reversible / destructive-VM |
-| **Domain** | [[bootcamp/lfcs/domains/01-filesystem]] |
+| **Domain** | [[01-filesystem]] |
 | **Time** | |
 
 ## Prerequisites

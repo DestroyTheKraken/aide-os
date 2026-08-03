@@ -1,0 +1,25 @@
+# GrokAide operator terminal (Ghostty) — installed by apply-ghostty.sh
+# Product themes live in ~/.config/ghostty/themes/ (copied from idee/ghostty/themes/)
+
+# Primary: electric neon muted dystopia (focus / LFCS / GrokBuild)
+theme = grokaide-electric-dystopia
+
+# Brighter neon work pack — uncomment to switch:
+# theme = hickmedia-dracula-neon-obsidian
+
+# Learning pack (Markdown / UI-UX study) — uncomment to switch:
+# theme = nes-markdown-learn
+
+font-size = 12
+window-padding-x = 10
+window-padding-y = 8
+mouse-hide-while-typing = true
+clipboard-paste-protection = true
+
+# Grok Build / modern TUI friendliness (defaults are usually fine; explicit for clarity)
+# Ghostty supports Kitty keyboard protocol and truecolor out of the box.
+
+# ── AIDE_OS command menu (preemptive readiness) ─────────────────
+keybind = ctrl+shift+a=text:aide-menu\n
+keybind = ctrl+shift+h=text:aide-heal\n
+keybind = ctrl+shift+u=text:aide-911 --fast\n

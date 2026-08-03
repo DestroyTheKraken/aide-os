@@ -18,7 +18,7 @@ risk: reversible
 |-------|--------|
 | **Host** | um690 |
 | **Risk** | **Reversible** — only touch `~/tmp-lfcs/` |
-| **Domain** | [[bootcamp/lfcs/domains/D02-users-permissions/00-domain]] |
+| **Domain** | [[bootcamp/01_lfcs/domains/D02-users-permissions/00-domain]] |
 | **Time** | ~30–45 min |
 
 ---

@@ -107,6 +107,29 @@ for desk in aide-obsidian-brain.desktop aide-grok-tui.desktop aide-lab-term.desk
   fi
 done
 
+# Ghostty (GrokAide terminal)
+if command -v ghostty >/dev/null 2>&1; then
+  ok "ghostty on PATH: $(command -v ghostty)"
+else
+  echo "  WARN ghostty not on PATH (GrokAide preferred terminal)"
+fi
+GHOSTTY_CFG="${XDG_CONFIG_HOME:-$HOME/.config}/ghostty/config"
+if [ -f "$GHOSTTY_CFG" ] && grep -q 'hickmedia-dracula-neon-obsidian' "$GHOSTTY_CFG" 2>/dev/null; then
+  ok "Ghostty GrokAide theme config"
+else
+  echo "  WARN Ghostty theme not applied (run: bash ~/AIDE_OS/idee/ghostty/apply-ghostty.sh)"
+fi
+if [ -f "$HOME/AIDE_OS/idee/ghostty/themes/nes-markdown-learn" ]; then
+  ok "NES Markdown learn theme in repo"
+else
+  bad "missing idee/ghostty/themes/nes-markdown-learn"
+fi
+if grep -q 'ghostty' "$HOME/AIDE_OS/idee/run-in-terminal.sh" 2>/dev/null; then
+  ok "run-in-terminal prefers Ghostty"
+else
+  bad "run-in-terminal.sh missing Ghostty preference"
+fi
+
 # GNOME workspaces
 if command -v gsettings >/dev/null 2>&1; then
   n=$(gsettings get org.gnome.desktop.wm.preferences num-workspaces 2>/dev/null || echo "?")

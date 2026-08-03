@@ -18,7 +18,7 @@ risk: read-only
 |-------|--------|
 | **Host** | um690 |
 | **Risk** | **Read-only** — do not `stop`/`disable` production services |
-| **Domain** | [[bootcamp/lfcs/domains/03-systemd]] |
+| **Domain** | [[03-systemd]] |
 | **Time** | ~30 min |
 
 ---

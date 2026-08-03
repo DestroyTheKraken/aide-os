@@ -1,0 +1,294 @@
+#!/usr/bin/env bash
+# aide-dual-backup — Preemptive dual-channel backup
+#
+#   NAS channel  → PII, secure IPs, keys, kubeconfig, restic, full packs
+#   GitHub-safe  → lab code & non-risk personal/projects (NO secrets, NO private IPs dump)
+#
+# Default is SAFE: writes NAS + local github-safe export. Push to GitHub only with --push
+# and only if remotes/auth exist.
+#
+# Usage:
+#   aide-dual-backup              # NAS secure + github-safe stage
+#   aide-dual-backup --with-911   # also run full aide-911 first
+#   aide-dual-backup --push       # attempt git push of github-safe remotes (if configured)
+#   aide-dual-backup --help
+set -euo pipefail
+
+export PATH="${HOME}/.local/bin:${HOME}/AIDE_OS/bin:${PATH}"
+
+NAS="${GROKAIDE_NAS:-/mnt/systems_admin}"
+STAMP=$(date +%Y%m%d-%H%M%S)
+SECURE_ROOT="${NAS}/kraken/backups/SECURE-${STAMP}"
+SAFE_ROOT="${NAS}/kraken/backups/GITHUB-SAFE-${STAMP}"
+PC_MIRROR="${HOME}/EVAC-READY"   # on the PC you can grab
+WITH_911=0
+DO_PUSH=0
+
+for a in "$@"; do
+  case "$a" in
+    --with-911) WITH_911=1 ;;
+    --push) DO_PUSH=1 ;;
+    --help|-h)
+      sed -n '2,18p' "$0"
+      exit 0
+      ;;
+  esac
+done
+
+log(){ echo "[dual-backup $(date -Iseconds)] $*"; }
+ok(){ echo "[dual-backup] OK  $*"; }
+warn(){ echo "[dual-backup] WARN $*" >&2; }
+die(){ echo "[dual-backup] ERR  $*" >&2; exit 1; }
+
+mountpoint -q "$NAS" || die "NAS not mounted: $NAS"
+
+if [[ "$WITH_911" -eq 1 ]]; then
+  log "Running aide-911 full pack first…"
+  aide-911 || warn "aide-911 returned non-zero — continuing dual-backup"
+fi
+
+# ─── NAS SECURE (PII / secure IP / secrets material on disk only) ───
+log "NAS SECURE → $SECURE_ROOT"
+mkdir -p "$SECURE_ROOT"/{ssh,kube,sovereign,packs-pointer,inventory,docs}
+
+# Pointer to latest emergency pack (do not re-copy 11G if LATEST exists)
+if [[ -e "${NAS}/um690/EMERGENCY-POWER-LATEST" ]]; then
+  readlink -f "${NAS}/um690/EMERGENCY-POWER-LATEST" >"$SECURE_ROOT/packs-pointer/LATEST.path"
+  ln -sfn "$(readlink -f "${NAS}/um690/EMERGENCY-POWER-LATEST")" \
+    "$SECURE_ROOT/packs-pointer/EMERGENCY-POWER-LATEST" 2>/dev/null || true
+fi
+
+# Secrets-adjacent (NAS only — never GitHub)
+rsync -a "${HOME}/.ssh/" "$SECURE_ROOT/ssh/" 2>/dev/null || warn "ssh rsync"
+rsync -a "${HOME}/.kube/" "$SECURE_ROOT/kube/" 2>/dev/null || true
+rsync -a "${HOME}/.config/sovereign/" "$SECURE_ROOT/sovereign/" 2>/dev/null || true
+
+# Inventory with live topology (private IPs — NAS only)
+{
+  echo "# SECURE inventory — NAS only — $(date -Iseconds)"
+  echo
+  echo "## Host"
+  hostname -f; uname -a; ip -br a; ip route
+  echo
+  echo "## LabNet / HomeNet (private)"
+  ping -c1 -W1 192.168.20.1 >/dev/null 2>&1 && echo lab_gw=ok || echo lab_gw=fail
+  ping -c1 -W1 192.168.10.1 >/dev/null 2>&1 && echo home_gw=ok || echo home_gw=fail
+  echo
+  echo "## Tailscale (device names; IPs are mesh)"
+  tailscale status 2>/dev/null || true
+  echo
+  echo "## k3s"
+  kubectl get nodes -o wide 2>/dev/null || true
+} >"$SECURE_ROOT/inventory/LIVE-TOPOLOGY.txt" 2>&1
+
+# Ops docs with real topology (NAS)
+cp -a "${HOME}/SovereignAid/docs/ops" "$SECURE_ROOT/docs/ops" 2>/dev/null || true
+cp -a "${HOME}/RECOVER.md" "$SECURE_ROOT/docs/" 2>/dev/null || true
+cp -a "${NAS}/shared/memory" "$SECURE_ROOT/docs/shared-memory" 2>/dev/null || true
+
+# Router configs (contain private addressing — NAS only)
+mkdir -p "$SECURE_ROOT/router"
+if [[ -d "${NAS}/um690/EMERGENCY-POWER-LATEST/router" ]]; then
+  rsync -a "${NAS}/um690/EMERGENCY-POWER-LATEST/router/" "$SECURE_ROOT/router/" || true
+else
+  # live dump if pack missing
+  ssh -o BatchMode=yes -o ConnectTimeout=10 router-lab 'cat /config/config.boot' \
+    >"$SECURE_ROOT/router/lab-config.boot" 2>/dev/null || true
+  ssh -o BatchMode=yes -o ConnectTimeout=10 router-home 'cat /config/config.boot' \
+    >"$SECURE_ROOT/router/home-config.boot" 2>/dev/null || true
+fi
+
+cat >"$SECURE_ROOT/README-SECURE.md" <<EOF
+# SECURE channel — NAS only
+
+**Stamp:** $STAMP  
+**Rule:** Never copy this tree to GitHub, chat, or unencrypted cloud.
+
+Contains: SSH keys, kubeconfig, restic env, private IPs, VyOS configs, live topology.
+
+Restore on grabbed PC after attaching NAS — see EVAC-WILDFIRE.md / RECOVER.md.
+EOF
+ok "SECURE pack at $SECURE_ROOT"
+
+# ─── GITHUB-SAFE (lab / non-risk) ───
+log "GITHUB-SAFE stage → $SAFE_ROOT"
+mkdir -p "$SAFE_ROOT"/{repos,docs,scripts}
+
+# Sanitizer: exclude secrets, large media, private dumps
+sanitize_rsync() {
+  local src="$1" dst="$2"
+  # rsync 23 = partial transfer (e.g. root-only AdGuard paths) — non-fatal
+  rsync -a --delete \
+    --exclude='.ssh/' \
+    --exclude='**/.env' \
+    --exclude='**/.env.*' \
+    --exclude='**/secrets/**' \
+    --exclude='**/*secret*' \
+    --exclude='**/*credential*' \
+    --exclude='**/restic.env' \
+    --exclude='**/.kube/' \
+    --exclude='**/kubeconfig*' \
+    --exclude='**/*.pem' \
+    --exclude='**/*.key' \
+    --exclude='**/id_ed25519' \
+    --exclude='**/id_rsa' \
+    --exclude='**/node_modules/' \
+    --exclude='**/.git/objects/pack/*.tmp' \
+    --exclude='**/compose/**/config/data/' \
+    --exclude='**/infra/adguard/work/' \
+    --exclude='**/infra/adguard/conf/AdGuardHome.yaml' \
+    --exclude='**/*.db' \
+    --exclude='**/*.iso' \
+    --exclude='home-trees/dot-ssh/' \
+    --exclude='home-trees/dot-kube/' \
+    --exclude='home-trees/dot-config-sovereign/' \
+    "$src" "$dst" || {
+      local rc=$?
+      if [[ $rc -eq 23 || $rc -eq 24 ]]; then
+        warn "rsync partial (code $rc) for $src — continuing"
+        return 0
+      fi
+      return $rc
+    }
+}
+
+# Project trees (code + docs) — still may contain lab IPs in docs; strip known secure paths
+for name_path in \
+  "SovereignAid:${HOME}/SovereignAid" \
+  "AIDE_OS:${HOME}/AIDE_OS" \
+  "HickMedia:${HOME}/HickMedia" \
+  "valley-tech-support:${HOME}/Documents/valley-tech-support" \
+  "DTK:${HOME}/DTK"
+do
+  name="${name_path%%:*}"; path="${name_path#*:}"
+  [[ -d "$path" ]] || continue
+  log "  safe copy $name"
+  mkdir -p "$SAFE_ROOT/repos/$name"
+  sanitize_rsync "$path/" "$SAFE_ROOT/repos/$name/"
+  # Prefer git bundle without private remotes config issues
+  if [[ -d "$path/.git" ]]; then
+    git -C "$path" bundle create "$SAFE_ROOT/repos/${name}.bundle" --all 2>/dev/null \
+      || warn "bundle $name failed"
+  fi
+done
+
+# Public-safe playbooks (redacted entrypoint — points to NAS for secrets)
+cat >"$SAFE_ROOT/docs/RECOVERY-PUBLIC.md" <<'EOF'
+# Lab recovery (GitHub-safe)
+
+This tree has **no SSH private keys, kubeconfigs, or restic passwords**.
+
+## If you still have the NAS
+
+1. Attach NAS → mount `systems_admin`
+2. Read `kraken/backups/SECURE-*/` and `um690/EMERGENCY-POWER-LATEST/`
+3. Run `aide-heal` / restore from secure channel
+
+## If NAS is unavailable
+
+1. Clone this lab code from GitHub
+2. Rebuild hosts from docs (LabNet topology is intentional lab addressing in docs)
+3. Re-create secrets from **Bitwarden** only
+4. Re-auth Tailscale from account login on phone/tablet/PC
+
+## Never commit
+
+- `~/.ssh` private keys
+- `~/.kube/config`
+- `~/.config/sovereign/restic.env`
+- Bitwarden exports
+- Customer PII
+EOF
+
+cp -a "${HOME}/SovereignAid/docs/ops/EMERGENCY-OPS.md" "$SAFE_ROOT/docs/" 2>/dev/null || true
+# Copy EVAC doc if present
+cp -a "${HOME}/SovereignAid/docs/ops/EVAC-WILDFIRE.md" "$SAFE_ROOT/docs/" 2>/dev/null || true
+cp -a "${HOME}/SovereignAid/scripts/ops/grokaide-emergency" "$SAFE_ROOT/scripts/" 2>/dev/null || true
+cp -a "${HOME}/AIDE_OS/bin/aide-menu" "$SAFE_ROOT/scripts/" 2>/dev/null || true
+
+cat >"$SAFE_ROOT/README.md" <<EOF
+# GITHUB-SAFE channel — $STAMP
+
+Lab / non-risk project trees + recovery docs.  
+**Not** a substitute for the NAS SECURE channel.
+
+Push (optional): configure private GitHub remotes, then:
+
+\`\`\`bash
+aide-dual-backup --push
+\`\`\`
+EOF
+ok "GITHUB-SAFE stage at $SAFE_ROOT"
+
+# ─── PC grab mirror (same machine you evacuate with) ───
+log "PC mirror → $PC_MIRROR"
+mkdir -p "$PC_MIRROR"
+# Lightweight pointers + dual-backup metadata (not full 11G duplicate)
+cat >"$PC_MIRROR/README.md" <<EOF
+# EVAC-READY (preemptive)
+
+**Not under active evacuation** — readiness staging on the PC you can grab.
+
+| Channel | Path |
+|---------|------|
+| Latest emergency pack | \`${NAS}/um690/EMERGENCY-POWER-LATEST\` |
+| SECURE (this run) | \`$SECURE_ROOT\` |
+| GITHUB-SAFE (this run) | \`$SAFE_ROOT\` |
+| Docs | \`~/RECOVER.md\` · \`~/SovereignAid/docs/ops/EVAC-WILDFIRE.md\` |
+
+## Commands
+
+\`\`\`bash
+aide-heal
+aide-911 --fast    # if escalation clock starts
+aide-911           # full
+aide-evac --ready  # preemptive full readiness (default)
+aide-evac --go     # only if actually leaving — adds halt path
+aide-menu          # Ghostty Ctrl+Shift+A
+\`\`\`
+EOF
+printf '%s\n' "$SECURE_ROOT" >"$PC_MIRROR/LAST-SECURE.path"
+printf '%s\n' "$SAFE_ROOT" >"$PC_MIRROR/LAST-GITHUB-SAFE.path"
+date -Is >"$PC_MIRROR/LAST-RUN.txt"
+# Small critical scripts on PC even if NAS unplugged mid-copy
+mkdir -p "$PC_MIRROR/bin"
+cp -a "${HOME}/AIDE_OS/bin/aide-menu" "$PC_MIRROR/bin/" 2>/dev/null || true
+cp -a "${HOME}/AIDE_OS/bin/grokaide-emergency" "$PC_MIRROR/bin/" 2>/dev/null || true
+cp -a "${HOME}/AIDE_OS/bin/aide-dual-backup" "$PC_MIRROR/bin/" 2>/dev/null || true
+cp -a "${HOME}/AIDE_OS/bin/aide-halt" "$PC_MIRROR/bin/" 2>/dev/null || true
+cp -a "${HOME}/AIDE_OS/bin/aide-evac" "$PC_MIRROR/bin/" 2>/dev/null || true
+cp -a "${HOME}/SovereignAid/docs/ops/EVAC-WILDFIRE.md" "$PC_MIRROR/" 2>/dev/null || true
+cp -a "${HOME}/RECOVER.md" "$PC_MIRROR/" 2>/dev/null || true
+ok "PC mirror $PC_MIRROR"
+
+# Symlinks LATEST for dual channels
+ln -sfn "$SECURE_ROOT" "${NAS}/kraken/backups/SECURE-LATEST"
+ln -sfn "$SAFE_ROOT" "${NAS}/kraken/backups/GITHUB-SAFE-LATEST"
+
+# Optional push
+if [[ "$DO_PUSH" -eq 1 ]]; then
+  log "Push requested — checking remotes…"
+  pushed=0
+  for repo in SovereignAid AIDE_OS HickMedia valley-tech-support; do
+    path="${HOME}/$repo"
+    [[ "$repo" == "valley-tech-support" ]] && path="${HOME}/Documents/valley-tech-support"
+    [[ -d "$path/.git" ]] || continue
+    if git -C "$path" remote get-url origin >/dev/null 2>&1; then
+      log "push $repo"
+      git -C "$path" push -u origin HEAD || warn "push failed: $repo"
+      pushed=1
+    else
+      warn "no origin remote: $repo (configure private GitHub, then re-run --push)"
+    fi
+  done
+  [[ "$pushed" -eq 1 ]] || warn "Nothing pushed — remotes not configured (gh not required if git@github.com works)"
+else
+  log "Skip git push (pass --push when remotes/auth ready)"
+fi
+
+echo
+ok "Dual-backup complete"
+echo "  SECURE:      $SECURE_ROOT"
+echo "  GITHUB-SAFE: $SAFE_ROOT"
+echo "  PC mirror:   $PC_MIRROR"
+echo "  Emergency:   ${NAS}/um690/EMERGENCY-POWER-LATEST"

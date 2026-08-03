@@ -18,7 +18,7 @@ risk: read-only
 |-------|--------|
 | **Host** | um690 (`kraken`) |
 | **Risk** | **Read-only** — no `rm`, no writes outside notes |
-| **Domain** | [[bootcamp/lfcs/domains/01-filesystem]] |
+| **Domain** | [[01-filesystem]] |
 | **Time** | ~25–40 min |
 
 ---

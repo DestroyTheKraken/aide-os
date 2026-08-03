@@ -1,7 +1,7 @@
 [Desktop Entry]
 Type=Application
-Name=GrokAide Lab Terminal
-Comment=Terminal in LFCS bootcamp folder
+Name=Lab Terminal
+Comment=LFCS lab shell in Ghostty (electric dystopia) — bootcamp/lfcs cwd
 Exec=/home/kraken/AIDE_OS/idee/run-in-terminal.sh /home/kraken/AIDE_OS/idee/open-lab-term.sh
 Icon=utilities-terminal
 Terminal=false

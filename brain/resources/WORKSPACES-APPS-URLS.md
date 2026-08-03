@@ -1,0 +1,1 @@
+/home/kraken/AIDE_OS/docs/ops/WORKSPACES-APPS-URLS.md

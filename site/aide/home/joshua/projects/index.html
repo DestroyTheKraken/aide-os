@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Projects · Destroy The Kraken Lab Portfolio</title>
+  <meta name="description" content="Portfolio projects: LabNET, AIDE_OS, Ubuntu Core practice, Valley Tech — Destroy The Kraken." />
+  <link rel="icon" type="image/png" href="../assets/img/dtk-logo.png" />
+  <link rel="stylesheet" href="../assets/style.css" />
+</head>
+<body>
+  <div class="sky" aria-hidden="true"></div>
+  <div class="stars" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="brand-bar">
+      <a class="brand" href="../">
+        <img src="../assets/img/dtk-logo.png" alt="Destroy The Kraken" width="42" height="42" />
+        <div class="brand-text">
+          <strong>Destroy The Kraken</strong>
+          <span>Projects</span>
+        </div>
+      </a>
+      <nav class="nav">
+        <a href="../">Home</a>
+        <a href="./">Projects</a>
+        <a href="../skills/">Skills</a>
+        <a href="../docs/">Docs</a>
+        <a class="cta" href="https://www.destroythekraken.com">DTK Site</a>
+      </nav>
+    </div>
+
+    <header class="hero">
+      <div class="hero-bg" style="background-image:url('../assets/img/lab-desktop.jpg')"></div>
+      <div class="hero-body">
+        <p class="eyebrow">Enter the Lab</p>
+        <h1>Projects</h1>
+        <p class="lede">Real lab work, documented for interviews and clients. Patterns only — no secrets, no school-SKU.</p>
+      </div>
+    </header>
+
+    <section class="card" id="labnet">
+      <h2>P1 · LabNET / SMADP <span class="status live">Live</span></h2>
+      <p><strong>One-liner:</strong> Private multi-node edge lab — control plane + workers, mesh access, durable storage, written ops.</p>
+      <ul>
+        <li><strong>Stack:</strong> Ubuntu · k3s triad · Tailscale · NAS · lab gateway</li>
+        <li><strong>Skills:</strong> Linux ops, networking, DevOps design/debug, documentation</li>
+        <li><strong>Talk track:</strong> “I operate a real three-node cluster; green means all nodes Ready.”</li>
+        <li><strong>Public claim:</strong> Anonymized architecture only</li>
+      </ul>
+      <pre class="diagram">control plane  — orchestration + k3s control
+workers        — capacity for services
+NAS            — durable tenants
+mesh           — zero-trust remote admin</pre>
+    </section>
+
+    <section class="card" id="aide">
+      <h2>P2 · AIDE_OS / GrokAide <span class="status build">Design → build</span></h2>
+      <p><strong>One-liner:</strong> AI-assisted desktop + VirtualBox lab-in-a-box that mirrors the host seat (notes + terminal + agent policy) for learning and portfolio demos.</p>
+      <ul>
+        <li><strong>Stack:</strong> classic Ubuntu guest · Obsidian/GrokAide · Ghostty · aidectl · hybrid local/xAI (planned)</li>
+        <li><strong>Skills:</strong> prompt engineering at scale, design docs, PR plans, Linux desktop/server crossover</li>
+        <li><strong>Audience:</strong> personal learning + portfolio; designed so a <strong>basic SuperGrok tier</strong> user can follow runbooks without maxing weekly usage by accident</li>
+        <li><strong>Not:</strong> district school SKU · not HickMedia gaming product</li>
+      </ul>
+      <img class="shot" src="../assets/img/grokaide-home.jpg" alt="GrokAide vault home screen" />
+      <p class="shot-cap">GrokAide / Obsidian home surface used in the education seat.</p>
+    </section>
+
+    <section class="card" id="core">
+      <h2>P3 · Ubuntu Core practice <span class="status learn">Practice</span></h2>
+      <p><strong>One-liner:</strong> Hands-on Core install/debug on constrained hardware; boot and appliance lessons.</p>
+      <ul>
+        <li><strong>Borrow:</strong> flash milestones, stop-rules, QEMU≠hardware honesty</li>
+        <li><strong>Do not:</strong> ship RetroArch/ROM defaults as AIDE; HickMedia stays gaming/media product</li>
+        <li><strong>Skills:</strong> install debugging, immutable OS concepts, postmortems</li>
+      </ul>
+      <img class="shot" src="../assets/img/splash-still.jpg" alt="Cinematic still used as splash mood reference" />
+      <p class="shot-cap">Splash / mood still (lab asset). MVP portfolio uses static branding; short motion optional later.</p>
+    </section>
+
+    <section class="card" id="vts">
+      <h2>P4 · Valley Tech Support <span class="status live">Business</span></h2>
+      <p>Rural IT under Destroy The Kraken: scoped packages, handoff documentation, private cloud on client-owned gear.</p>
+      <p><a href="https://www.destroythekraken.com">Client-facing site →</a></p>
+    </section>
+
+    <section class="card" id="lfcs">
+      <h2>P5 · LFCS / Canonical path <span class="status learn">In progress</span></h2>
+      <p>Structured Linux Foundation study + bootcamp vault. Complements LabNET as progressive skill proof.</p>
+    </section>
+
+    <section class="card">
+      <h2>What “documented” means</h2>
+      <ul>
+        <li>Design decisions (goals, non-goals, alternatives, PR plan)</li>
+        <li>What I learn (retrospectives, stop-rules, USAGE-LOG)</li>
+        <li>How a basic Grok tier user can follow without burning the whole weekly pool on thrash</li>
+      </ul>
+      <p class="note">Full private specs stay in the lab git trees. Public pages stay redacted.</p>
+    </section>
+
+    <footer class="foot">
+      <p><a href="../">← Portfolio home</a> · © <span id="y"></span> Destroy The Kraken</p>
+    </footer>
+  </div>
+  <script>document.getElementById("y").textContent = new Date().getFullYear();</script>
+</body>
+</html>

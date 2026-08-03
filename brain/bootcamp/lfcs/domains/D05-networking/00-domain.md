@@ -15,10 +15,10 @@ level: beginner
 
 ## Contents
 
-- [[bootcamp/lfcs/domains/D05-networking/objectives]]
+- [[bootcamp/01_lfcs/domains/D05-networking/objectives]]
 - Lessons (see folder)
 - Labs (see folder)
-- [[bootcamp/lfcs/domains/D05-networking/media/MEDIA-QUEUE]]
+- [[bootcamp/01_lfcs/domains/D05-networking/media/MEDIA-QUEUE]]
 
 ---
 

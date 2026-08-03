@@ -15,10 +15,10 @@ level: beginner
 
 ## Contents
 
-- [[bootcamp/lfcs/domains/D04-systemd-services/objectives]]
+- [[bootcamp/01_lfcs/domains/D04-systemd-services/objectives]]
 - Lessons (see folder)
 - Labs (see folder)
-- [[bootcamp/lfcs/domains/D04-systemd-services/media/MEDIA-QUEUE]]
+- [[bootcamp/01_lfcs/domains/D04-systemd-services/media/MEDIA-QUEUE]]
 
 ---
 

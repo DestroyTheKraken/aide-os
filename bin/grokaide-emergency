@@ -1,0 +1,633 @@
+#!/usr/bin/env bash
+# GrokAide Emergency Backup & Recovery Program
+# =============================================================================
+# Single program, two commands (also multi-call via basename):
+#
+#   aide-911   Emergency backup  — power warning / freeze risk / capture NOW
+#   aide-heal  Recovery health   — after hard power / unclean reboot
+#
+# Install:
+#   bash ~/SovereignAid/scripts/ops/grokaide-emergency/install.sh
+#
+# Docs:
+#   ~/SovereignAid/docs/ops/EMERGENCY-OPS.md
+#   ~/RECOVER.md
+#
+# Safety floor:
+#   - never restic forget/prune
+#   - never kubectl delete ns/pv/pvc
+#   - secrets stay in Bitwarden (not printed)
+# =============================================================================
+set -euo pipefail
+
+PROG_NAME="GrokAide Emergency"
+PROG_VER="1.0.0"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+SOVEREIGN_ROOT="$(cd "${SCRIPT_DIR}/../../.." && pwd)"
+NAS="${GROKAIDE_NAS:-/mnt/systems_admin}"
+OUT_ROOT="${NAS}/um690"
+ENV_FILE="${SOVEREIGN_RESTIC_ENV:-${HOME}/.config/sovereign/restic.env}"
+KUBECONFIG="${KUBECONFIG:-${HOME}/.kube/config}"
+export KUBECONFIG
+
+NEXTCLOUD_HOST="${GROKAIDE_NC_HOST:-um690.taile52ad9.ts.net}"
+NEXTCLOUD_URL="${GROKAIDE_NC_URL:-https://192.168.20.100/status.php}"
+
+# ---------- presentation ----------
+if [[ -t 1 ]] && command -v tput >/dev/null 2>&1; then
+  C_BOLD=$(tput bold 2>/dev/null || true)
+  C_RED=$(tput setaf 1 2>/dev/null || true)
+  C_GRN=$(tput setaf 2 2>/dev/null || true)
+  C_YEL=$(tput setaf 3 2>/dev/null || true)
+  C_CYN=$(tput setaf 6 2>/dev/null || true)
+  C_RST=$(tput sgr0 2>/dev/null || true)
+else
+  C_BOLD= C_RED= C_GRN= C_YEL= C_CYN= C_RST=
+fi
+
+ts()   { date -Iseconds; }
+log()  { echo "${C_CYN}[grokaide $(ts)]${C_RST} $*"; }
+ok()   { echo "${C_GRN}[grokaide $(ts)] OK${C_RST}  $*"; }
+warn() { echo "${C_YEL}[grokaide $(ts)] WARN${C_RST} $*" >&2; }
+err()  { echo "${C_RED}[grokaide $(ts)] ERR${C_RST}  $*" >&2; }
+die()  { err "$*"; exit 1; }
+
+banner() {
+  local title="$1"
+  echo
+  echo "${C_BOLD}╔══════════════════════════════════════════════════════════╗${C_RST}"
+  echo "${C_BOLD}║  ${PROG_NAME} v${PROG_VER}${C_RST}"
+  echo "${C_BOLD}║  ${title}${C_RST}"
+  echo "${C_BOLD}╚══════════════════════════════════════════════════════════╝${C_RST}"
+  echo
+}
+
+# ---------- dispatch by basename ----------
+cmd_from_basename() {
+  local base
+  base="$(basename "$0")"
+  case "$base" in
+    aide-911|911) echo 911 ;;
+    aide-heal|heal) echo heal ;;
+    *) echo multi ;;
+  esac
+}
+
+usage_911() {
+  cat <<'EOF'
+aide-911 — GrokAide Emergency BACKUP (capture now)
+
+Usage:
+  aide-911              Full emergency pack (default: trees + bundles + restic)
+  aide-911 --fast       Network/mesh/routers/cluster only (minutes left)
+  aide-911 --full       Same as default (explicit)
+  aide-911 --no-restic  Skip restic snapshot
+  aide-911 --help
+
+Output:
+  /mnt/systems_admin/um690/EMERGENCY-POWER-<stamp>/
+  /mnt/systems_admin/um690/EMERGENCY-POWER-LATEST  → newest pack
+
+Captures: Tailnet · LabNet · HomeNet · VyOS lab+home · k3s export ·
+          desktop · git bundles · home-trees · restic (unless --no-restic)
+EOF
+}
+
+usage_heal() {
+  cat <<'EOF'
+aide-heal — GrokAide Recovery HEALTH (after outage / hard reboot)
+
+Usage:
+  aide-heal             Full green check (default)
+  aide-heal --quiet     Exit code only (0=green, 1=degraded)
+  aide-heal --latest    Show newest emergency pack summary
+  aide-heal --redis     Print Redis AOF repair checklist (if needed)
+  aide-heal --help
+
+Checks: NAS · k3s triad (fail-hard) · Nextcloud/Redis · LabNet · HomeNet · Tailscale
+Docs:   ~/SovereignAid/docs/ops/OUTAGE-2026-07-15-power.md (Redis AOF)
+EOF
+}
+
+usage_multi() {
+  cat <<EOF
+${PROG_NAME} v${PROG_VER}
+
+Commands (install as PATH names):
+  aide-911    Emergency backup
+  aide-heal   Recovery health
+
+Also:
+  $(basename "$0") 911|backup [opts]
+  $(basename "$0") heal|check [opts]
+  $(basename "$0") install     → run install.sh
+
+Docs: ${SOVEREIGN_ROOT}/docs/ops/EMERGENCY-OPS.md
+      ${HOME}/RECOVER.md
+EOF
+}
+
+# ---------- health (heal) ----------
+check_health() {
+  local quiet="${1:-0}"
+  local rc=0
+  local line
+
+  _out() { [[ "$quiet" == "1" ]] || log "$*"; }
+  _ok()  { [[ "$quiet" == "1" ]] || ok "$*"; }
+  _wn()  { [[ "$quiet" == "1" ]] || warn "$*"; }
+
+  [[ "$quiet" == "1" ]] || banner "aide-heal · recovery health"
+
+  # NAS
+  if mountpoint -q "$NAS" 2>/dev/null; then
+    _ok "NAS mounted: $NAS"
+    [[ "$quiet" == "1" ]] || df -h "$NAS" | tail -1
+  else
+    _wn "NAS NOT mounted: $NAS"
+    rc=1
+  fi
+
+  # k3s
+  if command -v kubectl >/dev/null 2>&1; then
+    [[ "$quiet" == "1" ]] || kubectl get nodes -o wide 2>&1 | sed 's/^/  /' || true
+    local not_ready
+    not_ready=$(kubectl get nodes --no-headers 2>/dev/null | awk '$2 != "Ready" {print $1" "$2}' || true)
+    if [[ -z "${not_ready}" ]] && kubectl get nodes --no-headers 2>/dev/null | grep -q .; then
+      _ok "k3s triad: GREEN (all Ready)"
+    else
+      _wn "FAIL-HARD: k3s not fully Ready${not_ready:+ — $not_ready}"
+      rc=1
+    fi
+
+    [[ "$quiet" == "1" ]] || {
+      log "nextcloud pods:"
+      kubectl get pods -n nextcloud 2>&1 | sed 's/^/  /' || _wn "nextcloud ns unreachable"
+    }
+
+    if kubectl get pod -n nextcloud nextcloud-redis-master-0 >/dev/null 2>&1; then
+      local redis_phase redis_logs
+      redis_phase=$(kubectl get pod -n nextcloud nextcloud-redis-master-0 \
+        -o jsonpath='{.status.phase}' 2>/dev/null || echo unknown)
+      redis_logs=$(kubectl logs -n nextcloud nextcloud-redis-master-0 --tail=30 2>/dev/null || true)
+      # Healthy startups mention appendonly.aof — only flag real failure signatures
+      if [[ "$redis_phase" != "Running" ]] \
+        || echo "$redis_logs" | grep -qiE 'Bad file format|CrashLoop|Fatal error|Can.t handle RDB|Failed opening the AOF'; then
+        _wn "Redis unhealthy (phase=${redis_phase}) — run: aide-heal --redis"
+        rc=1
+      elif ! echo "$redis_logs" | grep -qiE 'Ready to accept connections|The server is now ready'; then
+        # Soft: running but no ready line in tail (still often OK if HTTP 200)
+        _ok "Redis: pod Running (ready banner not in last 30 lines)"
+      else
+        _ok "Redis: Ready"
+      fi
+    else
+      _wn "Redis pod not found"
+      rc=1
+    fi
+
+    local code
+    code=$(curl -sk -o /dev/null -w '%{http_code}' \
+      -H "Host: ${NEXTCLOUD_HOST}" \
+      "${NEXTCLOUD_URL}" 2>/dev/null || echo "000")
+    if [[ "$code" == "200" ]]; then
+      _ok "Nextcloud status.php HTTP 200"
+    else
+      _wn "Nextcloud status.php HTTP ${code} (want 200)"
+      rc=1
+    fi
+  else
+    _wn "kubectl not available"
+    rc=1
+  fi
+
+  # LabNet
+  local lip
+  for lip in 192.168.20.1 192.168.20.100 192.168.20.101 192.168.20.102 192.168.20.111; do
+    if ping -c1 -W1 "$lip" >/dev/null 2>&1; then
+      _ok "LabNet $lip"
+    else
+      _wn "LabNet $lip FAIL"
+      # .111 fam-media optional for platform green; only fail-hard lab path for gateway+triad
+      case "$lip" in
+        192.168.20.111) ;; # soft
+        *) rc=1 ;;
+      esac
+    fi
+  done
+
+  # HomeNet
+  if ping -c1 -W1 192.168.10.1 >/dev/null 2>&1; then
+    _ok "HomeNet 192.168.10.1"
+  else
+    _wn "HomeNet 192.168.10.1 unreachable"
+  fi
+
+  # Tailscale
+  if command -v tailscale >/dev/null 2>&1; then
+    if tailscale status >/dev/null 2>&1; then
+      _ok "Tailscale up ($(tailscale ip -4 2>/dev/null || echo '?'))"
+      [[ "$quiet" == "1" ]] || tailscale status 2>/dev/null | head -12 | sed 's/^/  /'
+    else
+      _wn "Tailscale status failed"
+      rc=1
+    fi
+  else
+    _wn "tailscale not installed"
+  fi
+
+  if [[ "$quiet" != "1" ]]; then
+    echo
+    if [[ $rc -eq 0 ]]; then
+      ok "HEALTH: ${C_BOLD}GREEN${C_RST}"
+    else
+      warn "HEALTH: ${C_BOLD}DEGRADED${C_RST} — see warnings; docs: EMERGENCY-OPS.md"
+    fi
+  fi
+  return $rc
+}
+
+show_latest_pack() {
+  banner "aide-heal · latest emergency pack"
+  local latest="${OUT_ROOT}/EMERGENCY-POWER-LATEST"
+  if [[ -L "$latest" || -d "$latest" ]]; then
+    local target
+    target=$(readlink -f "$latest" 2>/dev/null || echo "$latest")
+    ok "LATEST → $target"
+    du -sh "$target" 2>/dev/null || true
+    echo
+    [[ -f "$target/meta/STARTED.txt" ]] && { log "STARTED:"; sed 's/^/  /' "$target/meta/STARTED.txt"; }
+    [[ -f "$target/meta/FINISHED.txt" ]] && { log "FINISHED:"; sed 's/^/  /' "$target/meta/FINISHED.txt"; }
+    [[ -f "$target/meta/MANIFEST.md" ]] && { echo; cat "$target/meta/MANIFEST.md"; }
+    [[ -f "$target/meta/PROJECT-STATUS.md" ]] && { echo; head -40 "$target/meta/PROJECT-STATUS.md"; }
+  else
+    warn "No EMERGENCY-POWER-LATEST under $OUT_ROOT"
+    ls -lt "$OUT_ROOT"/EMERGENCY-POWER-* 2>/dev/null | head -8 || true
+    return 1
+  fi
+}
+
+show_redis_checklist() {
+  banner "aide-heal · Redis AOF repair checklist"
+  cat <<'EOF'
+Symptoms: Nextcloud HTTP 500 · Redis CrashLoop · logs: Bad file format / appendonly.aof
+
+1) Confirm:
+   kubectl get pods -n nextcloud
+   kubectl logs -n nextcloud nextcloud-redis-master-0 --tail=50
+
+2) Scale down Redis, mount PVC in a fix pod, BACKUP first:
+   → /mnt/systems_admin/kraken/backups/nextcloud-redis-aof-<timestamp>/
+
+3) redis-check-aof --fix on multi-part AOF manifest
+
+4) Scale Redis up; PING; re-check:
+   aide-heal
+
+Full narrative: ~/SovereignAid/docs/ops/OUTAGE-2026-07-15-power.md
+UPS plan:       ~/SovereignAid/docs/ops/UPS-PLAN.md
+
+Grok will perform these steps when asked (needs working cluster + NAS).
+EOF
+}
+
+# ---------- backup helpers (911) ----------
+dump_router() {
+  local host="$1" dest="$2"
+  mkdir -p "$dest"
+  log "Router dump: $host"
+  ssh -o BatchMode=yes -o ConnectTimeout=15 "$host" 'cat /config/config.boot' \
+    >"$dest/config.boot" 2>"$dest/ssh.err" || warn "config.boot failed ($host)"
+  local wrap='/opt/vyatta/bin/vyatta-op-cmd-wrapper'
+  # shellcheck disable=SC2086
+  for cmd in \
+    "show configuration commands" \
+    "show version" \
+    "show interfaces" \
+    "show ip route" \
+    "show dhcp server leases"
+  do
+    local file
+    file=$(echo "$cmd" | tr ' /' '--' | sed 's/^show-//')
+    ssh -o BatchMode=yes -o ConnectTimeout=15 "$host" $wrap $cmd \
+      >"$dest/${file}.txt" 2>>"$dest/ssh.err" || true
+  done
+  ssh -o BatchMode=yes -o ConnectTimeout=15 "$host" 'tar -cf - -C / config 2>/dev/null' \
+    >"$dest/config-dir.tar" 2>>"$dest/ssh.err" || true
+  local sz
+  sz=$(wc -c <"$dest/config.boot" 2>/dev/null || echo 0)
+  if [[ "${sz// /}" -lt 100 ]]; then
+    warn "router $host config.boot tiny (${sz} bytes) — check SSH/key"
+  else
+    ok "router $host config.boot (${sz} bytes)"
+  fi
+}
+
+bundle_repo() {
+  local name="$1" path="$2" out_repos="$3"
+  [[ -d "$path/.git" ]] || { log "skip bundle $name (no git)"; return 0; }
+  log "git bundle: $name"
+  git -C "$path" bundle create "$out_repos/${name}.bundle" --all
+  git -C "$path" status -sb >"$out_repos/${name}-status.txt" 2>&1 || true
+  git -C "$path" log -8 --oneline >"$out_repos/${name}-log.txt" 2>&1 || true
+  git -C "$path" remote -v >"$out_repos/${name}-remotes.txt" 2>&1 || true
+  git -C "$path" diff >"$out_repos/${name}-uncommitted.diff" 2>/dev/null || true
+  git -C "$path" ls-files -o --exclude-standard >"$out_repos/${name}-untracked.txt" 2>/dev/null || true
+  local bsz
+  bsz=$(wc -c <"$out_repos/${name}.bundle" 2>/dev/null || echo 0)
+  if [[ "${bsz// /}" -lt 100 ]]; then
+    warn "bundle $name is tiny/empty (${bsz}) — re-run aide-911"
+    return 1
+  fi
+  ok "bundle $name ($(numfmt --to=iec "$bsz" 2>/dev/null || echo "${bsz}B"))"
+}
+
+write_project_status() {
+  local dest="$1"
+  {
+    echo "# Project status — $(date -Iseconds)"
+    echo
+    for name_path in \
+      "SovereignAid:${HOME}/SovereignAid" \
+      "valley-tech-support:${HOME}/Documents/valley-tech-support" \
+      "AIDE_OS:${HOME}/AIDE_OS" \
+      "HickMedia:${HOME}/HickMedia" \
+      "DTK:${HOME}/DTK"
+    do
+      local name="${name_path%%:*}" path="${name_path#*:}"
+      echo "## $name"
+      echo "- path: \`$path\`"
+      if [[ ! -e "$path" ]]; then echo "- MISSING"; echo; continue; fi
+      echo "- size: $(du -sh "$path" 2>/dev/null | awk '{print $1}')"
+      if [[ -d "$path/.git" ]]; then
+        echo "- branch: $(git -C "$path" rev-parse --abbrev-ref HEAD 2>/dev/null)"
+        echo "- HEAD: $(git -C "$path" log -1 --oneline 2>/dev/null)"
+        local rem
+        rem=$(git -C "$path" remote -v 2>/dev/null | head -1 || true)
+        echo "- remote: ${rem:-NONE (local-only)}"
+        echo "- dirty files: $(git -C "$path" status --porcelain 2>/dev/null | wc -l)"
+      else
+        echo "- git: no"
+      fi
+      echo
+    done
+  } >"$dest"
+}
+
+write_manifest() {
+  local out="$1" mode="$2" stamp="$3"
+  {
+    echo "# GrokAide emergency pack MANIFEST"
+    echo
+    echo "| Field | Value |"
+    echo "|-------|--------|"
+    echo "| stamp | \`$stamp\` |"
+    echo "| mode | \`$mode\` |"
+    echo "| host | \`$(hostname -s)\` |"
+    echo "| finished | \`$(date -Iseconds)\` |"
+    echo "| program | ${PROG_NAME} v${PROG_VER} |"
+    echo
+    echo "## Sizes"
+    echo
+    echo '```'
+    du -sh "$out"/* 2>/dev/null | sort -h || true
+    du -sh "$out" 2>/dev/null || true
+    echo '```'
+    echo
+    echo "## Restore pointer"
+    echo
+    echo "Playbook: \`~/SovereignAid/docs/ops/EMERGENCY-OPS.md\`"
+    echo "Heal: \`aide-heal\`"
+  } >"$out/meta/MANIFEST.md"
+}
+
+run_911() {
+  local mode="full"  # full | fast
+  local use_restic=1
+
+  for arg in "$@"; do
+    case "$arg" in
+      --fast|-f) mode="fast" ;;
+      --full) mode="full" ;;
+      --no-restic) use_restic=0 ;;
+      --help|-h) usage_911; return 0 ;;
+      *) warn "unknown arg: $arg (ignored)" ;;
+    esac
+  done
+
+  banner "aide-911 · emergency BACKUP (${mode})"
+  [[ "$(hostname -s)" == "um690" ]] || warn "expected host um690 (got $(hostname -s))"
+  mountpoint -q "$NAS" || die "NAS not mounted: $NAS — cannot write pack"
+
+  local stamp out latest
+  stamp=$(date +%Y%m%d-%H%M%S)
+  out="${OUT_ROOT}/EMERGENCY-POWER-${stamp}"
+  latest="${OUT_ROOT}/EMERGENCY-POWER-LATEST"
+  mkdir -p "$out"/{meta,hosts,network/um690,mesh/tailnet,router/{lab,home,repo-scripts},cluster,desktop,repos,home-trees,docs,scripts-copy}
+
+  {
+    echo "stamp=$stamp"
+    echo "mode=$mode"
+    echo "program=${PROG_NAME} v${PROG_VER}"
+    echo "command=aide-911"
+    date -Is
+    hostname -f
+    uname -a
+    uptime
+    echo "playbook=${SOVEREIGN_ROOT}/docs/ops/EMERGENCY-OPS.md"
+  } >"$out/meta/STARTED.txt"
+
+  log "Pack → $out"
+
+  # Pre-health (informational; backup still runs if degraded)
+  check_health 0 || warn "pre-backup health degraded — packing anyway"
+
+  # Host network
+  {
+    echo "### hostnamectl"; hostnamectl 2>/dev/null || true
+    echo "### ip -br a"; ip -br a
+    echo "### ip route"; ip route
+    echo "### nmcli"; nmcli -f NAME,UUID,TYPE,DEVICE,STATE con show 2>/dev/null || true
+  } >"$out/hosts/um690-network.txt" 2>&1
+  dpkg --get-selections >"$out/hosts/um690-packages.txt" 2>/dev/null || true
+  cp -a "${HOME}/.ssh/config" "$out/hosts/ssh-config" 2>/dev/null || true
+  cp -a /etc/hosts "$out/hosts/etc-hosts" 2>/dev/null || true
+  cp -a /etc/hostname "$out/hosts/etc-hostname" 2>/dev/null || true
+
+  {
+    echo "### LabNet 192.168.20.0/24"
+    for h in 1 100 101 102 111; do
+      ip="192.168.20.$h"
+      ping -c1 -W1 "$ip" >/dev/null 2>&1 && echo "$ip OK" || echo "$ip FAIL"
+    done
+    echo "### HomeNet 192.168.10.0/24"
+    ping -c1 -W1 192.168.10.1 >/dev/null 2>&1 && echo "192.168.10.1 OK" || echo "192.168.10.1 FAIL"
+    echo "### neighbors"; ip neigh 2>/dev/null || true
+  } >"$out/network/reachability.txt" 2>&1
+  ok "LabNet + HomeNet reachability"
+
+  # Tailnet
+  {
+    echo "### version"; tailscale version 2>/dev/null || true
+    echo "### ip"; tailscale ip -4 2>/dev/null; tailscale ip -6 2>/dev/null || true
+    echo "### status"; tailscale status 2>/dev/null || true
+    echo "### netcheck"; tailscale netcheck 2>/dev/null || true
+  } >"$out/mesh/tailnet/status.txt" 2>&1
+  tailscale status --json >"$out/mesh/tailnet/status.json" 2>/dev/null || true
+  printf '%s\n' \
+    "Tailscale inventory only. Re-auth via Bitwarden / admin console." \
+    "Do not treat this JSON as a join credential." \
+    >"$out/mesh/tailnet/README.txt"
+  cp -a "${HOME}/.ssh/"*.pub "$out/mesh/" 2>/dev/null || true
+  cp -a "${NAS}/shared/ssh" "$out/mesh/shared-ssh" 2>/dev/null || true
+  ok "Tailnet inventory"
+
+  # Routers
+  dump_router router-lab "$out/router/lab"
+  dump_router router-home "$out/router/home"
+  cp -a "${HOME}/SovereignAid/scripts/network/"*.conf "$out/router/repo-scripts/" 2>/dev/null || true
+  cp -a "${HOME}/SovereignAid/scripts/network" "$out/scripts-copy/" 2>/dev/null || true
+
+  # Docs
+  cp -a "${NAS}/shared/memory" "$out/docs/shared-memory" 2>/dev/null || true
+  cp -a "${HOME}/AIDE_OS/LABNET.md" "$out/docs/" 2>/dev/null || true
+  cp -a "${HOME}/SovereignAid/docs/ops" "$out/docs/ops" 2>/dev/null || true
+
+  # Cluster
+  kubectl get nodes -o wide >"$out/cluster/nodes.txt" 2>&1 || true
+  kubectl get pods -A -o wide >"$out/cluster/pods.txt" 2>&1 || true
+  kubectl get pvc -A >"$out/cluster/pvc.txt" 2>&1 || true
+  kubectl get ingress -A >"$out/cluster/ingress.txt" 2>&1 || true
+  kubectl get all,ingress,pvc,configmap,secret,svc,deploy,sts,ds,networkpolicy -A -o yaml \
+    >"$out/cluster/cluster-export.yaml" 2>/dev/null || true
+  kubectl get pods -n nextcloud -o wide >"$out/cluster/nextcloud.txt" 2>&1 || true
+  kubectl logs -n nextcloud nextcloud-redis-master-0 --tail=40 >"$out/cluster/redis-tail.txt" 2>&1 || true
+  curl -sk -o /dev/null -w '%{http_code}\n' -H "Host: ${NEXTCLOUD_HOST}" \
+    "${NEXTCLOUD_URL}" >"$out/cluster/nextcloud-status-code.txt" 2>&1 || true
+  cp -a "${HOME}/.kube/config" "$out/cluster/kubeconfig-kraken" 2>/dev/null || true
+  ok "Cluster export"
+
+  # Desktop
+  cp -a "${HOME}/.config/monitors.xml" "$out/desktop/" 2>/dev/null || true
+  cp -a "${HOME}/.config/mimeapps.list" "$out/desktop/" 2>/dev/null || true
+  dconf dump / >"$out/desktop/dconf-dump.ini" 2>/dev/null || true
+
+  write_project_status "$out/meta/PROJECT-STATUS.md"
+
+  if [[ "$mode" == "full" ]]; then
+    log "=== full: git bundles ==="
+    bundle_repo SovereignAid "${HOME}/SovereignAid" "$out/repos" || true
+    bundle_repo AIDE_OS "${HOME}/AIDE_OS" "$out/repos" || true
+    bundle_repo HickMedia "${HOME}/HickMedia" "$out/repos" || true
+    bundle_repo valley-tech-support "${HOME}/Documents/valley-tech-support" "$out/repos" || true
+
+    log "=== full: home-trees rsync ==="
+    rsync -aH --delete \
+      --exclude='.cache/' --exclude='**/node_modules/' --exclude='**/public/' \
+      "${HOME}/SovereignAid/" "$out/home-trees/SovereignAid/" || warn "rsync SovereignAid"
+    rsync -aH --delete \
+      --exclude='.cache/' --exclude='**/node_modules/' --exclude='**/*.iso' \
+      "${HOME}/Documents/valley-tech-support/" "$out/home-trees/valley-tech-support/" || warn "rsync VTS"
+    rsync -aH --delete \
+      --exclude='.cache/' --exclude='**/node_modules/' --exclude='**/.next/' \
+      --exclude='infra/adguard/work/' --exclude='infra/adguard/conf/AdGuardHome.yaml' \
+      "${HOME}/AIDE_OS/" "$out/home-trees/AIDE_OS/" || warn "rsync AIDE_OS (partial OK)"
+    rsync -aH --delete \
+      --exclude='.cache/' --exclude='**/node_modules/' \
+      "${HOME}/HickMedia/" "$out/home-trees/HickMedia/" || warn "rsync HickMedia"
+    rsync -aH "${HOME}/DTK/" "$out/home-trees/DTK/" 2>/dev/null || true
+    rsync -aH --exclude='cache/' --exclude='**/node_modules/' \
+      "${HOME}/.grok/" "$out/home-trees/dot-grok/" || warn "rsync .grok"
+    rsync -aH "${HOME}/.ssh/" "$out/home-trees/dot-ssh/"
+    rsync -aH "${HOME}/.kube/" "$out/home-trees/dot-kube/"
+    rsync -aH "${HOME}/.config/sovereign/" "$out/home-trees/dot-config-sovereign/" 2>/dev/null || true
+    ok "home-trees rsync"
+
+    if [[ "$use_restic" -eq 1 ]]; then
+      log "=== full: restic (no forget/prune) ==="
+      if [[ -f "$ENV_FILE" ]]; then
+        # shellcheck disable=SC1090
+        source "$ENV_FILE"
+        mkdir -p "${RESTIC_REPOSITORY:-${NAS}/restic/smadp}" "${NAS}/restic/staging"
+        if ! restic snapshots >/dev/null 2>&1; then
+          log "Initializing restic repo..."
+          restic init || warn "restic init failed"
+        fi
+        restic backup "$out" \
+          --tag smadp --tag emergency-power --tag grokaide --tag "host-$(hostname -s)" --tag "$stamp" \
+          || warn "restic backup failed"
+        restic snapshots --latest 3 || true
+        ok "restic snapshot tagged emergency-power"
+      else
+        warn "No $ENV_FILE — skip restic (init via SovereignAid scripts/backup/)"
+      fi
+    else
+      log "restic skipped (--no-restic)"
+    fi
+  else
+    log "fast mode: skipped git bundles, home-trees, restic"
+  fi
+
+  write_manifest "$out" "$mode" "$stamp"
+  date -Is >"$out/meta/FINISHED.txt"
+  ln -sfn "$out" "$latest"
+
+  echo
+  ok "Pack complete: $out"
+  ok "LATEST → $latest"
+  du -sh "$out"/* 2>/dev/null | sort -h || true
+  du -sh "$out"
+  echo
+  log "Next: aide-heal   |   docs: ~/RECOVER.md"
+  echo "$out"
+}
+
+run_heal() {
+  local quiet=0
+  for arg in "$@"; do
+    case "$arg" in
+      --quiet|-q) quiet=1 ;;
+      --latest) show_latest_pack; return $? ;;
+      --redis) show_redis_checklist; return 0 ;;
+      --help|-h) usage_heal; return 0 ;;
+      *) warn "unknown arg: $arg (ignored)" ;;
+    esac
+  done
+  check_health "$quiet"
+}
+
+run_install() {
+  bash "${SCRIPT_DIR}/install.sh"
+}
+
+# ---------- main ----------
+main() {
+  local entry
+  entry="$(cmd_from_basename)"
+
+  if [[ "$entry" == "911" ]]; then
+    run_911 "$@"
+    return $?
+  fi
+  if [[ "$entry" == "heal" ]]; then
+    run_heal "$@"
+    return $?
+  fi
+
+  # multi-call: grokaide-emergency.sh <subcommand>
+  local sub="${1:-}"
+  shift || true
+  case "$sub" in
+    911|backup|emergency) run_911 "$@" ;;
+    heal|check|recover)   run_heal "$@" ;;
+    install)              run_install "$@" ;;
+    --help|-h|help|"")    usage_multi; [[ -z "$sub" ]] && return 0 || return 0 ;;
+    *)
+      err "unknown subcommand: $sub"
+      usage_multi
+      return 2
+      ;;
+  esac
+}
+
+main "$@"

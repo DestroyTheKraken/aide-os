@@ -1,0 +1,11 @@
+B2 Core appliance — GrokBuild seed (short strategic session)
+
+I am on modest hardware (UM690-class host). Ubuntu Core 26 VirtualBox VM "AIDE_OS" may already exist.
+
+Goals for THIS session only:
+1) Confirm verify.sh passes or fix the smallest failure.
+2) Plan host-only NIC attach steps (do not Tailscale unless I say so).
+3) One hireable LinkedIn sentence about Core lab appliance.
+
+Read: ~/AIDE_OS/programs/aia/B2-core-appliance/README.md
+Local-first for VBox commands. No permanent YOLO.

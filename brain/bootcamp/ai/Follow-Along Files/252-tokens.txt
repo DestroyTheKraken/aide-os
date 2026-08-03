@@ -1,0 +1,14 @@
+# The quick brown fox jumps over the lazy dog
+
+
+#code for converting to tokens
+
+import nltk
+
+sentence = "The quick brown fox jumps over the lazy dog"
+
+# Tokenize the sentence into individual words
+tokens = nltk.word_tokenize(sentence)
+
+# Print the sentence tokens
+print(tokens)

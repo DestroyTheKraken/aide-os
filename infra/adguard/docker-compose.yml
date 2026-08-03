@@ -1,0 +1,20 @@
+# LabNET ad blocking — AdGuard Home on um690 (.100)
+# DNS: 192.168.20.100:53  · Admin: http://192.168.20.100:3080  or http://127.0.0.1:3080
+# First visit admin URL and complete setup wizard (set admin password in UI only).
+# Lab DNS cutover (optional): point client/DHCP DNS to 192.168.20.100
+# Rollback: DNS back to 192.168.20.1 (VyOS) or ISP
+services:
+  adguardhome:
+    image: adguard/adguardhome:latest
+    container_name: adguardhome
+    restart: unless-stopped
+    volumes:
+      - ./work:/opt/adguardhome/work
+      - ./conf:/opt/adguardhome/conf
+    ports:
+      - "192.168.20.100:53:53/tcp"
+      - "192.168.20.100:53:53/udp"
+      - "192.168.20.100:3080:3000/tcp"
+      - "127.0.0.1:3080:3000/tcp"
+    environment:
+      - TZ=America/Los_Angeles

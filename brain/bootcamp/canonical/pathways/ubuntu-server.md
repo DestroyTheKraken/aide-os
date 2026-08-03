@@ -27,7 +27,7 @@ status: draft
 
 ## Media
 
-[[bootcamp/canonical/resources/media/MEDIA-QUEUE]]
+[[bootcamp/02_canonical/resources/media/MEDIA-QUEUE]]
 
 ---
 

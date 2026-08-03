@@ -1,0 +1,90 @@
+#!/usr/bin/env bash
+# aide-workstations-start — restore Workstations 1–3 layout (Control / Brain / Lab)
+# Snapshot: docs/ops/WORKSTATIONS-SNAPSHOT-2026-08-02-night.md
+# GNOME Wayland cannot always place windows on exact WS; we open apps in order
+# after switching workspaces via gsettings/xdotool when available.
+set -euo pipefail
+
+export PATH="${HOME}/.local/bin:${HOME}/AIDE_OS/bin:${PATH}"
+AIDE_ROOT="${AIDE_ROOT:-$HOME/AIDE_OS}"
+LOG="${XDG_RUNTIME_DIR:-/tmp}/aide-workstations-start.log"
+
+log() { echo "[$(date -Iseconds)] $*" | tee -a "$LOG"; }
+
+# Apply workspace names from snapshot
+gsettings set org.gnome.mutter dynamic-workspaces false 2>/dev/null || true
+gsettings set org.gnome.desktop.wm.preferences num-workspaces 5 2>/dev/null || true
+gsettings set org.gnome.desktop.wm.preferences workspace-names \
+  "['Control', 'Brain', 'Lab', 'Platform']" 2>/dev/null || true
+
+switch_ws() {
+  local n="$1"  # 0-based index for some APIs; we use 1-based Super+n
+  # Prefer wmctrl if present (X11); on Wayland often no-op
+  if command -v wmctrl >/dev/null 2>&1; then
+    wmctrl -s "$((n - 1))" 2>/dev/null || true
+  fi
+  # gdbus workspace switch (best-effort; may fail if Shell Eval disabled)
+  gdbus call --session --dest org.gnome.Shell --object-path /org/gnome/Shell \
+    --method org.gnome.Shell.Eval \
+    "global.workspace_manager.get_workspace_by_index($((n - 1))).activate(global.get_current_time())" \
+    >/dev/null 2>&1 || true
+  sleep 0.6
+}
+
+# Delay after login so session is ready
+sleep 8
+log "Starting workstation layout restore"
+
+# --- WS1 Control: Grok Build ---
+switch_ws 1
+if command -v grokAide-start >/dev/null 2>&1; then
+  log "WS1 Control: grokAide-start"
+  (cd "$AIDE_ROOT" && nohup grokAide-start >/dev/null 2>&1 &) || true
+elif command -v grok >/dev/null 2>&1; then
+  log "WS1 Control: grok"
+  (cd "$AIDE_ROOT" && nohup grok --cwd "$AIDE_ROOT" >/dev/null 2>&1 &) || true
+fi
+if command -v ptyxis >/dev/null 2>&1; then
+  log "WS1 Control: ptyxis"
+  nohup ptyxis --new-window >/dev/null 2>&1 &
+fi
+sleep 2
+
+# --- WS2 Brain: Obsidian + Firefox ---
+switch_ws 2
+if command -v aide-obsidian-day >/dev/null 2>&1; then
+  log "WS2 Brain: aide-obsidian-day"
+  nohup aide-obsidian-day >/dev/null 2>&1 &
+elif command -v obsidian >/dev/null 2>&1; then
+  nohup obsidian >/dev/null 2>&1 &
+elif [ -x /snap/bin/obsidian ]; then
+  nohup /snap/bin/obsidian >/dev/null 2>&1 &
+fi
+sleep 1
+if command -v firefox >/dev/null 2>&1; then
+  log "WS2 Brain: firefox"
+  nohup firefox >/dev/null 2>&1 &
+elif [ -x /snap/bin/firefox ]; then
+  nohup /snap/bin/firefox >/dev/null 2>&1 &
+fi
+# Desktop note for WS2 SFTP reminder
+if [ -f "$HOME/Desktop/MORNING-TODOS-AND-RESTORE-NOTE.txt" ]; then
+  nohup gedit "$HOME/Desktop/MORNING-TODOS-AND-RESTORE-NOTE.txt" >/dev/null 2>&1 &
+fi
+sleep 2
+
+# --- WS3 Lab: Brave ---
+switch_ws 3
+if command -v brave >/dev/null 2>&1; then
+  log "WS3 Lab: brave"
+  nohup brave >/dev/null 2>&1 &
+elif [ -x /snap/bin/brave ]; then
+  nohup /snap/bin/brave >/dev/null 2>&1 &
+fi
+
+# Return focus hint to WS1
+switch_ws 1
+log "Done. Drag windows to Control/Brain/Lab if Wayland did not place them."
+log "WS2: resolve Nathon SFTP or rsync — see Desktop morning note."
+notify-send -u normal "AIDE Workstations" \
+  "WS1–3 launched (Control/Brain/Lab). Check morning note for WS2 SFTP/rsync." 2>/dev/null || true

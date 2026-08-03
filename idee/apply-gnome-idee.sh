@@ -2,6 +2,7 @@
 # Apply um690 GNOME IDEE profile for GrokAide (user-level only).
 set -euo pipefail
 
+SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 BACKUP_DIR="${XDG_STATE_HOME:-$HOME/.local/state}/aide-idee"
 mkdir -p "$BACKUP_DIR"
 STAMP=$(date +%Y%m%d%H%M%S)
@@ -24,14 +25,23 @@ if gsettings writable org.gnome.desktop.wm.preferences workspace-names 2>/dev/nu
     "['Control', 'Brain', 'Lab', 'Platform']"
 fi
 
+echo "==> Ghostty (GrokAide terminal themes)"
+if [ -f "$SCRIPT_DIR/ghostty/apply-ghostty.sh" ]; then
+  bash "$SCRIPT_DIR/ghostty/apply-ghostty.sh"
+else
+  echo "    WARN: idee/ghostty/apply-ghostty.sh missing; skip"
+fi
+
 echo "==> Favorites (dock)"
-# Prefer our launchers when present
-FAVS="['aide-obsidian-brain.desktop', 'org.gnome.Terminal.desktop', 'aide-grok-tui.desktop', 'aide-lab-term.desktop', 'firefox_firefox.desktop', 'firefox.desktop', 'org.gnome.Nautilus.desktop']"
-# Filter to existing desktop files
+# Prefer our launchers when present. Ghostty first when installed (GrokAide).
 EXISTING=()
-for f in aide-obsidian-brain.desktop org.gnome.Terminal.desktop aide-grok-tui.desktop aide-lab-term.desktop \
+for f in aide-obsidian-brain.desktop \
+  com.mitchellh.ghostty.desktop ghostty_ghostty.desktop \
+  org.gnome.Terminal.desktop org.gnome.Ptyxis.desktop \
+  aide-grok-tui.desktop aide-lab-term.desktop \
   firefox_firefox.desktop firefox.desktop org.gnome.Nautilus.desktop; do
-  if [ -f "$HOME/.local/share/applications/$f" ] || [ -f "/usr/share/applications/$f" ]; then
+  if [ -f "$HOME/.local/share/applications/$f" ] || [ -f "/usr/share/applications/$f" ] \
+    || [ -f "/var/lib/snapd/desktop/applications/$f" ]; then
     EXISTING+=("$f")
   fi
 done
@@ -51,7 +61,6 @@ else
 fi
 
 echo "==> Installing application launchers"
-SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 mkdir -p "$HOME/.local/share/applications"
 for desk in aide-obsidian-brain.desktop aide-grok-tui.desktop aide-lab-term.desktop; do
   if [ -f "$SCRIPT_DIR/$desk" ]; then

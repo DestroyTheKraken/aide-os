@@ -1,0 +1,26 @@
+# GrokAide / AIDE_OS — NES-inspired high-contrast theme for Markdown + UI/UX learning
+# Readable body text, bright semantic colors for headings / code / links (CRT-ish, not pure green-on-black).
+# Use when studying Markdown, Electron UI notes, or exam flashcards in the terminal.
+
+palette = 0=#0f0f1b
+palette = 1=#ff004d
+palette = 2=#00e436
+palette = 3=#ffec27
+palette = 4=#29adff
+palette = 5=#ff77a8
+palette = 6=#00e5ff
+palette = 7=#f0f0f0
+palette = 8=#5f574f
+palette = 9=#ff6b81
+palette = 10=#5ef38c
+palette = 11=#fff38a
+palette = 12=#7ec8ff
+palette = 13=#ffb3d0
+palette = 14=#7afcff
+palette = 15=#ffffff
+background = #0f0f1b
+foreground = #e8e6e3
+cursor-color = #ffec27
+cursor-text = #0f0f1b
+selection-background = #1d2b53
+selection-foreground = #ffffff

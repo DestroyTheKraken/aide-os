@@ -1,7 +1,7 @@
 [Desktop Entry]
 Type=Application
-Name=GrokAide CLI
-Comment=Grok Build TUI — AIDE_OS seat
+Name=GrokAide Grok TUI
+Comment=Grok Build TUI in Ghostty — AIDE_OS seat (electric dystopia theme)
 Exec=/home/kraken/AIDE_OS/idee/run-in-terminal.sh /home/kraken/AIDE_OS/idee/open-grok-tui.sh
 Icon=utilities-terminal
 Terminal=false

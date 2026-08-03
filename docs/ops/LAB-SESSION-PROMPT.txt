@@ -1,0 +1,11 @@
+AIDE_OS lab session — Destroy The Kraken
+
+CWD is ~/AIDE_OS. Ubuntu Core VM name: AIDE_OS (VirtualBox). Snapshot: post-console-conf.
+
+Priorities this session (pick with me):
+1) Attach host-only vboxnet0 to VM, SSH from um690 (guest had NAT IP 10.0.2.15 style — recheck after host-only).
+2) USAGE-LOG pair if heavy Build (screenshot before/after).
+3) Do not join Tailscale or Samsung TV unless I explicitly approve this turn.
+
+Read if needed: docs/ops/AIDE-OS-CORE-VM.md, docs/labs/LEARNING-TRACK-AIDE-OS.md, docs/ops/USAGE-LOG.md.
+Stay in this interactive session. Local-first when possible.

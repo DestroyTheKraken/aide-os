@@ -26,6 +26,19 @@ Deep Spark↔Grok engine design: `~/SovereignAid/docs/design/2026-07-26-spark-en
 - Grok CLI / Buildian (`permissionMode: default`) for execution
 - `bootcamp/lfcs/` MOC + labs + domains
 - `idee/` apply + verify + `.desktop` launchers
+- **Ghostty** as preferred GrokAide terminal (`idee/ghostty/` themes + `run-in-terminal.sh`)
+- Learner-facing chrome direction: **Electron / Chromium** (see `2026-07-27-grokaide-electron-education-ui.md`)
+
+## Themes (terminal)
+
+| Pack | Role |
+|------|------|
+| `hickmedia-dracula-neon-obsidian` | Default — HickMedia neon cyan/mag/purple on deep black |
+| `nes-markdown-learn` | High-contrast NES-inspired pack for Markdown / UI-UX study |
+
+```bash
+bash ~/AIDE_OS/idee/ghostty/apply-ghostty.sh
+```
 
 ## Verify
 
@@ -36,4 +49,4 @@ spark start ~/AIDE_OS/brain
 
 ## Non-goals
 
-Nextcloud AI shell (abandoned), HickMedia merge, permanent YOLO, full Edbuntu image.
+Nextcloud AI shell (abandoned), HickMedia **product** merge (visual token kinship OK), permanent YOLO, full Edbuntu image day-1.

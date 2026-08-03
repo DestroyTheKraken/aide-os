@@ -10,8 +10,8 @@ level: beginner
 > Who you are (`uid`/`gid`), what you own, and what mode bits allow.
 
 > [!todo] Next
-> - [ ] [[bootcamp/lfcs/domains/D02-users-permissions/objectives]]
-> - [ ] [[bootcamp/lfcs/domains/D02-users-permissions/lessons/L01-identity]]
+> - [ ] [[bootcamp/01_lfcs/domains/D02-users-permissions/objectives]]
+> - [ ] [[L01-identity]]
 
 ## Path
 

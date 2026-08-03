@@ -1,0 +1,188 @@
+#!/usr/bin/env bash
+# aide-menu — Ghostty pager menu for AIDE_OS / GrokAide commands
+# Bind in Ghostty:  keybind = ctrl+shift+a=text:aide-menu\n
+# Or run: aide-menu
+set -euo pipefail
+
+AIDE_ROOT="${AIDE_ROOT:-$HOME/AIDE_OS}"
+export PATH="${HOME}/.local/bin:${AIDE_ROOT}/bin:${PATH}"
+
+if [[ -t 1 ]] && command -v tput >/dev/null 2>&1; then
+  B=$(tput bold 2>/dev/null || true)
+  R=$(tput setaf 1 2>/dev/null || true)
+  G=$(tput setaf 2 2>/dev/null || true)
+  Y=$(tput setaf 3 2>/dev/null || true)
+  C=$(tput setaf 6 2>/dev/null || true)
+  Z=$(tput sgr0 2>/dev/null || true)
+else
+  B= R= G= Y= C= Z=
+fi
+
+pager() {
+  if command -v less >/dev/null 2>&1; then
+    LESS="${LESS:--R}" less -R
+  else
+    cat
+  fi
+}
+
+run_cmd() {
+  local title="$1"
+  shift
+  echo
+  echo "${C}── ${title} ──${Z}"
+  echo "${Y}\$ $*${Z}"
+  echo
+  # shellcheck disable=SC2068
+  "$@"
+  local rc=$?
+  echo
+  if [[ $rc -eq 0 ]]; then
+    echo "${G}[ok] exit $rc${Z}"
+  else
+    echo "${R}[fail] exit $rc${Z}"
+  fi
+  echo
+  read -r -p "Press Enter to return to menu… " _
+  return 0
+}
+
+show_help_pager() {
+  {
+    echo "${B}AIDE_OS / GrokAide — command reference${Z}"
+    echo
+    cat <<'EOF'
+EMERGENCY / PREEMPTIVE READINESS (not active evac unless --go)
+  aide-heal          Recovery health after reboot/outage
+  aide-911 --fast    Capture net/mesh/routers/cluster (minutes left)
+  aide-911           Full pack: trees + git bundles + restic → NAS
+  aide-evac --ready  Preemptive: full pack + dual backup (no shutdown)
+  aide-evac --go     Only if actually leaving — pack + halt path
+  aide-halt          Dry-run halt plan; --execute for real stop
+  aide-dual-backup   NAS (PII/secure) + GitHub-safe (lab/non-risk) export
+
+DAILY / LAB
+  grokAide-start     Open Grok Build in AIDE_OS (morning prompt)
+  grokAide-start --lab
+  aide-day           LFCS Day Start
+  aide-obsidian-day  Obsidian day bridge
+  into-the-sequence  Learning sequence
+  aide-bridge-sync   Bridge sync
+
+DOCS
+  ~/RECOVER.md
+  ~/SovereignAid/docs/ops/EMERGENCY-OPS.md
+  ~/SovereignAid/docs/ops/EVAC-WILDFIRE.md
+  /mnt/systems_admin/shared/memory/RECOVER.md
+
+GHOSTTY
+  Ctrl+Shift+A       Open this menu (after config reload)
+  Ctrl+Shift+,       Reload Ghostty config
+  Ctrl+,             Open Ghostty config
+
+GRAB BAG (Omak wildfire)
+  Take: NAS drive · Phone · Tablet · PC (um690)
+  Leave: node1 · node2 · fam-media · (routers if fixed)
+  Recovery: attach NAS to PC → aide-heal / restore from
+            /mnt/systems_admin/um690/EMERGENCY-POWER-LATEST
+EOF
+  } | pager
+}
+
+menu_whiptail() {
+  whiptail --title "AIDE_OS · GrokAide" --menu "Select command" 22 72 14 \
+    "1" "aide-heal          — recovery health" \
+    "2" "aide-911 --fast    — emergency pack (fast)" \
+    "3" "aide-911           — FULL emergency pack + restic" \
+    "4" "aide-evac --ready  — preemptive pack+dual (no shutdown)" \
+    "5" "aide-dual-backup   — NAS + GitHub-safe export" \
+    "6" "aide-halt          — graceful platform shutdown" \
+    "7" "aide-heal --latest — show last pack" \
+    "8" "grokAide-start     — Grok Build (AIDE_OS)" \
+    "9" "aide-day           — LFCS Day Start" \
+    "A" "into-the-sequence  — learning sequence" \
+    "H" "Help / docs (pager)" \
+    "Q" "Quit" \
+    3>&1 1>&2 2>&3
+}
+
+menu_select() {
+  echo "${B}╔══════════════════════════════════════════════╗${Z}"
+  echo "${B}║  AIDE_OS · GrokAide menu                     ║${Z}"
+  echo "${B}╚══════════════════════════════════════════════╝${Z}"
+  echo
+  echo "  ${R}1${Z}) aide-heal          recovery health"
+  echo "  ${R}2${Z}) aide-911 --fast    emergency pack (fast)"
+  echo "  ${R}3${Z}) aide-911           FULL pack + restic"
+  echo "  ${R}4${Z}) aide-evac --ready  preemptive pack+dual"
+  echo "  ${Y}5${Z}) aide-dual-backup   NAS + GitHub-safe"
+  echo "  ${Y}6${Z}) aide-halt          graceful shutdown"
+  echo "  ${C}7${Z}) aide-heal --latest last pack"
+  echo "  ${C}8${Z}) grokAide-start     Grok Build"
+  echo "  ${C}9${Z}) aide-day"
+  echo "  ${C}A${Z}) into-the-sequence"
+  echo "  ${C}H${Z}) Help / docs (pager)"
+  echo "  ${C}Q${Z}) Quit"
+  echo
+  read -r -p "Choice: " choice
+  echo "$choice"
+}
+
+dispatch() {
+  local c="${1:-}"
+  case "$c" in
+    1) run_cmd "heal" aide-heal ;;
+    2) run_cmd "911 fast" aide-911 --fast ;;
+    3)
+      echo "${Y}Full pack can take several minutes and writes to NAS.${Z}"
+      read -r -p "Continue? [y/N] " yn
+      [[ "${yn,,}" == "y" ]] || return 0
+      run_cmd "911 full" aide-911
+      ;;
+    4)
+      echo "${Y}Preemptive readiness: full pack + dual backup. Does NOT shut down.${Z}"
+      echo "For real leave later: aide-evac --go"
+      read -r -p "Continue aide-evac --ready? [y/N] " yn
+      [[ "${yn,,}" == "y" ]] || return 0
+      run_cmd "evac-ready" aide-evac --ready
+      ;;
+    5) run_cmd "dual-backup" aide-dual-backup ;;
+    6)
+      echo "${R}Graceful platform shutdown — confirm hosts carefully.${Z}"
+      read -r -p "Continue? [y/N] " yn
+      [[ "${yn,,}" == "y" ]] || return 0
+      run_cmd "halt" aide-halt
+      ;;
+    7) run_cmd "latest" aide-heal --latest ;;
+    8) run_cmd "grok" grokAide-start ;;
+    9) run_cmd "day" aide-day ;;
+    A|a) run_cmd "sequence" into-the-sequence ;;
+    H|h) show_help_pager ;;
+    Q|q|"") echo "Bye."; exit 0 ;;
+    *) echo "Unknown: $c"; sleep 1 ;;
+  esac
+}
+
+main() {
+  if [[ "${1:-}" == "--help" || "${1:-}" == "-h" ]]; then
+    show_help_pager
+    exit 0
+  fi
+  if [[ "${1:-}" == "--once" && -n "${2:-}" ]]; then
+    dispatch "$2"
+    exit 0
+  fi
+
+  while true; do
+    clear 2>/dev/null || true
+    local choice=""
+    if [[ -t 0 ]] && command -v whiptail >/dev/null 2>&1 && [[ "${AIDE_MENU_SIMPLE:-}" != "1" ]]; then
+      choice=$(menu_whiptail) || choice="Q"
+    else
+      choice=$(menu_select)
+    fi
+    dispatch "$choice"
+  done
+}
+
+main "$@"

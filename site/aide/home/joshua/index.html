@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Joshua Hickman · Destroy The Kraken — Lab Portfolio</title>
+  <meta name="description" content="Destroy The Kraken lab portfolio: LabNET, AIDE_OS, Ubuntu/Linux ops, AI-assisted design. HickMedia neon theme. Anonymized. No school SKU." />
+  <link rel="icon" type="image/png" href="assets/img/dtk-logo.png" />
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+  <div class="sky" aria-hidden="true"></div>
+  <div class="stars" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <div class="brand-bar">
+      <a class="brand" href="./">
+        <img src="assets/img/dtk-logo.png" alt="Destroy The Kraken logo" width="42" height="42" />
+        <div class="brand-text">
+          <strong>Destroy The Kraken</strong>
+          <span>Joshua Hickman · Lab Portfolio</span>
+        </div>
+      </a>
+      <nav class="nav" aria-label="Primary">
+        <a href="#about">About</a>
+        <a href="projects/">Projects</a>
+        <a href="skills/">Skills</a>
+        <a href="#architecture">Architecture</a>
+        <a href="docs/">Docs</a>
+        <a class="cta" href="https://www.destroythekraken.com">DTK Site</a>
+      </nav>
+    </div>
+
+    <header class="hero">
+      <div class="hero-bg" style="background-image:url('assets/img/hero-synthwave.jpg')"></div>
+      <div class="hero-body">
+        <p class="eyebrow">Destroy The Kraken · personal lab · not a school product</p>
+        <h1>Systems that work in the hills — and in the head.</h1>
+        <p class="lede">
+          I build and document private infrastructure, Ubuntu/Linux ops, and AI-assisted workflows
+          so hard problems stop looking impossible. This page is the <strong>technical portfolio</strong>
+          (HickMedia neon look · <strong>DTK branding</strong>).
+        </p>
+        <div class="tag-row">
+          <span class="tag">LabNET / k3s</span>
+          <span class="tag">AIDE_OS</span>
+          <span class="tag">Ubuntu · LFCS path</span>
+          <span class="tag">Prompt engineering</span>
+          <span class="tag">Rural IT (VTS)</span>
+        </div>
+        <div class="btn-row">
+          <a class="btn btn-primary" href="projects/">Enter the Lab</a>
+          <a class="btn btn-ghost" href="skills/">Skills &amp; evaluation</a>
+        </div>
+      </div>
+    </header>
+
+    <section class="card" id="about">
+      <h2>About</h2>
+      <div class="profile">
+        <img src="assets/img/headshot.jpg" alt="Joshua Hickman" width="96" height="96" />
+        <div>
+          <p>
+            <strong>Joshua Hickman</strong> — Destroy The Kraken. Career transition into systems &amp; DevOps
+            with a live multi-node home lab, written design discipline, and Valley Tech Support for
+            Okanogan County clients.
+          </p>
+          <p class="note">
+            Public claims are <em>lab patterns</em>, not multi-tenant hosting of customer data.
+            No student PII. No unfinished school-SKU education distro.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" id="projects-preview">
+      <h2>Portfolio projects</h2>
+      <div class="grid two">
+        <article class="tile">
+          <h3>LabNET / SMADP</h3>
+          <p>Multi-node Ubuntu lab: control plane + workers, Tailscale mesh, durable storage, fail-hard health.</p>
+          <div class="meta"><span class="status live">Live</span></div>
+          <a class="more" href="projects/#labnet">Details →</a>
+        </article>
+        <article class="tile">
+          <h3>AIDE_OS / GrokAide</h3>
+          <p>AI desktop + lab-in-a-box design: VirtualBox classic guest, hybrid AI policy, document-first development.</p>
+          <div class="meta"><span class="status build">Design → build</span></div>
+          <a class="more" href="projects/#aide">Details →</a>
+        </article>
+        <article class="tile">
+          <h3>Ubuntu Core practice</h3>
+          <p>Core flash/install lessons from appliance lab work — patterns for AIDE, not gaming console product merge.</p>
+          <div class="meta"><span class="status learn">Practice</span></div>
+          <a class="more" href="projects/#core">Details →</a>
+        </article>
+        <article class="tile">
+          <h3>DTK · Valley Tech</h3>
+          <p>Public brand + rural IT packages: scoped work, handoff docs, private cloud on gear you own.</p>
+          <div class="meta"><span class="status live">Business</span></div>
+          <a class="more" href="https://www.destroythekraken.com">destroythekraken.com →</a>
+        </article>
+      </div>
+    </section>
+
+    <section class="card" id="architecture">
+      <h2>Anonymized lab architecture</h2>
+      <pre class="diagram" aria-label="Lab architecture">LabNET (private — IPs redacted)
+  gateway          — lab edge router
+  control plane    — Grok director, k3s control, image builds
+  workers ×2       — k3s workers
+  appliance lab    — Ubuntu Core–class console experiments
+  NAS              — durable tenant storage
+  Tailscale        — management mesh only (no public IPs here)</pre>
+      <img class="shot" src="assets/img/lab-desktop.jpg" alt="Lab desktop: notes, terminal, and agent workflow (redacted personal lab)" width="1280" />
+      <p class="shot-cap">Host control-plane composition (synthwave desk · Ghostty · GrokAide vault). Local screenshot, no management IPs.</p>
+    </section>
+
+    <section class="card" id="skills-preview">
+      <h2>Skill tracks</h2>
+      <div class="grid two">
+        <article class="tile">
+          <h3>AI prompt engineering</h3>
+          <p>Markdown, structure, research→content, file organization, desktop app stacks as a control plane.</p>
+        </article>
+        <article class="tile">
+          <h3>DevOps</h3>
+          <p>Design &amp; planning (PR DAGs, non-goals); testing &amp; debugging (preflight, retrospectives, stop-rules).</p>
+        </article>
+        <article class="tile">
+          <h3>Linux</h3>
+          <p>Intermediate lab operator — multi-node Ubuntu/k3s; LFCS path; honest evaluation published on Skills.</p>
+        </article>
+        <article class="tile">
+          <h3>Usage discipline</h3>
+          <p>Calibrating SuperGrok weekly pool → hours/week so evenings/weekends can be off after intentional burn.</p>
+        </article>
+      </div>
+      <div class="btn-row">
+        <a class="btn btn-ghost" href="skills/">Full skills page →</a>
+      </div>
+    </section>
+
+    <section class="card" id="contact">
+      <h2>Contact</h2>
+      <p>
+        Public channels only via
+        <a href="https://www.destroythekraken.com">destroythekraken.com</a>.
+        Do not publish personal cell, home address, or management IPs on portfolio forks.
+      </p>
+    </section>
+
+    <footer class="foot">
+      <p>© <span id="y"></span> Joshua Hickman · <strong>Destroy The Kraken</strong> · Lab portfolio</p>
+      <p class="tiny">
+        Visual language: HickMedia neon tokens · Brand: Destroy The Kraken.
+        Redact Tailscale IPs, secrets, and client hostnames. No school-SKU.
+      </p>
+    </footer>
+  </div>
+  <script>document.getElementById("y").textContent = new Date().getFullYear();</script>
+</body>
+</html>

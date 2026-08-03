@@ -1,0 +1,26 @@
+# Install required packages
+install.packages("rpart")
+
+# Load the required packages
+library(rpart)
+
+# Create a sample dataset
+# Here, we have a dataset with three features (age, experience, and number of hikes) and a target variable (hiking path)
+dataset <- data.frame(
+  age = c(25, 35, 45, 22, 32, 48, 60, 55, 38, 27),
+  experience = c(7,9,12,5,8,11,15,13,10,6),
+  numberofhikes = c(10,20,30,10,20,30,40,30,20,10),
+  hiking_path = c(0, 1, 1, 0, 1, 1, 1, 1, 0, 0)
+)
+
+# Train the decision tree classifier
+model <- rpart(hiking_path ~ age + experience + numberofhikes, data = dataset, method = "class")
+
+# Create a new instance to make a prediction
+new_instance <- data.frame(age = 30, experience = 8, numberofhikes = 20)
+
+# Make predictions using the trained model
+prediction <- predict(model, new_instance, type = "class")
+
+# Print the predicted class
+print(prediction)

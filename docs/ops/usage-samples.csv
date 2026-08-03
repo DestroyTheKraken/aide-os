@@ -1,0 +1,14 @@
+# timestamp_local,pct_used,product,reset_eta,source,activity_class,notes
+2026-08-02T01:01:00,9,Grok Build,2026-08-07T23:58:00,screencast-01-01-01,strategic,Usage UI first capture
+2026-08-02T01:10:00,10,Grok Build,2026-08-07T23:58:00,user-note,strategic,2 min into 10pct
+2026-08-02T01:27:00,12,Grok Build,2026-08-07T23:58:00,screenshot-01-27-03,strategic,design portfolio
+2026-08-02T01:33:00,13,Grok Build,2026-08-07T23:58:00,screenshot-01-33-26,strategic,portfolio strategy
+2026-08-02T01:38:00,13,Grok Build,2026-08-07T23:58:00,screenshot-01-38-40,local,Core download VBox no pp move
+2026-08-02T02:21:00,15,Grok Build,2026-08-07T23:58:00,screenshot-02-21-55,strategic,night Q Core SSH
+2026-08-02T02:25:00,16,Grok Build,2026-08-07T23:58:00,screenshot-02-25-19,strategic,session packaging
+2026-08-02T04:40:00,23,Grok Build,2026-08-07T23:58:00,screenshot-04-40-10,mixed,long gap mixed work
+2026-08-02T05:11:00,26,Grok Build,2026-08-07T23:58:00,screenshot-05-11-53,strategic,obsidian theme work
+2026-08-02T05:57:33-07:00,29,Grok Build,2026-08-07T23:58:00,manual,strategic,user report after interface fail
+2026-08-02T05:59:08-07:00,29,Grok Build,2026-08-07T23:58:00,manual,strategic,confirmed 29pct user
+2026-08-02T06:08:29-07:00,30,Grok Build,2026-08-07T23:58:00,manual,strategic,user note 30pct
+2026-08-02T14:03:38-07:00,35,Grok Build,2026-08-07T23:58:00,manual,manual,Controlled Chaos portfolio redesign session (DTK site); design+theme in progress

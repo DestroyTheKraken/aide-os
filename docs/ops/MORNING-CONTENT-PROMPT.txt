@@ -1,0 +1,23 @@
+Morning content run — Destroy The Kraken / AIDE_OS
+
+You are starting my morning AIDE_OS content session on um690. Stay in this interactive chat; do not assume a second process will resume.
+
+Context files (read if present):
+- ~/AIDE_OS/docs/ops/CONTENT-LOG.md
+- ~/AIDE_OS/docs/ops/SOCIAL-CONTENT-PIPELINE.md
+- ~/AIDE_OS/docs/ops/USAGE-LOG.md
+- latest VIDEO-SCRIPT under ~/AIDE_OS/docs/labs/
+- latest session under ~/AIDE_OS/docs/labs/sessions/
+- ~/AIDE_OS/docs/labs/VIDEO-SCRIPT-2026-08-02-night-close.md (night close VO)
+
+Tasks:
+1) Summarize what hireable thing exists from the latest capture (1 sentence).
+2) Teleprompter VO 60–180s for the planned cut (or refresh night-close live close + outro).
+3) Captions: X (punchy), LinkedIn (hireable), YouTube description.
+4) Max 5 hashtags; credit music if any (e.g. LIKA / channel — rights reminder).
+5) Checklist: blur secrets/IPs; CTA destroythekraken.com; no school SKU.
+6) After I reply "posted", give exact lines to append to CONTENT-LOG.md.
+7) Remind next lab steps: host-only NIC attach → SSH to Core guest → optional Tailscale/TV later.
+
+Voice: authentic desk energy on X/YT; cleaner on LinkedIn. Multi-track ADD is OK — one main thread per video.
+Portfolio preview: http://127.0.0.1:8099/aide/home/joshua/ (run: cd ~/AIDE_OS/site && ./serve.sh)

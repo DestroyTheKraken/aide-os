@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+# grokAide-start — open ONE interactive Grok Build session seeded with the morning prompt.
+#
+# Why not:  grok -p @file && grok --resume
+#   -p/--single  = single-turn, prints, EXITS (new process ends the chat)
+#   --resume     = second process; may attach to a different session than you expect
+# Correct:  one `grok` with positional initial PROMPT → same TUI session continues.
+#
+# Usage:
+#   grokAide-start              # morning content prompt (default)
+#   grokAide-start --resume     # continue last session in AIDE_OS cwd
+#   grokAide-start --lab        # lab ops prompt instead
+set -euo pipefail
+
+AIDE_ROOT="${AIDE_ROOT:-$HOME/AIDE_OS}"
+PROMPT_FILE="${PROMPT_FILE:-$AIDE_ROOT/docs/ops/MORNING-CONTENT-PROMPT.txt}"
+MODE="start"
+
+for a in "$@"; do
+  case "$a" in
+    --resume|-c) MODE="resume" ;;
+    --lab)
+      PROMPT_FILE="$AIDE_ROOT/docs/ops/LAB-SESSION-PROMPT.txt"
+      ;;
+    --help|-h)
+      sed -n '2,12p' "$0"
+      exit 0
+      ;;
+  esac
+done
+
+if [[ ! -d "$AIDE_ROOT" ]]; then
+  echo "AIDE_OS root missing: $AIDE_ROOT" >&2
+  exit 1
+fi
+
+cd "$AIDE_ROOT"
+
+case "$MODE" in
+  resume)
+    # Continue most recent session for this working directory
+    exec grok --cwd "$AIDE_ROOT" --continue
+    ;;
+  start)
+    if [[ ! -f "$PROMPT_FILE" ]]; then
+      echo "Prompt file missing: $PROMPT_FILE" >&2
+      exit 1
+    fi
+    # Single process: initial prompt + interactive TUI (do not use -p/--single)
+    PROMPT="$(cat "$PROMPT_FILE")"
+    exec grok --cwd "$AIDE_ROOT" --fullscreen "$PROMPT"
+    ;;
+esac

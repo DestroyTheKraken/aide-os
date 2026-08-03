@@ -9,7 +9,7 @@ status: active
 > Units, status, enable/start concepts, and reading the journal.
 
 > [!todo] Next
-> - [ ] [[bootcamp/lfcs/labs/LAB-03-systemd-journal]]
+> - [ ] [[bootcamp/01_lfcs/labs/LAB-03-systemd-journal]]
 
 ## Objectives
 
@@ -19,7 +19,7 @@ status: active
 
 ## Labs
 
-- [[bootcamp/lfcs/labs/LAB-03-systemd-journal]]
+- [[bootcamp/01_lfcs/labs/LAB-03-systemd-journal]]
 
 ## Man
 

@@ -45,7 +45,8 @@ Target brand for education distro work: **Edbuntu** (Custom Ubuntu 26.04+ educat
 
 4. **Automation + self-hosted services** — out-of-the-box via **AIDE installers** (Nextcloud, Obsidian-centric workflow, browser policies, etc.) that **augment learning and productivity**, not couch gaming.
 5. **Minimal user themes** (selectable packs):
-   - Gruvbox · Tokyo Night Storm Dark · Panda · Everforest Dark · …
+   - Operator terminal (Ghostty): **HickMedia Dracula Neon Obsidian** · **NES Markdown Learn**
+   - Broader packs later: Gruvbox · Tokyo Night Storm Dark · Panda · Everforest Dark · …
 6. **Platform customization** profiles:
    - Google · Windows · AWS · Oracle · Canonical · …
 7. **Ecosystem customization** profiles:

@@ -39,7 +39,7 @@ echo "hello from $SHELL"
 
 ## Media
 
-See [[bootcamp/lfcs/domains/D01-essential-commands/media/MEDIA-QUEUE]]
+See [[bootcamp/01_lfcs/domains/D01-essential-commands/media/MEDIA-QUEUE]]
 
 ---
 

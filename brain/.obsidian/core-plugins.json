@@ -24,5 +24,10 @@
   "audio-recorder": false,
   "zk-prefixer": false,
   "random-note": false,
-  "footnotes": true
+  "footnotes": true,
+  "slash-command": false,
+  "markdown-importer": false,
+  "publish": false,
+  "bases": true,
+  "webviewer": false
 }

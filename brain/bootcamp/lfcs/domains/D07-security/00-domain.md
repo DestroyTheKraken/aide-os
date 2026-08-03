@@ -15,10 +15,10 @@ level: beginner
 
 ## Contents
 
-- [[bootcamp/lfcs/domains/D07-security/objectives]]
+- [[bootcamp/01_lfcs/domains/D07-security/objectives]]
 - Lessons (see folder)
 - Labs (see folder)
-- [[bootcamp/lfcs/domains/D07-security/media/MEDIA-QUEUE]]
+- [[bootcamp/01_lfcs/domains/D07-security/media/MEDIA-QUEUE]]
 
 ---
 

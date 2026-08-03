@@ -29,3 +29,23 @@ brain/.spark/backups/
 resources/attachments/
 *.img
 *.img.xz
+# AdGuard runtime (may contain secrets after wizard)
+infra/adguard/work/
+infra/adguard/conf/
+
+# session exports / secrets
+private/
+
+
+# deps / build
+**/node_modules/
+**/.next/
+**/dist/
+*.iso
+*.deb
+
+# Nested clones (keep local; not submodule-managed yet)
+brain/bootcamp/lfcs/study/Terminus-Global/
+brain/bootcamp/lfcs/study/bashcrawl/
+brain/bootcamp/lfcs/study/clh-bash/
+brain/bootcamp/lfcs/study/**/node_modules/

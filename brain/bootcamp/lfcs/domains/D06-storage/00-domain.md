@@ -15,10 +15,10 @@ level: beginner
 
 ## Contents
 
-- [[bootcamp/lfcs/domains/D06-storage/objectives]]
+- [[bootcamp/01_lfcs/domains/D06-storage/objectives]]
 - Lessons (see folder)
 - Labs (see folder)
-- [[bootcamp/lfcs/domains/D06-storage/media/MEDIA-QUEUE]]
+- [[bootcamp/01_lfcs/domains/D06-storage/media/MEDIA-QUEUE]]
 
 ---
 

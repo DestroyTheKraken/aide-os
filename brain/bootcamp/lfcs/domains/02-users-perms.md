@@ -9,7 +9,7 @@ status: active
 > Identity (`uid`/`gid`), ownership, mode bits, and safe local practice.
 
 > [!todo] Next
-> - [ ] [[bootcamp/lfcs/labs/LAB-02-users-groups]]
+> - [ ] [[bootcamp/01_lfcs/labs/LAB-02-users-groups]]
 
 ## Objectives
 
@@ -20,7 +20,7 @@ status: active
 
 ## Labs
 
-- [[bootcamp/lfcs/labs/LAB-02-users-groups]]
+- [[bootcamp/01_lfcs/labs/LAB-02-users-groups]]
 
 ## Man
 

@@ -1,0 +1,29 @@
+# GrokAide / AIDE_OS — HickMedia-aligned terminal theme
+# "Dracula Neon Glow meets Obsidian Purple"
+# Tokens: HickMedia docs/THEME.md + boot splash (cyan/mag/purple) + Dracula structure
+#
+# bg0 #05030a · bg1 #0b0a10 · cyan #00f0ff · mag #ff2bd6 · purple #c77dff
+# text #c0caf5 / #eef2ff · Tokyo Night secondary #bb9af7 · rose #e93d58
+
+palette = 0=#0b0a10
+palette = 1=#ff2bd6
+palette = 2=#50fa7b
+palette = 3=#f1fa8c
+palette = 4=#7aa2f7
+palette = 5=#c77dff
+palette = 6=#00f0ff
+palette = 7=#c0caf5
+palette = 8=#44475a
+palette = 9=#ff79c6
+palette = 10=#69ff94
+palette = 11=#ffffa5
+palette = 12=#bd93f9
+palette = 13=#bb9af7
+palette = 14=#a4ffff
+palette = 15=#eef2ff
+background = #05030a
+foreground = #c0caf5
+cursor-color = #00f0ff
+cursor-text = #05030a
+selection-background = #241b3a
+selection-foreground = #eef2ff

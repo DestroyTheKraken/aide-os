@@ -33,6 +33,7 @@
 - **Open vault:** `bash ~/AIDE_OS/idee/open-brain-vault.sh` or dock **GrokAide Brain**
 - **Verify:** `bash ~/AIDE_OS/idee/verify-idee.sh`
 - [docs/design/2026-07-27-grokaide-obsidian-idee.md](./docs/design/2026-07-27-grokaide-obsidian-idee.md)
+- [docs/design/2026-07-27-grokaide-electron-education-ui.md](./docs/design/2026-07-27-grokaide-electron-education-ui.md) — Electron/Chromium education UI direction + Ghostty themes
 - [docs/PRODUCT-SCOPE-AND-EDBUNTU.md](./docs/PRODUCT-SCOPE-AND-EDBUNTU.md)
 - [GLOSSARY.md](./GLOSSARY.md)
 - [LABNET.md](./LABNET.md)

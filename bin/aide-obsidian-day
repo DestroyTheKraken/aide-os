@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+# Open GrokAide brain vault focused on DAY-START (Workspace 1 morning)
+set -euo pipefail
+VAULT="${AIDE_BRAIN_VAULT:-$HOME/AIDE_OS/brain}"
+FILE="${1:-DAY-START.md}"
+URI="obsidian://open?path=${VAULT}/${FILE}"
+
+# Prefer full open-brain script first (finds real Obsidian binary)
+if [[ -x "$HOME/AIDE_OS/idee/open-brain-vault.sh" ]]; then
+  bash "$HOME/AIDE_OS/idee/open-brain-vault.sh" || true
+  sleep 1
+fi
+
+# Then focus DAY-START
+export PATH="$HOME/.local/bin:$PATH"
+if [[ -x /opt/Obsidian/obsidian ]]; then
+  nohup /opt/Obsidian/obsidian "$URI" >/dev/null 2>&1 &
+elif command -v obsidian >/dev/null 2>&1; then
+  nohup obsidian "$URI" >/dev/null 2>&1 &
+else
+  echo "Open manually: $VAULT / $FILE" >&2
+  echo "URI: $URI" >&2
+fi
+
+echo "GrokAide Day Start → $FILE"
+echo "Layout: DAY-START | DAY-01-START | session (workspace.json)"
+echo "Optional timer: aide-day"

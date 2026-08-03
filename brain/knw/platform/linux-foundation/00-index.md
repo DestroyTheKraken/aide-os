@@ -4,7 +4,7 @@ tags: [knw, platform]
 
 # Platform — Linux Foundation
 
-LFCS / LFS207 study lives primarily under [[bootcamp/lfcs/00-MOC]].
+LFCS / LFS207 study lives primarily under [[bootcamp/01_lfcs/00-MOC]].
 
 ---
 

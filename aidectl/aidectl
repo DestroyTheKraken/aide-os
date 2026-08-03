@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+# aidectl — AIDE_OS system command surface (provision → config → doctor)
+set -euo pipefail
+
+AIDECTL_HOME=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+# shellcheck source=lib/common.sh
+source "$AIDECTL_HOME/lib/common.sh"
+# shellcheck source=cmd/provision.sh
+source "$AIDECTL_HOME/cmd/provision.sh"
+# shellcheck source=cmd/config.sh
+source "$AIDECTL_HOME/cmd/config.sh"
+# shellcheck source=cmd/doctor.sh
+source "$AIDECTL_HOME/cmd/doctor.sh"
+
+usage() {
+  cat <<'EOF'
+aidectl — AIDE_OS command language (Core target · classic-shim today)
+
+Usage:
+  aidectl provision [--profile NAME] [--dry-run] [--verify-only]
+  aidectl config list|tree|get|set ...
+  aidectl doctor [--fix] [ask "symptom"]
+  aidectl mode
+  aidectl help
+
+Phase order: 1 provision → 2 config → 3 doctor
+Product: ethics + family + education. See docs/design/2026-07-27-aide-core-aidectl.md
+EOF
+}
+
+main() {
+  local cmd="${1:-help}"
+  shift || true
+  case "$cmd" in
+    provision) cmd_provision "$@" ;;
+    config) cmd_config "$@" ;;
+    doctor) cmd_doctor "$@" ;;
+    mode)
+      printf 'mode=%s\n' "$(detect_mode)"
+      if [ -f "$AIDE_STATE/profile" ]; then
+        printf 'profile=%s\n' "$(cat "$AIDE_STATE/profile")"
+      fi
+      ;;
+    help|-h|--help) usage ;;
+    *)
+      usage
+      return 2
+      ;;
+  esac
+}
+
+main "$@"

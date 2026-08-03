@@ -32,7 +32,12 @@
   "bookmarkIcons": {},
   "tagIcons": {},
   "propertyIcons": {},
-  "ribbonIcons": {},
+  "ribbonIcons": {
+    "spark:Open spark chat": {
+      "icon": "lucide-message-circle-dashed",
+      "color": "purple"
+    }
+  },
   "fileRules": [],
   "folderRules": []
 }

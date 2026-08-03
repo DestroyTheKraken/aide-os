@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+# Refresh usage snapshot into Obsidian USAGE-BRIDGE.md
+set -euo pipefail
+python3 "$HOME/AIDE_OS/scripts/ops/usage-tracker.py" >/dev/null
+python3 << 'PY'
+import json, re
+from pathlib import Path
+state = json.loads(Path.home().joinpath("AIDE_OS/docs/ops/usage-state.json").read_text())
+note = Path.home()/"AIDE_OS/brain/USAGE-BRIDGE.md"
+text = note.read_text()
+block = f"""
+## Live snapshot (auto)
+
+| Sensor | Reading |
+|--------|---------|
+| **Weekly bar** | **{state['latest_pct']:.0f}%** used |
+| **Reset** | `{state['reset']}` |
+| **Plan ≤ heavy/day** | **{state['planned_per_day_h']:.2f} h** (~{state['planned_per_day_h']*60:.0f} min) |
+| **Plan more this week** | {state['planned_more_h']:.2f} h (after 20% reserve) |
+| **Weekly $ scaffold** | ${state['weekly_sub_usd']:.2f} · used ~${state['weekly_sub_usd']*state['latest_pct']/100:.2f} |
+| **Updated (UTC)** | {state['updated'][:19]} |
+
+*Refresh: `usage-tracker` then `aide-bridge-sync`.*
+"""
+if "<!-- LIVE-START -->" in text:
+    text = re.sub(r"<!-- LIVE-START -->.*?<!-- LIVE-END -->",
+                  f"<!-- LIVE-START -->{block}<!-- LIVE-END -->", text, flags=re.S)
+else:
+    text += f"\n<!-- LIVE-START -->{block}<!-- LIVE-END -->\n"
+note.write_text(text)
+print("synced USAGE-BRIDGE.md")
+PY

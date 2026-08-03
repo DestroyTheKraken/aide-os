@@ -20,8 +20,8 @@ LFCS is distro-aware but generic. Ubuntu production work adds packaging, netplan
 
 1. LFCS D01–D04  
 2. This bridge (Ubuntu mental model)  
-3. [[bootcamp/canonical/pathways/ubuntu-server]]  
-4. Optional [[bootcamp/canonical/pathways/ubuntu-core]]
+3. [[ubuntu-server]]  
+4. Optional [[ubuntu-core]]
 
 ---
 

@@ -1,0 +1,99 @@
+#!/usr/bin/env bash
+# aide-halt — Graceful platform shutdown (preemptive readiness / real escalation)
+#
+# Default is DRY-RUN (prints plan only). Nothing powers off unless --execute.
+#
+# Usage:
+#   aide-halt                 # dry-run plan
+#   aide-halt --execute       # perform graceful stop (asks confirm)
+#   aide-halt --execute --yes # no interactive confirm (scripts only)
+#   aide-halt --pc-only       # stop local services; do not touch workers
+#
+# Grab-bag model (servers left behind): PC=um690 control; workers may stay on site.
+# Prefer clean stop of Nextcloud Redis/MariaDB + k3s drain if workers reachable.
+set -euo pipefail
+
+export PATH="${HOME}/.local/bin:${HOME}/AIDE_OS/bin:${PATH}"
+export KUBECONFIG="${KUBECONFIG:-${HOME}/.kube/config}"
+
+EXECUTE=0
+YES=0
+PC_ONLY=0
+
+for a in "$@"; do
+  case "$a" in
+    --execute) EXECUTE=1 ;;
+    --yes|-y) YES=1 ;;
+    --pc-only) PC_ONLY=1 ;;
+    --help|-h)
+      sed -n '2,18p' "$0"
+      exit 0
+      ;;
+  esac
+done
+
+log(){ echo "[aide-halt $(date -Iseconds)] $*"; }
+warn(){ echo "[aide-halt] WARN $*" >&2; }
+
+plan() {
+  cat <<'EOF'
+## Graceful halt plan (LabNET / SMADP)
+
+1. aide-heal (record health)
+2. Final aide-911 --fast (or full if time) if not just packed
+3. Scale down Nextcloud Redis/MariaDB cleanly (avoid AOF corruption)
+4. Optional: kubectl drain node1 node2 (if --execute and not --pc-only)
+5. sync; sync
+6. Optional: systemctl poweroff on um690 ONLY with explicit --execute
+   Workers left on site: best-effort drain only; no remote poweroff by default
+
+Power-on later (if site intact): router → um690 → workers → fam-media
+Hardware-loss rebuild: NAS SECURE + GITHUB-SAFE + Bitwarden + EVAC-WILDFIRE.md
+EOF
+}
+
+log "Mode: $([[ $EXECUTE -eq 1 ]] && echo EXECUTE || echo DRY-RUN)  pc_only=$PC_ONLY"
+plan
+
+if [[ "$EXECUTE" -eq 0 ]]; then
+  log "Dry-run only. Re-run with --execute when you intend to shut down."
+  exit 0
+fi
+
+if [[ "$YES" -eq 0 ]]; then
+  echo
+  read -r -p "EXECUTE graceful halt now? Type YES: " ans
+  [[ "$ans" == "YES" ]] || { log "Aborted."; exit 1; }
+fi
+
+log "Recording health…"
+aide-heal || warn "health degraded — continuing halt path"
+
+log "Fast pack for halt timestamp…"
+aide-911 --fast || warn "fast pack failed"
+
+if command -v kubectl >/dev/null 2>&1; then
+  log "Scaling Nextcloud Redis/MariaDB toward clean stop…"
+  kubectl scale statefulset -n nextcloud nextcloud-redis-master --replicas=0 2>/dev/null || warn "redis scale"
+  kubectl scale statefulset -n nextcloud nextcloud-mariadb --replicas=0 2>/dev/null || warn "mariadb scale"
+  sleep 5
+  kubectl get pods -n nextcloud 2>/dev/null || true
+
+  if [[ "$PC_ONLY" -eq 0 ]]; then
+    for n in node1 node2; do
+      log "drain $n (ignore-daemonsets, delete-emptydir)…"
+      kubectl drain "$n" --ignore-daemonsets --delete-emptydir-data --force --grace-period=30 2>/dev/null \
+        || warn "drain $n failed (worker may be offline — OK if leaving servers)"
+    done
+  fi
+fi
+
+log "sync disks…"
+sync; sync
+
+log "Graceful service stop done on control path."
+log "PC (um690) is still UP. Power off from menu/GUI or: systemctl poweroff"
+log "Not auto-powering off (avoid stranding mid-evacuation UI)."
+echo
+echo "When ready to leave: save work → poweroff PC → grab NAS + phone + tablet + PC."
+exit 0

@@ -1,0 +1,23 @@
+# Future Core / education appliance defaults
+id: education-default
+mode: core-or-shim
+description: Education pathway defaults (LFCS-first, family-safe IoT)
+learning:
+  track: lfcs
+  vault: ~/AIDE_OS/brain
+desktop:
+  theme: hickmedia-dracula-neon-obsidian
+  terminal: ghostty
+ai:
+  provider: grok
+  permission_mode: default
+network:
+  tailscale: true
+security:
+  auto_heal: false
+iot:
+  hub: none
+  family_safe_mode: true
+modules:
+  - ghostty
+  - verify_idee

@@ -2,7 +2,7 @@
 
 | Field | Value |
 |-------|--------|
-| **Host** | um690 · GNOME **Wayland** · Ubuntu 26.04 |
+| **Host** | Lab control workstation · GNOME **Wayland** · Ubuntu 26.04 |
 | **Workspace names** | **1 Control** · **2 Brain** · **3 Lab** · **4 Platform** (+ 5th spare) |
 | **num-workspaces** | 5 · dynamic-workspaces = false |
 | **Autostart** | `~/.config/autostart/aide-workstations.desktop` → `aide-workstations-start` |
@@ -13,43 +13,22 @@
 |----|------|---------------------------|
 | **1** | **Control** | **Grok Build** (Ghostty/TUI in AIDE_OS) · optional Ptyxis lab shell |
 | **2** | **Brain** | **Obsidian** vault `~/AIDE_OS/brain` (DAY-START) · **Firefox** for docs/Grok.com |
-| **3** | **Lab** | **Brave** (LF portal / tools) · note: VBox AIDE_OS if you use Core guest |
-| **4** | **Platform** | Manual / later — cluster ops, Nextcloud TS |
+| **3** | **Lab** | **Brave** (LF portal / tools) · optional lab VM |
+| **4** | **Platform** | Manual / later — cluster ops |
 
 Captured running at snapshot time: `grok`, `firefox`, `ptyxis`, `gedit` (morning note).
 
-## Workstation 2 — SFTP / rsync (Nathon → pookie)
+## Workstation 2 — large transfer follow-up
 
-**Do this on WS2 (Brain) morning session:**
+**Do this on WS2 (Brain) when needed:**
 
-Source (NAS):
-```text
-/mnt/systems_admin/joshua/Backups/Nathon/nathon-bak-2026.tar.gz
-```
-(~38 GiB · do not interrupt a healthy Termius SFTP)
+Large offline backup transfers (e.g. family archive to a remote host) stay **private**. Do not commit hostnames, Tailscale IPs, or account names into this public repo.
 
-Dest:
-```text
-adm1@pookie  (or 100.71.166.67 / pookie.taile52ad9.ts.net)  →  /Backups/
-```
+- Check morning note / private ops memory on the control plane for current job paths.
+- Prefer resume-safe `rsync --partial --inplace` over restarting a healthy GUI SFTP mid-transfer.
+- Verify byte sizes match before unpacking on the destination.
 
-**If Termius SFTP still running:** leave it; only verify progress.
-
-**If stuck / failed:** fix SSH, then resume with rsync:
-
-```bash
-# 1) SSH from um690 (interactive once for host key)
-ssh adm1@100.71.166.67 'hostname; df -h /Backups; ls -lh /Backups/nathon-bak-2026.tar.gz 2>/dev/null'
-
-# 2) Resume-safe copy (no re-compress — already .tar.gz)
-rsync -aH --partial --inplace --info=progress2 \
-  -e 'ssh -o Compression=no -c aes128-gcm@openssh.com' \
-  /mnt/systems_admin/joshua/Backups/Nathon/nathon-bak-2026.tar.gz \
-  adm1@100.71.166.67:/Backups/
-
-# 3) Verify sizes match, then unpack on pookie
-# stat -c '%s' both paths  → expect 40437570081
-```
+Private job archives: NAS under `kraken/jobs/` (not git).
 
 ## Media backup (this night)
 
@@ -60,4 +39,4 @@ NAS: `/mnt/systems_admin/kraken/backups/AIDE-OS-docs-media-LATEST`
 
 - `WORKSPACES-APPS-URLS.md` (earlier URL inventory)
 - `SCREENSHARE-INDEX-2026-08-02.md`
-- Desktop: `MORNING-TODOS-AND-RESTORE-NOTE.txt`
+- Desktop morning note (local only — do not commit secrets)

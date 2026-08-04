@@ -1,7 +1,7 @@
-# Product scope: AIDE_OS / Edbuntu vs HickMedia Console
+# Product scope: AIDE_OS Home / Work / platform vs education (Edbuntu)
 
-**Updated:** 2026-07-26  
-**SoT for coordination:** this file · `~/AIDE_OS` · `~/Documents/GrokPrompts.md` · HickMedia `docs/PRODUCT-BOUNDARIES.md`
+**Updated:** 2026-08-04
+**SoT for coordination:** this file · evolution log `PRODUCT-EVOLUTION-2026-08-04-AIDE-OS-HOME-WORK.md` · `~/AIDE_OS` · HickMedia `docs/PRODUCT-BOUNDARIES.md` + `ARCHIVE-AND-LINEAGE.md`
 
 ---
 
@@ -9,10 +9,14 @@
 
 | Product | Role | Stack direction | Hosts (lab) |
 |---------|------|-----------------|-------------|
-| **HickMedia Console** | Living-room **gaming / media console** | Ubuntu Core · Frame · Qt · RetroArch · on-box Jellyfin · remote gamepad · Cyberpunk neon | **fam-media** (dev) · **hickmedia** (reference) |
-| **AIDE_OS** | Sovereign **AI Desktop Environment** for learning & work | **Edbuntu** (education-first Ubuntu flavor) · browser-centric · installers · knowledgebase · SuperGrok API · industry pathways | **Not** the gaming console; future dedicated seats / VMs |
+| **AIDE_OS platform** | LabNET life/work substrate | um690 · k3s · NAS · Grok · shared memory | um690 triad + NAS |
+| **AIDE_OS Home** | Living-room **station** (media, play, coffee-break aide) — **HickMedia lineage** | Ubuntu Core · Frame · WPE/Qt · RetroArch · Jellyfin · gamepad · cockpit | **fam-media** (dev) · **hickmedia** (reference) · Samsung |
+| **AIDE_OS Work** | Ops board / pipeline / Command Center / micro-sprints | Static+live dashboards · status JSON · cc-log · Grok | um690 · cockpit Work panels |
+| **SmartHome Aide Hub** | Whole-home config aide (direction) | Reuse Home + platform | LabNET first |
+| **AIDE education (Edbuntu)** | Education distro / curricula packaging | **Gated** · `/knw` · SuperGrok learning product | **Not** Home/Work station SKU |
 
-**AIDE_OS is not a gaming console.** Console pack work that mixed “TV kiosk + RetroArch” into AIDE is **legacy**. Gaming belongs only under **HickMedia**.
+**AIDE education is not a gaming console.** Gaming / couch media belongs under **AIDE_OS Home** (repo path may still be `~/HickMedia` until migrate).
+**HickMedia** name is archive-annotated for corporate memory of how the IDE/station idea evolved.
 
 ---
 
@@ -54,9 +58,9 @@ Target brand for education distro work: **Edbuntu** (Custom Ubuntu 26.04+ educat
 
 ### What stays out of AIDE_OS
 
-- RetroArch / ROM libraries as product defaults  
-- Ubuntu Frame gaming kiosk as AIDE core  
-- HickMedia Cyberpunk neon console UI as AIDE brand  
+- RetroArch / ROM libraries as product defaults
+- Ubuntu Frame gaming kiosk as AIDE core
+- HickMedia Cyberpunk neon console UI as AIDE brand
 
 Those are **HickMedia** only.
 

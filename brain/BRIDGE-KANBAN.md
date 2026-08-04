@@ -7,6 +7,7 @@ kanban-plugin: list
 ## 🚀 Bridge · Now
 
 - [ ] [[DAY-START|Into the Sequence]] — open this every morning #lfcs
+- [ ] **2026-08-04 10:00** AIDE_OS Next Sprint — `SovereignAid/Weekday/Tuesday/01-Session-Start` (glitch-debug + pad) #ship
 - [ ] [[bootcamp/lfcs/DAY-01-START|DAY-01 FOCUS]] — man / info / shell only #lfcs
 - [ ] Run `aide-day` timer 25 min #focus
 - [ ] TV wall: `http://192.168.20.100:8099/aide/home/joshua/` (after serve.sh) #labnet

@@ -1,0 +1,4 @@
+Phone alarm (set once):
+  Time: Tue Aug 4, 2026  10:00 AM
+  Label: AIDE_OS Next Sprint — open Session Start
+  Open:  ~/SovereignAid/Weekday/Tuesday/01-Session-Start.md

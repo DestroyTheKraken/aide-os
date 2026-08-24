@@ -1,34 +1,45 @@
 # AIDE_OS
 
-Personal Linux and study platform: desktop helpers, lab notes, and an education-oriented workstation on Ubuntu.
+A personal Linux study environment for system administration. The learner in the software is named **Student**. The authoring machine is this lab workstation.
 
-This is the **current** tree. It grew out of **[SovereignAid](https://github.com/DestroyTheKraken/SovereignAid)** (first generation, now historical).
+This tree is the current project. It grew out of [SovereignAid](https://github.com/DestroyTheKraken/SovereignAid), which is kept only as history.
 
-**Not a product for sale.** Not a multi-tenant cloud. Not a game console (that experiment lives in [HickMedia](https://github.com/DestroyTheKraken/HickMedia)).
+It is not a product for sale, not a school district package, and not a game console.
 
-## What is here
+## How to start
 
-| Area | Purpose |
-|------|---------|
-| Lab / network notes | How the premises lab is organized (see also [homelab](https://github.com/DestroyTheKraken/homelab)) |
-| Desktop helpers (`idee/`) | Launchers and checks used on the control seat |
-| Study material | Linux administration practice, including an LFCS-oriented vault |
-| Docs | Scope, glossary, and design notes |
+On the lab workstation:
 
-## How to read this as a portfolio piece
+```bash
+aide-day
+```
 
-I use this workstation and the three Ubuntu nodes behind it as a place to practice administration: install, document, break, fix, write it down. The public, redacted picture of the network is in **[DestroyTheKraken/homelab](https://github.com/DestroyTheKraken/homelab)**.
+That opens the Student seat in a browser. First visit shows a short welcome. After **Begin as Student**, you get today’s lesson, the lab text, a timer, and a way to mark the day complete.
 
-Related installers:
+Optional practice VM:
 
-- [nc-lin-cs](https://github.com/DestroyTheKraken/nc-lin-cs) — Nextcloud hub installer
-- [ssh-ufw-ts-install](https://github.com/DestroyTheKraken/ssh-ufw-ts-install) — SSH, UFW, and Tailscale bootstrap
+```bash
+multipass start grokaide-edu
+multipass shell grokaide-edu
+```
+
+`aide-review` lists leftover folders from earlier experiments. Use it when deciding what still belongs in the product — not when taking a lesson.
+
+More detail: [START.md](./START.md).
+
+## What lives here
+
+| Area | Role |
+|------|------|
+| Student UI | `aide-day` — `scripts/learning/day-start-app.py` |
+| Lessons | `Study_Projects/` and `schedule/` |
+| Tutor notes | `ara_tutor/knowledge/` |
+| Lab notes | Network picture is in [homelab](https://github.com/DestroyTheKraken/homelab), not in this README |
+
+Related installers: [nc-lin-cs](https://github.com/DestroyTheKraken/nc-lin-cs), [ssh-ufw-ts-install](https://github.com/DestroyTheKraken/ssh-ufw-ts-install).
 
 ## Status
 
-Active personal lab and study tree. Older k3s / appliance work described under SovereignAid is **not** what is running on the current four-host rebuild.
+Active study tree. The Student seat is the supported front door. Older Docker portal, tablet, and k3s notes are leftovers.
 
-## Contact
-
-Job search: [joshua.hickman1@gmail.com](mailto:joshua.hickman1@gmail.com)  
-Studio: [destroythekraken@gmail.com](mailto:destroythekraken@gmail.com)
+Job search: [joshua.hickman1@gmail.com](mailto:joshua.hickman1@gmail.com)

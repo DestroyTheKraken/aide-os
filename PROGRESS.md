@@ -1,3 +1,7 @@
+# Historical progress report (June 2026)
+
+This file describes an older tablet-and-Docker layout and outdated addresses. **It is not how you start today.** Use [START.md](./START.md) and `aide-day`.
+
 # AIOS Education IDE — Progress Report
 
 **Repo:** `aios-ed` (local) → [DestroyTheKraken/aios-os](https://github.com/DestroyTheKraken/aios-os.git)  

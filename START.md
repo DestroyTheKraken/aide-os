@@ -2,6 +2,14 @@
 
 You sit at **um690**. You do not wait for an ISO, `hickles`, or `node3`.
 
+To see **everything this tree already contains** (including leftover AI work) and mark keep / cut / later:
+
+```bash
+aide-review
+```
+
+That is the product you correct. Student class is still `aide-day`.
+
 ## Student seat (learning)
 
 ```bash

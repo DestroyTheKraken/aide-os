@@ -1,0 +1,206 @@
+{
+  "product": "AIDE_OS",
+  "tagline": "AI Integrated Desktop Environment — LFCS / Canonical learning seat",
+  "review_on": "um690",
+  "student_start": "aide-day",
+  "author_start": "grokAide-start",
+  "review_start": "aide-review",
+  "modules": [
+    {
+      "id": "day-start",
+      "name": "Day Start (student UI)",
+      "layer": "student",
+      "path": "scripts/learning/day-start-app.py",
+      "start": "aide-day",
+      "status": "live",
+      "notes": "Localhost :8101. Timer + mark complete. This is the current product face."
+    },
+    {
+      "id": "schedule",
+      "name": "45-day lesson schedule",
+      "layer": "student",
+      "path": "schedule/daily-schedule.json",
+      "status": "live",
+      "notes": "Day Start reads this. Also lesson-resources.json for videos."
+    },
+    {
+      "id": "study-projects",
+      "name": "Study projects 00–09",
+      "layer": "student",
+      "path": "Study_Projects/",
+      "status": "live",
+      "notes": "Actual lab write-ups. Day 1 maps to 00.md."
+    },
+    {
+      "id": "objectives",
+      "name": "LFCS objectives tracker",
+      "layer": "student",
+      "path": "guides/OBJECTIVES_TRACKER.md",
+      "status": "live",
+      "notes": "Checklist. Not yet wired into Day Start automatically."
+    },
+    {
+      "id": "ara-knowledge",
+      "name": "Ara tutor corpus",
+      "layer": "tutor",
+      "path": "ara_tutor/knowledge/",
+      "status": "live",
+      "notes": "Markdown refs. Not yet a chat UI in Day Start. Ollama already runs on um690."
+    },
+    {
+      "id": "progress",
+      "name": "Focus progress",
+      "layer": "student",
+      "path": "brain/bootcamp/lfcs/progress/focus-progress.json",
+      "status": "live",
+      "notes": "Where Day Start stores completed days."
+    },
+    {
+      "id": "brain-vault",
+      "name": "Obsidian brain vault",
+      "layer": "student",
+      "path": "brain/",
+      "start": "aide-obsidian-day",
+      "status": "blocked",
+      "notes": "DAY-START.md exists. Obsidian GUI is not installed on um690."
+    },
+    {
+      "id": "grokaide-start",
+      "name": "Author seat (Grok)",
+      "layer": "author",
+      "path": "bin/grokAide-start",
+      "start": "grokAide-start",
+      "status": "live",
+      "notes": "Opens Grok in ~/AIDE_OS. Building the product, not taking class."
+    },
+    {
+      "id": "aidectl",
+      "name": "aidectl",
+      "layer": "platform",
+      "path": "aidectl/",
+      "status": "partial",
+      "notes": "CLI for provision/doctor. Aimed at Ubuntu Core; classic shim on um690."
+    },
+    {
+      "id": "idee",
+      "name": "Desktop launchers",
+      "layer": "platform",
+      "path": "idee/",
+      "status": "broken",
+      "notes": ".desktop Exec= still /home/kraken/AIDE_OS/..."
+    },
+    {
+      "id": "multipass",
+      "name": "Lab VM grokaide-edu",
+      "layer": "lab",
+      "path": "scripts/multipass/",
+      "start": "multipass start grokaide-edu && multipass shell grokaide-edu",
+      "status": "live",
+      "notes": "Ubuntu 26.04 Multipass instance exists, currently stopped."
+    },
+    {
+      "id": "games",
+      "name": "Terminal learning games",
+      "layer": "lab",
+      "path": "~/AIDE_OS-games",
+      "status": "live",
+      "notes": "bashcrawl, clmystery, cmdchallenge. Mount into the lab VM, not the desktop."
+    },
+    {
+      "id": "ssh-ufw-ts",
+      "name": "ssh-ufw-ts-install",
+      "layer": "platform",
+      "path": "~/Projects/ssh-ufw-ts-install",
+      "status": "adjacent",
+      "notes": "First-boot hardening for a future student seat. Not in Day Start."
+    },
+    {
+      "id": "nc-lin-cs",
+      "name": "nc-lin-cs (Nextcloud installer)",
+      "layer": "platform",
+      "path": "~/Projects/nc-lin-cs",
+      "status": "adjacent",
+      "notes": "Optional later for calendar/progress sync. Not required to take a lesson."
+    },
+    {
+      "id": "portal",
+      "name": "LFCS web portal + Docker stack",
+      "layer": "leftover",
+      "path": "portal/ + docker/docker-compose.yml",
+      "status": "leftover",
+      "notes": "Full dashboard, AI chat, PWA, nginx, Open WebUI, code-server. Needs FORGE_BIND_IP and old tablet workflow. You may not remember building this."
+    },
+    {
+      "id": "automation",
+      "name": "lfcs-*.sh automation",
+      "layer": "leftover",
+      "path": "automation/",
+      "status": "leftover",
+      "notes": "Daily cron, Ara sync, backend deploy. Paths still say /home/kraken/Projects/aios-ed."
+    },
+    {
+      "id": "console",
+      "name": "Browser console :8765",
+      "layer": "leftover",
+      "path": "console/",
+      "status": "leftover",
+      "notes": "Separate dashboard. Overlaps Day Start and portal."
+    },
+    {
+      "id": "site",
+      "name": "Portfolio static site",
+      "layer": "leftover",
+      "path": "site/",
+      "status": "leftover",
+      "notes": "Personal portfolio pages, not the student product."
+    },
+    {
+      "id": "console-pack",
+      "name": "console-pack install scripts",
+      "layer": "leftover",
+      "path": "console-pack/",
+      "status": "leftover",
+      "notes": "Plasma/Firefox/theme installers. HickMedia-era desktop packing."
+    },
+    {
+      "id": "vbox",
+      "name": "VirtualBox lab scripts",
+      "layer": "leftover",
+      "path": "scripts/vbox/",
+      "status": "leftover",
+      "notes": "Alternate to Multipass. Pick one lab host."
+    },
+    {
+      "id": "adguard",
+      "name": "AdGuard infra notes",
+      "layer": "leftover",
+      "path": "infra/adguard/",
+      "status": "leftover",
+      "notes": "Homelab DNS, not AIDE class."
+    },
+    {
+      "id": "sovereignaid",
+      "name": "SovereignAid (predecessor)",
+      "layer": "history",
+      "path": "~/SovereignAid",
+      "status": "history",
+      "notes": "First generation. Archived on GitHub. Do not develop here."
+    },
+    {
+      "id": "getting-started",
+      "name": "guides/GETTING_STARTED.md",
+      "layer": "docs",
+      "path": "guides/GETTING_STARTED.md",
+      "status": "stale",
+      "notes": "Tablet + Docker + old Tailscale IPs + /home/kraken. Superseded by START.md."
+    },
+    {
+      "id": "progress-md",
+      "name": "PROGRESS.md (aios-ed)",
+      "layer": "docs",
+      "path": "PROGRESS.md",
+      "status": "stale",
+      "notes": "June 2026 report for a different repo name and exam date."
+    }
+  ]
+}

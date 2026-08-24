@@ -36,6 +36,9 @@ infra/adguard/conf/
 # session exports / secrets
 private/
 
+# Personal product-review marks (keep / cut / later)
+product/review-state.json
+
 
 # deps / build
 **/node_modules/

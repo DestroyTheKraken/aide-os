@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# Open the single product-review surface (everything already in the tree).
+set -euo pipefail
+AIDE_ROOT="${AIDE_ROOT:-$HOME/AIDE_OS}"
+export AIDE_ROOT
+exec python3 "$AIDE_ROOT/scripts/learning/product-review.py" "$@"

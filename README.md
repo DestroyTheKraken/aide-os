@@ -1,58 +1,34 @@
 # AIDE_OS
 
-**Brand / product canon** for the sovereign, browser-centric **AI Desktop Environment** and future **Edbuntu** education stack.
+Personal Linux and study platform: desktop helpers, lab notes, and an education-oriented workstation on Ubuntu.
 
-**Not a gaming console.** Gaming / living-room media = **`~/HickMedia`** only.
+This is the **current** tree. It grew out of **[SovereignAid](https://github.com/DestroyTheKraken/SovereignAid)** (first generation, now historical).
 
-| What | Path / note |
-|------|-------------|
-| **This tree** | `~/AIDE_OS` — glossary, Edbuntu scope, design pointers |
-| **GrokAide vault** | **`~/AIDE_OS/brain`** — Obsidian Second Brain (LFCS scaffold) |
-| **IDEE scripts** | `~/AIDE_OS/idee/` — GNOME launchers + verify |
-| **Product scope / Edbuntu** | [docs/PRODUCT-SCOPE-AND-EDBUNTU.md](./docs/PRODUCT-SCOPE-AND-EDBUNTU.md) |
-| **Grok prompts / seat map** | `~/Documents/GrokPrompts.md` |
-| **Platform code** | `~/SovereignAid` — SMADP / cluster |
-| **Business ops** | **`~/valley-tech-support`** on **kraken** |
-| **Gaming console** | **`~/HickMedia`** (separate product) |
-| **System focus SoT** | `/mnt/systems_admin/shared/memory/SYSTEM-FOCUS.md` |
-| **Precursor archive** | `/mnt/systems_admin/archive/AIDE_OS-precursors/` |
+**Not a product for sale.** Not a multi-tenant cloud. Not a game console (that experiment lives in [HickMedia](https://github.com/DestroyTheKraken/HickMedia)).
 
-## Status (2026-07-27)
+## What is here
 
-| Item | State |
-|------|--------|
-| **GrokAide MVP** | **Active scaffold** — vault + Spark grok-http + LFCS labs + IDEE |
-| **AIDE_OS / Edbuntu product** | Scope clarified; education wave usable on um690 |
-| **What AIDE is** | Education · SuperGrok · Second Brain · `/knw` · role/platform tracks |
-| **What AIDE is not** | RetroArch console, Ubuntu Frame gaming kiosk, HickMedia |
-| **fam-media** | **HickMedia Console dev** (`100.119.236.78`) — not AIDE MVP |
-| **Grok** | Single paid account on **kraken** |
+| Area | Purpose |
+|------|---------|
+| Lab / network notes | How the premises lab is organized (see also [homelab](https://github.com/DestroyTheKraken/homelab)) |
+| Desktop helpers (`idee/`) | Launchers and checks used on the control seat |
+| Study material | Linux administration practice, including an LFCS-oriented vault |
+| Docs | Scope, glossary, and design notes |
 
-## Quick links
+## How to read this as a portfolio piece
 
-- **Open vault:** `bash ~/AIDE_OS/idee/open-brain-vault.sh` or dock **GrokAide Brain**
-- **Verify:** `bash ~/AIDE_OS/idee/verify-idee.sh`
-- [docs/design/2026-07-27-grokaide-obsidian-idee.md](./docs/design/2026-07-27-grokaide-obsidian-idee.md)
-- [docs/design/2026-07-27-grokaide-electron-education-ui.md](./docs/design/2026-07-27-grokaide-electron-education-ui.md) — Electron/Chromium education UI direction + Ghostty themes
-- [docs/PRODUCT-SCOPE-AND-EDBUNTU.md](./docs/PRODUCT-SCOPE-AND-EDBUNTU.md)
-- [GLOSSARY.md](./GLOSSARY.md)
-- [LABNET.md](./LABNET.md)
-- `~/Documents/GrokPrompts.md`
-- System focus: `/mnt/systems_admin/shared/memory/SYSTEM-FOCUS.md`
+I use this workstation and the three Ubuntu nodes behind it as a place to practice administration: install, document, break, fix, write it down. The public, redacted picture of the network is in **[DestroyTheKraken/homelab](https://github.com/DestroyTheKraken/homelab)**.
 
-## fam-media (no longer AIDE test console)
+Related installers:
 
-| Field | Value |
-|-------|--------|
-| **Host** | `fam-media` |
-| **Tailscale** | `100.119.236.78` · `ssh fam-media-ts` |
-| **Role** | **HickMedia Console development** (Core reimage) |
-| **AIDE data** | No backup required for console wipe (2026-07-26); AIDE work continues under this tree + Edbuntu later |
+- [nc-lin-cs](https://github.com/DestroyTheKraken/nc-lin-cs) — Nextcloud hub installer
+- [ssh-ufw-ts-install](https://github.com/DestroyTheKraken/ssh-ufw-ts-install) — SSH, UFW, and Tailscale bootstrap
 
-```bash
-# Education / Edbuntu work:
-cd ~/AIDE_OS && grok
+## Status
 
-# Gaming console work:
-cd ~/HickMedia && grok
-```
+Active personal lab and study tree. Older k3s / appliance work described under SovereignAid is **not** what is running on the current four-host rebuild.
+
+## Contact
+
+Job search: [joshua.hickman1@gmail.com](mailto:joshua.hickman1@gmail.com)  
+Studio: [destroythekraken@gmail.com](mailto:destroythekraken@gmail.com)

@@ -1,9 +1,10 @@
 {
-  "version": 1,
-  "focus_cycle_started": "2026-08-02",
+  "version": 2,
+  "learner": "student",
+  "focus_cycle_started": "2026-08-24",
   "focus_day": 1,
   "completed_days": [],
   "sessions": [],
   "pomodoro_min": 25,
-  "note": "Personal focus cycle independent of old 2026-06-14 calendar window"
+  "note": "Fresh Student seat"
 }

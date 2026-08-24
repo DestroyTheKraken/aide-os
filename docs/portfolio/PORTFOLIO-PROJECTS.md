@@ -4,8 +4,7 @@
 |-------|--------|
 | **Updated** | 2026-08-02 |
 | **Owner** | Joshua Hickman |
-| **Public technical site** | `~/AIDE_OS/site/aide/home/joshua/` → aide-os / hickles |
-| **Public brand site** | [destroythekraken.com](https://www.destroythekraken.com) |
+| **Public technical site** | [github.com/DestroyTheKraken](https://github.com/DestroyTheKraken) |
 | **Design SoT (lab-in-a-box)** | `docs/design/2026-08-02-aide-lab-virtualbox.md` |
 | **Rules** | No school-SKU · no student PII · redact Tailscale IPs / secrets · Bitwarden for credentials |
 
@@ -95,16 +94,16 @@ See full evaluation: [LINUX-SKILLS-EVAL.md](./LINUX-SKILLS-EVAL.md).
 | **Paths** | `~/valley-tech-support`, `~/DTK/docs/SERVICE-MENU-2026-07.md` |
 | **Skills** | Client scoping, documentation, practical Linux/network support |
 | **Status** | **Active business** |
-| **Public claim** | destroythekraken.com packages only — **no client PII** |
+| **Public claim** | Public GitHub docs only — **no client PII** |
 
 ### P5 — Destroy The Kraken (public brand / web)
 
 | Field | Detail |
 |-------|--------|
-| **One-liner** | Professional site + brand SoT + publish pipeline. |
+| **One-liner** | Brand notes and GitHub portfolio. |
 | **Paths** | `~/DTK/site/`, `~/DTK/brand/` |
-| **Skills** | Content structure, web publish, mobile-first layout goals |
-| **Status** | Live at destroythekraken.com |
+| **Skills** | Content structure, documentation |
+| **Status** | GitHub |
 
 ### P6 — LFCS / Canonical learning path
 

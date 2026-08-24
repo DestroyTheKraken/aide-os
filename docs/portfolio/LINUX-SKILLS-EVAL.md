@@ -68,4 +68,4 @@
 
 - [PORTFOLIO-PROJECTS.md](./PORTFOLIO-PROJECTS.md)  
 - Design: `docs/design/2026-08-02-aide-lab-virtualbox.md`  
-- Brand public: destroythekraken.com  
+- Brand public: [github.com/DestroyTheKraken](https://github.com/DestroyTheKraken)  

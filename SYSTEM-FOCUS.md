@@ -48,3 +48,4 @@ Any customer SSH or remote automation requires **site name + ticket/job ID** in 
 | Seat ACL matrix | `~/SovereignAid/docs/ops/SEAT-ACCESS.md` |
 | VTS README | `~/valley-tech-support/README.md` |
 | UPS / outage | `~/SovereignAid/docs/ops/` |
+| VyOS router logs | `~/SovereignAid/docs/network/vyos/` |

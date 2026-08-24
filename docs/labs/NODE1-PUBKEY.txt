@@ -1,0 +1,6 @@
+# Paste into node1 after Edubuntu install:
+#   mkdir -p ~/.ssh && chmod 700 ~/.ssh
+#   echo 'KEY_BELOW' >> ~/.ssh/authorized_keys && chmod 600 ~/.ssh/authorized_keys
+#
+# Platform public key (grokaide-edu@um690):
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILwFNCb0XCfOivn+Z/C64YF0vSNH7cDu8HnZQa63azwx grokaide-edu@um690

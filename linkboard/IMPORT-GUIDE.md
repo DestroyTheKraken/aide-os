@@ -11,7 +11,7 @@
 
 ### A. Get the file open in Nextcloud
 
-1. Open Firefox → **https://um690.taile52ad9.ts.net** (Tailscale on).  
+1. Open Firefox → **https://um690.tail13a119.ts.net** (Tailscale on). Nextcloud is **not installed** on the 2026-08-13 rebuild — this recipe waits for that deploy.  
 2. Log in as **admin** (or the account that owns the board).  
 3. Open **Files**.  
 4. Go to folder **AIDE_OS → LinkBoard**.  

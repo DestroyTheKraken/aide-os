@@ -36,7 +36,7 @@ Configure Tailscale Serve / reverse proxy hostname `aide-os` → that root so
 
 ## Theme
 
-- **Brand:** Destroy The Kraken (logo, name, destroythekraken.com)  
+- **Brand:** Destroy The Kraken (logo, name)  
 - **Visual language:** HickMedia neon tokens (`#00f0ff` / `#ff2bd6` / `#c77dff`, starfield CSS)  
 - **Not:** HickMedia gaming product merge on this portfolio  
 

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0f1419" />
+  <title>GrokAide Console · Productivity</title>
+  <link rel="stylesheet" href="css/console.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="top">
+      <div class="brand">
+        <span class="mark">GA</span>
+        <div>
+          <h1>GrokAide Console</h1>
+          <p class="sub">Productivity · LFCS · Lab control</p>
+        </div>
+      </div>
+      <div class="meta">
+        <span id="clock" class="clock">—</span>
+        <span class="pill" id="host-pill">platform</span>
+      </div>
+    </header>
+
+    <section class="hero">
+      <h2>Enter the Lab</h2>
+      <p>Education and ops surfaces — not a gaming console. HickMedia stays a separate product.</p>
+      <div class="hero-actions">
+        <a class="btn primary" href="#learn">Start learning</a>
+        <a class="btn" href="#lab">Lab status</a>
+        <a class="btn" href="#tools">Tools</a>
+      </div>
+    </section>
+
+    <main class="grid">
+      <section id="learn" class="card">
+        <h3>Learn Linux Admin</h3>
+        <p class="muted">LFCS objective-aligned curriculum + Canonical Ubuntu practice.</p>
+        <ul class="links">
+          <li><a href="../Study_Projects/00.md">Project 00 — man/docs matrix</a></li>
+          <li><a href="../Study_Projects/01.md">Project 01 — files &amp; remote</a></li>
+          <li><a href="../guides/OBJECTIVES_TRACKER.md">Objectives tracker</a></li>
+          <li><a href="../docs/EDUCATION-CLIENTS.md">Education clients guide</a></li>
+          <li><a href="../docs/labs/GROKAIDE-EDU-MULTIPASS-BRINGUP.md">Multipass <code>grokaide-edu</code></a></li>
+          <li><a href="../docs/labs/NODE1-EDUBUNTU-REIMAGE.md">node1 Edubuntu reimage</a></li>
+        </ul>
+        <pre class="cmd">multipass shell grokaide-edu
+less /mnt/aide-os/Study_Projects/00.md</pre>
+      </section>
+
+      <section id="lab" class="card">
+        <h3>Lab map</h3>
+        <table class="map">
+          <thead><tr><th>Host</th><th>IP</th><th>Role</th></tr></thead>
+          <tbody>
+            <tr><td>um690</td><td>192.168.20.100</td><td>Platform · Studio · Grok</td></tr>
+            <tr><td>node1</td><td>192.168.20.101</td><td>LFCS hardware (Edubuntu)</td></tr>
+            <tr><td>node2</td><td>192.168.20.102</td><td>Second lab peer</td></tr>
+            <tr><td>fam-media</td><td>192.168.20.111</td><td>This console / dashboard seat</td></tr>
+            <tr><td>Samsung TV</td><td>192.168.20.109</td><td>Display only (not fam-media)</td></tr>
+            <tr><td>VyOS</td><td>.20.1 / .10.1</td><td>LabNET / HomeNET</td></tr>
+            <tr><td>Multipass</td><td>10.x</td><td><code>grokaide-edu</code> client</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="tools" class="card">
+        <h3>Productivity tools</h3>
+        <ul class="links">
+          <li><strong>Grok</strong> — platform: <code>cd ~/AIDE_OS &amp;&amp; grok</code></li>
+          <li><strong>Brain vault</strong> — Obsidian · <code>~/AIDE_OS/brain</code></li>
+          <li><strong>Games pack</strong> — bashcrawl / clmystery · <code>~/AIDE_OS-games</code> (learning, not HickMedia)</li>
+          <li><strong>Mesh scripts</strong> — <code>~/SovereignAid</code> (when k3s restored)</li>
+        </ul>
+        <pre class="cmd"># Platform day start
+cd ~/AIDE_OS && grokAide-start
+
+# Education client
+multipass shell grokaide-edu</pre>
+      </section>
+
+      <section id="console-seat" class="card accent">
+        <h3>fam-media seat</h3>
+        <p><strong>Role:</strong> GrokAide Console &amp; Productivity Dashboard — <em>not</em> HickMedia gaming/media console.</p>
+        <ul class="links">
+          <li>Browser kiosk or Plasma → open this page</li>
+          <li>Optional: full-screen browser to <code>http://um690:8765/</code> or local copy</li>
+          <li>HickMedia product remains in <code>~/HickMedia</code> for a different host/time</li>
+        </ul>
+        <pre class="cmd"># Serve dashboard on platform (LAN)
+cd ~/AIDE_OS/console && python3 -m http.server 8765 --bind 0.0.0.0
+# On fam-media browser: http://192.168.20.100:8765/</pre>
+      </section>
+
+      <section id="status" class="card">
+        <h3>Quick status (manual)</h3>
+        <p class="muted">Run on platform; paste results when documenting a session.</p>
+        <pre class="cmd">multipass list
+ping -c1 192.168.20.101
+ping -c1 192.168.20.111
+ip -br a show eno1</pre>
+      </section>
+    </main>
+
+    <footer class="foot">
+      <span>AIDE_OS · flavor-first · LFCS track</span>
+      <span>Not a gaming console</span>
+    </footer>
+  </div>
+  <script src="js/console.js"></script>
+</body>
+</html>

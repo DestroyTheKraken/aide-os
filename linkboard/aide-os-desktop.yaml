@@ -11,29 +11,29 @@
         description: CLI on um690
         icon: mdi-book-open-variant
     - Nextcloud Files:
-        href: https://um690.taile52ad9.ts.net/apps/files/
+        href: https://um690.tail13a119.ts.net/apps/files/
         description: Shared memory
         icon: mdi-folder-cloud
 
 - Platform services:
     - Nextcloud:
-        href: https://um690.taile52ad9.ts.net/
-        ping: https://um690.taile52ad9.ts.net/status.php
+        href: https://um690.tail13a119.ts.net/
+        ping: https://um690.tail13a119.ts.net/status.php
         icon: mdi-cloud
     - LinkBoard:
-        href: https://um690.taile52ad9.ts.net/apps/linkboard/
+        href: https://um690.tail13a119.ts.net/apps/linkboard/
         icon: mdi-view-dashboard
     - Ops Center (legacy):
-        href: https://um690.taile52ad9.ts.net/ops/
+        href: https://um690.tail13a119.ts.net/ops/
         icon: mdi-console-network
     - Longhorn:
-        href: https://um690.taile52ad9.ts.net/longhorn/
+        href: https://um690.tail13a119.ts.net/longhorn/
         icon: mdi-harddisk
     - Valley Tech:
-        href: https://um690.taile52ad9.ts.net/vts/
+        href: https://um690.tail13a119.ts.net/vts/
         icon: mdi-briefcase
     - Traefik:
-        href: https://um690.taile52ad9.ts.net/dashboard/
+        href: https://um690.tail13a119.ts.net/dashboard/
         icon: mdi-router-network
     - Tailscale:
         href: https://login.tailscale.com/admin/machines
@@ -46,6 +46,6 @@
     - node2: 192.168.20.102
 
 - Knowledge & sessions:
-    - AIDE_OS: https://um690.taile52ad9.ts.net/apps/files/?dir=/AIDE_OS
-    - Sessions: https://um690.taile52ad9.ts.net/apps/files/?dir=/AIDE_OS/sessions
-    - Grok design: https://um690.taile52ad9.ts.net/apps/files/?dir=/AIDE_OS/docs/grok-integration
+    - AIDE_OS: https://um690.tail13a119.ts.net/apps/files/?dir=/AIDE_OS
+    - Sessions: https://um690.tail13a119.ts.net/apps/files/?dir=/AIDE_OS/sessions
+    - Grok design: https://um690.tail13a119.ts.net/apps/files/?dir=/AIDE_OS/docs/grok-integration

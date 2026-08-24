@@ -8,11 +8,12 @@
 | **SovereignAid** | Current platform **directory** (`~/SovereignAid`). Keep this path for now. |
 | **SMADP** | Optional internal name for the mesh/platform architecture. |
 | **Valley Tech Support (VTS)** | Real-world business MVP; dogfood for AIDE. Linux/Nextcloud user: **`vtech`**. |
-| **`kraken`** | Platform / DevOps / cluster director identity. |
-| **`joshua`** | Personal/family identity; full NAS access. |
-| **`vtech`** | Business identity; jailed to own NAS tree. |
-| **fam-media** | Lab host **`100.119.236.78`** (TS) / `.104` LabNET. **HickMedia Console dev** (2026-07-26); **not** AIDE MVP gaming box. |
-| **LabNET** | Lab subnet `192.168.20.0/24`. Shared map: `/mnt/systems_admin/shared/memory/LABNET.md`. |
+| **`kraken`** | Worker login on node1–node3. Not present on um690 after the 2026-08-13 rebuild. |
+| **`joshua`** | Control-plane user on um690 (UID 1000). Grok seat. |
+| **`vtech`** | Business identity; **not created** on this rebuild. |
+| **node3** | Third mesh worker at `192.168.20.103` / `100.71.46.114`. Former fam-media M93p. |
+| **fam-media** | **Retired host.** Hardware is now **node3**. Do not SSH `fam-media`. |
+| **LabNET** | Lab subnet `192.168.20.0/24`. Map: `~/AIDE_OS/LABNET.md` · SoT `~/SovereignAid/ARCHITECTURE.md`. |
 | **`/knw`** | AIDE/Edbuntu documentation knowledgebase root (`industry/`, `course/`, `platform/`, `ecosystem/`, `role/`). |
 | **Namespaces** | Kubernetes: `platform`, `vtech`, `family`. |
 | **Precursors** | AIOS, aios, aIDE, NetAIDE, LinuxAIDE, ARA, NovaProSys, Retro House, SovereignAide, etc. → archive or merge into AIDE_OS. Do not treat as equal living brands. |

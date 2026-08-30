@@ -1,48 +1,32 @@
-# Tablet Access — Ready Now
+# Tablet / phone access
 
-Backend is live on um690. Use these URLs from **j-tab** (Tailscale must be connected).
+Backend services (when running) live on `um690`. Connect with the **lab** Tailscale profile (`destroythekraken@`), then use MagicDNS — not Tailscale CGNAT addresses.
 
-## 1. LFCS Portal (start here — UI/UX tuning)
+## Reach the control seat
 
+| Client | Notes |
+|--------|--------|
+| operator-phone | Active on lab tailnet as of 2026-08-29 |
+| operator-tablet | Offline ~4 days as of 2026-08-29 |
+| um690 local terminal | When you are at the desk |
+
+Examples (only if those listeners are up on your box):
+
+```text
+http://um690:3080/
+https://um690:3001/
 ```
-http://100.81.13.95:3080/
-```
 
-No login required. Mobile-friendly dashboard with today's guidance.
+## Credentials
 
-## 2. Mullvad Browser (secure Firefox lab)
+Service passwords are **not** stored in this public repository. Read them from your private local notes on `um690` if you still run those containers.
 
-```
-https://100.81.13.95:3001/
-```
+## If a container service will not connect
 
-| Field | Value |
-|-------|-------|
-| Username | `lfcs` |
-| Password | `a3cDMXOmMt1JKkxu` |
-
-**Certificate warning:** Tap Advanced → Proceed (self-signed cert is expected).
-
-First load may take **1–2 minutes** while Firefox initializes inside the container.
-
-## Tablet setup steps
-
-1. Open **Chrome or Samsung Internet** on j-tab (or Firefox).
-2. Ensure **Tailscale** is connected (green/active).
-3. Bookmark both URLs above.
-4. Open Portal first → review layout → tap **Open Mullvad Browser**.
-5. Log into Mullvad Browser → configure Firefox bookmarks/homepage for your UI/UX pass.
-
-## If browser won't connect
-
-On um690 (Termius SSH):
+On `um690`:
 
 ```bash
 sg docker -c 'docker ps -a'
-sg docker -c 'docker start secure-browser-forge'   # if Created/Exited
-sg docker -c 'docker logs -f secure-browser-forge' # watch startup
 ```
 
-## After UI/UX config
-
-We'll connect this backend to your frontend. Note what you change (bookmarks, homepage, portal HTML) so we can persist it in `portal/www/` and compose volumes.
+Inventory SoT: [homelab](https://github.com/DestroyTheKraken/homelab/blob/main/docs/04-tailscale.md).

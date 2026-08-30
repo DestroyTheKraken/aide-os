@@ -134,7 +134,7 @@ From the X.com / Grok conversation (`grok-build-prompt.md`) and live readiness a
 | Interface / host | Address / role | Guest strategy |
 |------------------|----------------|----------------|
 | `eno1` | **192.168.20.100/24** LabNET | Guest does **not** steal `.100` |
-| `tailscale0` | **100.120.232.39/32** · MagicDNS `um690` | Guest **optional** Tailscale join as `aide-lab` / historical pattern `um690-test-vm` |
+| `tailscale0` | **REDACTED/32** · MagicDNS `um690` | Guest **optional** Tailscale join as `aide-lab` / historical pattern `um690-test-vm` |
 | docker0 / flannel.1 / cni0 | k3s / docker bridges | Not nested in guest MVP |
 | VyOS `.1` | LabNET gateway | Guest reaches via host NAT or host-only; no VyOS agent |
 | um690 `.100` | k3s control + Grok director | Host only |
@@ -199,7 +199,7 @@ Prefer files already aligned with product gates. Shared-memory `LABNET.md` may s
 | Host-only interfaces | **`list hostonlyifs` empty** | — | Must create `vboxnet0` via `hostonly-net.sh` (PR3) |
 | VBoxManage | **7.2.12r174389** | — | Host hypervisor SoT |
 | Multipass | **Installed** snap `1.16.3` | — | Optional Wave-2 headless workers (not fat desktop) |
-| Tailscale peer | `um690-test-vm` **100.101.92.95** offline | — | Historical guest TS name |
+| Tailscale peer | `um690-test-vm` **REDACTED** offline | — | Historical guest TS name |
 
 ---
 

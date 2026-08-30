@@ -182,12 +182,12 @@ blkid
 
 ```bash
 ssh-keygen -t ed25519 -f ~/.ssh/lfcs_lab
-ssh-copy-id -i ~/.ssh/lfcs_lab.pub user@100.75.124.36
+ssh-copy-id -i ~/.ssh/lfcs_lab.pub user@node1
 ssh -i ~/.ssh/lfcs_lab kraken@node1
 scp file user@host:/path
 ```
 
-AIOS tailnet: `ssh kraken@100.75.124.36` (node1).
+AIOS tailnet: `ssh kraken@node1` (node1).
 
 ---
 

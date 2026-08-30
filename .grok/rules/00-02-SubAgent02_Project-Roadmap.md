@@ -50,9 +50,9 @@ Weekly: `study-journal.log` | Monthly: roadmap + checklist | Quarterly: full rev
 ## URLs (um690)
 
 ```
-Dashboard:   http://100.81.13.95:3080/
-Ara:         http://100.81.13.95:3082/
-Workspace:   http://100.81.13.95:3080/ide/
-Lab browser: https://100.81.13.95:3001/
-Ollama:      http://100.81.13.95:11434
+Dashboard:   http://REDACTED:3080/
+Ara:         http://REDACTED:3082/
+Workspace:   http://REDACTED:3080/ide/
+Lab browser: https://REDACTED:3001/
+Ollama:      http://REDACTED:11434
 ```

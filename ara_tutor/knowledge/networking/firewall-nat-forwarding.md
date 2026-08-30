@@ -158,12 +158,12 @@ pool 2.ubuntu.pool.ntp.org iburst
 
 ```bash
 ss -tlnp | grep 3001
-# GOOD: 100.82.177.52:3001
+# GOOD: MagicDNS host:3001
 # BAD:  0.0.0.0:3001 or *:3001 on public interface
 ```
 
 ```bash
-curl -k --connect-timeout 3 https://100.82.177.52:3001/
+curl -k --connect-timeout 3 https://um690:3001/
 # from node1 on tailnet — should work
 # from LAN without tailnet — should fail (rich rule)
 ```

@@ -30,7 +30,7 @@
   },
   "monitoring": {
     "tailscale": {
-      "self_ip": "100.81.13.95",
+      "self_ip": "REDACTED",
       "peers_online": 6,
       "peers_total": 8
     },
@@ -772,7 +772,7 @@
       "is_future": true
     }
   ],
-  "guidance": "# LFCS Daily Guidance \u2014 2026-06-16\n\n**Program day 3 of 45** | **~60 min** | **Node: node1** (`100.75.124.36`)\n\n---\n\n## Today's Focus: Directory Sandbox \u2014 SSH & mkdir -p trees\n\n| Field | Value |\n|-------|-------|\n| Project | 01 |\n| Phase | 1-2 |\n| LFCS Domains | Essential Commands |\n| Target node | **node1** (100.75.124.36) |\n| Study guide | `Study_Projects/01.md` |\n\n---\n\n## Step-by-Step (do in order)\n\n1. ssh kraken@node1\n2. mkdir -p /projects/archive/2026/\n3. Create symlink + hard link, verify\n\n---\n\n## Connect via Termius\n\n```bash\nssh kraken@100.75.124.36\n```\n\n---\n\n## LFCS Exam Tip\n> visudo -c after every sudoers.d edit.\n\n---\n## End-of-Session Checklist\n\n- [ ] Completed all steps above\n- [ ] Verified persistence (or scheduled reboot test)\n- [ ] Logged blockers in study journal\n- [ ] Append: `echo '2026-06-16 Project 01 phase 1-2 DONE' >> notifications/study-journal.log`\n\n---\n*Generated 2026-06-16 06:15:58 by lfcs-daily-guidance.sh*",
+  "guidance": "# LFCS Daily Guidance \u2014 2026-06-16\n\n**Program day 3 of 45** | **~60 min** | **Node: node1** (`REDACTED`)\n\n---\n\n## Today's Focus: Directory Sandbox \u2014 SSH & mkdir -p trees\n\n| Field | Value |\n|-------|-------|\n| Project | 01 |\n| Phase | 1-2 |\n| LFCS Domains | Essential Commands |\n| Target node | **node1** (REDACTED) |\n| Study guide | `Study_Projects/01.md` |\n\n---\n\n## Step-by-Step (do in order)\n\n1. ssh kraken@node1\n2. mkdir -p /projects/archive/2026/\n3. Create symlink + hard link, verify\n\n---\n\n## Connect via Termius\n\n```bash\nssh kraken@REDACTED\n```\n\n---\n\n## LFCS Exam Tip\n> visudo -c after every sudoers.d edit.\n\n---\n## End-of-Session Checklist\n\n- [ ] Completed all steps above\n- [ ] Verified persistence (or scheduled reboot test)\n- [ ] Logged blockers in study journal\n- [ ] Append: `echo '2026-06-16 Project 01 phase 1-2 DONE' >> notifications/study-journal.log`\n\n---\n*Generated 2026-06-16 06:15:58 by lfcs-daily-guidance.sh*",
   "resources": {
     "youtube": [
       {
@@ -837,10 +837,10 @@
     ]
   },
   "urls": {
-    "portal": "http://100.81.13.95:3080/",
-    "browser": "https://100.81.13.95:3001/",
+    "portal": "http://REDACTED:3080/",
+    "browser": "https://REDACTED:3001/",
     "ide": "/ide/",
-    "ara": "http://100.81.13.95:3082/"
+    "ara": "http://REDACTED:3082/"
   },
   "ara": {
     "name": "Ara",
@@ -864,25 +864,25 @@
   "cluster": [
     {
       "name": "um690",
-      "tailscale_ip": "100.81.13.95",
+      "tailscale_ip": "REDACTED",
       "lfcs_role": "control-plane",
       "reachable": true
     },
     {
       "name": "node1",
-      "tailscale_ip": "100.75.124.36",
+      "tailscale_ip": "REDACTED",
       "lfcs_role": "primary-worker",
       "reachable": true
     },
     {
       "name": "node2",
-      "tailscale_ip": "100.104.54.20",
+      "tailscale_ip": "REDACTED",
       "lfcs_role": "edge-gateway",
       "reachable": true
     },
     {
       "name": "node3",
-      "tailscale_ip": "100.82.177.52",
+      "tailscale_ip": "REDACTED",
       "lfcs_role": "storage-forge",
       "reachable": true
     }

@@ -1,115 +1,35 @@
 {
-  "scan_timestamp": "2026-08-13T15:20:00-07:00",
-  "scanned_from": "um690 (user joshua)",
+  "scan_timestamp": "2026-08-29T19:27:00-07:00",
+  "scanned_from": "um690",
   "control_plane": "um690",
   "labnet": "192.168.20.0/24",
-  "lab_gateway": "192.168.20.1 (VyOS, SSH key id_ed25519_vyos)",
-  "home_wifi": "192.168.10.0/24 (um690 wlp3s0 192.168.10.150)",
-  "architecture_sot": "~/SovereignAid/ARCHITECTURE.md",
+  "lab_gateway": "192.168.20.1 (VyOS)",
+  "home_wifi": "192.168.10.0/24",
+  "source_of_truth": "https://github.com/DestroyTheKraken/homelab",
   "tailnet": {
-    "name": "tail13a119.ts.net",
     "account": "destroythekraken@",
-    "self": "100.90.171.47",
-    "self_name": "um690",
-    "retired_tailnet": "taile52ad9.ts.net",
+    "note": "Tailscale addresses omitted from public inventory",
     "peers": [
-      {"name": "node1", "ip": "100.85.76.33", "online": true, "os": "linux"},
-      {"name": "node2", "ip": "100.116.240.9", "online": true, "os": "linux"},
-      {"name": "node3", "ip": "100.71.46.114", "online": true, "os": "linux"}
+      {"name": "um690", "online": true, "os": "linux", "role": "control-plane"},
+      {"name": "node1", "online": true, "os": "linux", "role": "worker"},
+      {"name": "node2", "online": true, "os": "linux", "role": "worker"},
+      {"name": "node3", "online": true, "os": "linux", "role": "worker"},
+      {"name": "operator-phone", "online": true, "os": "android", "role": "operator phone", "status": "active"},
+      {"name": "operator-tablet", "online": false, "os": "android", "role": "operator tablet", "status": "offline ~4d"}
     ]
   },
-  "labnet_hosts_up": [
-    {"ip": "192.168.20.1", "label": "router (VyOS)", "mac": "9c:69:d3:81:3b:e2", "ssh": "ok as vyos@", "role": "L3 gateway"},
-    {"ip": "192.168.20.100", "label": "um690", "mac": "58:47:ca:70:aa:02", "ssh": "local joshua@", "role": "control plane"},
-    {"ip": "192.168.20.101", "label": "node1", "mac": "d8:cb:8a:01:7a:89", "ssh": "ok as kraken@", "role": "worker"},
-    {"ip": "192.168.20.102", "label": "node2", "mac": "44:8a:5b:dd:a0:c5", "ssh": "ok as kraken@", "role": "worker"},
-    {"ip": "192.168.20.103", "label": "node3", "mac": "d8:cb:8a:86:c8:02", "ssh": "ok as kraken@", "role": "worker (ex-fam-media)"},
-    {"ip": "192.168.20.109", "label": "samsung", "mac": "20:15:de:c6:fe:f6", "ssh": "closed", "role": "display"}
-  ],
-  "mesh_cluster": [
-    {
-      "name": "um690",
-      "role": "control-plane",
-      "tailscale_ip": "100.90.171.47",
-      "lan_ip": "192.168.20.100",
-      "wifi_ip": "192.168.10.150",
-      "reachable": true,
-      "ssh": true,
-      "ssh_user": "joshua",
-      "os": "Ubuntu 26.04 LTS",
-      "kernel": "7.0.0-29-generic",
-      "hardware": "Minisforum UM690",
-      "machine_id": "1e020631397b455780a74446f2c0aa8f",
-      "ram": "60Gi",
-      "cores": "16",
-      "k3s": "not installed",
-      "docker": "inactive",
-      "tailscale": "active",
-      "grok": "1.0.3"
-    },
-    {
-      "name": "node1",
-      "role": "worker",
-      "tailscale_ip": "100.85.76.33",
-      "lan_ip": "192.168.20.101",
-      "reachable": true,
-      "ssh": true,
-      "ssh_user": "kraken",
-      "os": "Ubuntu 26.04 LTS",
-      "kernel": "7.0.0-29-generic",
-      "hardware": "Lenovo ThinkCentre M93p",
-      "machine_id": "1f1142d28291498d98678d32367d75a2",
-      "mac": "d8:cb:8a:01:7a:89",
-      "ram": "15Gi",
-      "cores": "4",
-      "k3s": "not installed",
-      "grok": "missing"
-    },
-    {
-      "name": "node2",
-      "role": "worker",
-      "tailscale_ip": "100.116.240.9",
-      "lan_ip": "192.168.20.102",
-      "reachable": true,
-      "ssh": true,
-      "ssh_user": "kraken",
-      "os": "Ubuntu 26.04 LTS",
-      "kernel": "7.0.0-29-generic",
-      "hardware": "Lenovo ThinkCentre M93p",
-      "machine_id": "63ecc9225625424db93f303c5250f27e",
-      "mac": "44:8a:5b:dd:a0:c5",
-      "ram": "15Gi",
-      "cores": "4",
-      "k3s": "not installed",
-      "grok": "missing"
-    },
-    {
-      "name": "node3",
-      "role": "worker",
-      "tailscale_ip": "100.71.46.114",
-      "lan_ip": "192.168.20.103",
-      "reachable": true,
-      "ssh": true,
-      "ssh_user": "kraken",
-      "os": "Ubuntu 26.04 LTS",
-      "kernel": "7.0.0-29-generic",
-      "hardware": "Lenovo ThinkCentre M93p (former fam-media)",
-      "machine_id": "8bcb5bf323c748eebf78a12c1565632f",
-      "mac": "d8:cb:8a:86:c8:02",
-      "ram": "15Gi",
-      "cores": "4",
-      "k3s": "not installed",
-      "grok": "missing"
-    }
-  ],
-  "retired": [
-    {"name": "fam-media", "note": "Hardware reimaged as node3 at 192.168.20.103. VyOS fam-media mapping removed 2026-08-13."},
-    {"name": "taile52ad9.ts.net", "note": "Previous tailnet. All new config uses tail13a119.ts.net."}
+  "labnet_hosts": [
+    {"lan": "192.168.20.1", "label": "vyos-router", "role": "L3 gateway"},
+    {"lan": "192.168.20.100", "label": "um690", "role": "control plane"},
+    {"lan": "192.168.20.101", "label": "node1", "role": "worker"},
+    {"lan": "192.168.20.102", "label": "node2", "role": "worker"},
+    {"lan": "192.168.20.103", "label": "node3", "role": "worker"},
+    {"lan": "192.168.20.109", "label": "display", "role": "consumer display"}
   ],
   "cluster_stack_status": {
     "k3s": "not installed",
-    "docker": "not running",
+    "docker": "not claimed as production here",
     "orchestration": "bare metal + Tailscale SSH mesh",
-    "ssh_mesh": "4x4 PASS (LAN + MagicDNS)"
+    "public_docs": "homelab repo redacted tables"
   }
 }

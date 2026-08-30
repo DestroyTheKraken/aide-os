@@ -45,7 +45,7 @@ sudo chmod 640 /var/lfcs-staging/project02/raw-auth.log
 2026-06-15T06:25:01 hostname sshd[18432]: Failed password for invalid user admin from 203.0.113.44 port 51422 ssh2
 2026-06-15T06:25:03 hostname sshd[18432]: Failed password for root from 203.0.113.44 port 51422 ssh2
 2026-06-15T06:26:11 hostname sudo:     kraken : command not allowed ; TTY=pts/0 ; PWD=/home/kraken ; USER=root ; COMMAND=/usr/bin/passwd root
-2026-06-15T06:30:00 hostname sshd[19001]: Accepted password for kraken from 100.75.74.14 port 44102 ssh2
+2026-06-15T06:30:00 hostname sshd[19001]: Accepted password for kraken from <tailscale-client> port 44102 ssh2
 ```
 
 ---

@@ -13,7 +13,7 @@ Build the lab while practicing weak LFCS areas: text processing, containers, net
 - **High:** Operations/Deployment, Networking, Essential Commands
 - **Medium:** Storage, Users & Groups
 
-## AIOS on um690 (`100.81.13.95`)
+## AIOS on um690 (`REDACTED`)
 
 | Service | Port | Role |
 |---------|------|------|

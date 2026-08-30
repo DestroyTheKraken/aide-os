@@ -77,7 +77,7 @@ grep -r PermitRootLogin /etc/ssh/sshd_config.d/
 systemctl is-enabled secure-browser-forge.service docker.service firewalld
 
 # Tailnet access test (from Node1 or tablet on tailnet)
-curl -k -I https://100.82.177.52:3001/
+curl -k -I https://REDACTED:3001/
 ```
 
 ---

@@ -1,7 +1,7 @@
 # AIDE_OS portfolio site (skeleton)
 
 **Local path:** `~/AIDE_OS/site/`  
-**Public path target:** `https://aide-os.hickles.ts.net/aide/home/joshua/`  
+**Public path target:** `https://aide-os.home-desktop-2.ts.net/aide/home/joshua/`  
 **Updated:** 2026-07-31
 
 ## Preview on um690
@@ -11,13 +11,13 @@ cd ~/AIDE_OS/site && ./serve.sh
 # open http://127.0.0.1:8099/aide/home/joshua/
 ```
 
-## Deploy to hickles (when SSH works)
+## Deploy to home-desktop-2 (when SSH works)
 
 ```bash
-# Example rsync — adjust remote web root to match hickles Caddy/nginx
+# Example rsync — adjust remote web root to match home-desktop-2 Caddy/nginx
 rsync -av --delete \
   ~/AIDE_OS/site/aide/ \
-  hickles:/var/www/aide-os/aide/
+  home-desktop-2:/var/www/aide-os/aide/
 ```
 
 Configure Tailscale Serve / reverse proxy hostname `aide-os` → that root so  

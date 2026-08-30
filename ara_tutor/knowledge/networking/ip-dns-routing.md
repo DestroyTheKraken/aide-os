@@ -90,7 +90,7 @@ sudo nmcli con up "Wired connection 1"
 127.0.0.1   localhost
 192.168.68.101  node1.lan node1
 192.168.68.102  node2.lan node2
-100.75.124.36   node1
+REDACTED   node1
 ```
 
 Test: `getent hosts node1` · `ping node1`
@@ -177,16 +177,20 @@ fusermount -u ~/remote
 
 ---
 
-## AIOS cluster addressing
+## Lab cluster addressing (current premises)
+
+Public SoT: [homelab](https://github.com/DestroyTheKraken/homelab). Tailscale CGNAT addresses omitted — use MagicDNS.
 
 | Host | LAN | Tailscale |
 |------|-----|-----------|
-| um690 | 192.168.68.100 | 100.81.13.95 |
-| node1 | 192.168.68.101 | 100.75.124.36 |
-| node2 | 192.168.68.102 | 100.104.54.20 |
-| node3 | 192.168.68.103 | 100.82.177.52 |
+| um690 | 192.168.20.100 | MagicDNS `um690` |
+| node1 | 192.168.20.101 | MagicDNS `node1` |
+| node2 | 192.168.20.102 | MagicDNS `node2` |
+| node3 | 192.168.20.103 | MagicDNS `node3` |
+| operator-phone | — | lab tailnet · active (2026-08-29) |
+| operator-tablet | — | lab tailnet · offline ~4d (2026-08-29) |
 
-Starlink + Deco: `192.168.68.0/22`.
+Lab LAN: `192.168.20.0/24`. Home WLAN: `192.168.10.0/24`. Older `192.168.68.0/22` examples elsewhere in study notes are historical practice problems, not this lab.
 
 ---
 
@@ -197,7 +201,7 @@ ip -br addr
 ip route | grep default
 getent hosts node1
 resolvectl status 2>/dev/null || cat /etc/resolv.conf
-ping -c 2 100.75.124.36
+ping -c 2 REDACTED
 findmnt /mnt/nfs_share
 ```
 

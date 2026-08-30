@@ -20,7 +20,7 @@
 | **Linux user `vtech`** | **Optional** isolation later; **not** required daily; **no** second Grok install |
 | **Linux user `joshua`** | Family / fam-media SSH only |
 | **AIDE_OS / Edbuntu** | Education product under `~/AIDE_OS` — **not** gaming; see `docs/PRODUCT-SCOPE-AND-EDBUNTU.md` |
-| **fam-media** | **HickMedia Console dev** (`100.119.236.78`) — not AIDE MVP |
+| **fam-media** | **HickMedia Console dev** (`REDACTED`) — not AIDE MVP |
 | **HickMedia** | Gaming console product → `~/HickMedia` |
 | **Desktop/cluster reorg** | **Paused** unless blocking VTS delivery |
 | **Grok↔Nextcloud deep integration** | **Abandoned** → SovereignAid `docs/archive/abandoned/2026-07-14-grok-nextcloud-firefox/` |

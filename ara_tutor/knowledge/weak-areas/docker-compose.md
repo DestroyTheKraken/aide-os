@@ -124,7 +124,7 @@ The `:?` syntax **fails compose parsing** if the variable is unset — prevents 
 
 ```bash
 # docker/.env (example keys — rotate secrets locally)
-FORGE_BIND_IP=100.81.13.95          # tailscale ip -4
+FORGE_BIND_IP=  # set locally; do not commit Tailscale IP          # tailscale ip -4
 LFCS_ROOT=/home/kraken/Projects/aios-ed
 FORGE_PUID=1000
 FORGE_PGID=1000
@@ -254,9 +254,9 @@ External clients use **host** Tailscale IP + published port — not container DN
 **Requirement:** Service listens on Tailscale IP only, not `0.0.0.0`.
 
 ```bash
-# Good — compose with FORGE_BIND_IP=100.81.13.95
+# Good — compose with FORGE_BIND_IP=  # set locally; do not commit Tailscale IP
 ss -tlnp | grep 3080
-# LISTEN 100.81.13.95:3080
+# LISTEN on tailscale0:3080 (address omitted in public docs)
 
 # Bad — exposed to LAN/Starlink
 # LISTEN 0.0.0.0:3080

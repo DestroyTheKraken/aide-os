@@ -10,3 +10,7 @@ Public, redacted detail lives in **[DestroyTheKraken/homelab](https://github.com
 | grokaide-edu | Multipass practice VM on um690 |
 
 Do not publish MAC addresses, Tailscale addresses, or household hostnames here.
+
+## Lab Tailscale (2026-08-29)
+
+`um690`, `node1`–`node3`, `operator-phone` (active), `operator-tablet` (offline ~4d). Addresses omitted.

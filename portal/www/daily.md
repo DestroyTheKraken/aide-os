@@ -1,6 +1,6 @@
 # LFCS Daily Guidance — 2026-06-16
 
-**Program day 3 of 45** | **~60 min** | **Node: node1** (`100.75.124.36`)
+**Program day 3 of 45** | **~60 min** | **Node: node1** (`REDACTED`)
 
 ---
 
@@ -11,7 +11,7 @@
 | Project | 01 |
 | Phase | 1-2 |
 | LFCS Domains | Essential Commands |
-| Target node | **node1** (100.75.124.36) |
+| Target node | **node1** (REDACTED) |
 | Study guide | `Study_Projects/01.md` |
 
 ---
@@ -27,7 +27,7 @@
 ## Connect via Termius
 
 ```bash
-ssh kraken@100.75.124.36
+ssh kraken@REDACTED
 ```
 
 ---

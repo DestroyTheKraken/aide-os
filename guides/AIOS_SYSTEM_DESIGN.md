@@ -1,5 +1,8 @@
 # AIOS Education IDE — System Design
 
+> **Inventory SoT:** Lab Tailscale membership and redacted tables live in [homelab](https://github.com/DestroyTheKraken/homelab) (refreshed 2026-08-29). This design doc may describe historical service ideas; do not treat embedded addresses as live.
+
+
 | Field | Value |
 |-------|-------|
 | **Author** | Systems Architecture (Draft) |
@@ -13,7 +16,7 @@
 
 ## Overview
 
-**AIOS Education IDE** is a tailnet-hosted EdTech daily-driver for LFCS exam preparation. The learner opens a single dashboard (`http://100.81.13.95:3080/`) on a Samsung Tab S10 Ultra (or any tailnet client), sees today's 45-day program lesson, launches a browser IDE and lab browser, and studies with **Ara** — a local personalized tutor backed by Ollama and Open WebUI on um690.
+**AIOS Education IDE** is a tailnet-hosted EdTech daily-driver for LFCS exam preparation. The learner opens a single dashboard (`http://um690:3080/`) on a Samsung Tab S10 Ultra (or any tailnet client), sees today's 45-day program lesson, launches a browser IDE and lab browser, and studies with **Ara** — a local personalized tutor backed by Ollama and Open WebUI on um690.
 
 The stack is already operational (Phase 2 complete): Docker Compose services in `docker/docker-compose.yml`, static dashboard in `portal/`, daily data pipeline in `automation/lfcs-portal-build.sh` + `lfcs-daily-guidance.sh`, and cluster inventory in `inventory/cluster.json`. Phase 3 (responsive dashboard + Ara sidebar) is active.
 
@@ -59,7 +62,7 @@ Phase 4 (RAG + lesson context + PWA) is the critical unlock for Ara tutoring qua
 | # | Goal | Success metric |
 |---|------|----------------|
 | G1 | **Ara tutoring quality** — personalized, context-aware, RAG-backed | ≥80% pass rate on canonical eval prompt suite (see Observability); learner thumbs-up ≥70% |
-| G2 | Daily-driver UX on tablet | Dashboard TTI < 2s; PWA installable on j-tab |
+| G2 | Daily-driver UX on tablet | Dashboard TTI < 2s; PWA installable on operator-tablet |
 | G3 | LFCS exam readiness by Dec 2026 / Jan 2027 | ≥70% objectives closed (`guides/OBJECTIVES_TRACKER.md`); mock exam pass |
 | G4 | Reproducible tailnet stack | One-shot deploy via `lfcs-backend-deploy.sh`; git-tracked compose |
 | G5 | Lesson-schedule integration | Ara aware of program day, project, phase, target node on every session |
@@ -201,11 +204,11 @@ LFCS/
 ```mermaid
 flowchart TB
     subgraph clients["Clients (Tailnet)"]
-        TAB["j-tab S10 Ultra<br/>Chrome / PWA"]
-        PHONE["j-phn / Termius"]
+        TAB["operator-tablet S10 Ultra<br/>Chrome / PWA"]
+        PHONE["operator-phone / Termius"]
     end
 
-    subgraph um690["um690 — Control Plane (100.81.13.95)"]
+    subgraph um690["um690 — Control Plane"]
         NGINX["lfcs-portal :3080<br/>nginx"]
         DASH["Dashboard SPA<br/>app.js + ai-chat.js"]
         IDE["lfcs-ide<br/>code-server /ide/"]
@@ -600,7 +603,7 @@ TODAY'S SESSION (auto-generated 2026-06-15)
 - Program day: 2 of 45 (cycle 1)
 - Project: 00 — Documentation Matrix
 - Phase: 3-4
-- Target node: um690 (100.81.13.95)
+- Target node: um690
 - LFCS domains: Essential Commands
 - Study guide: /study/00.md
 - Today's tasks: [from lesson-tasks.json]
@@ -669,10 +672,10 @@ No structural change to the 4-node topology documented in `inventory/cluster.jso
 
 | Node | Tailscale IP | LFCS role | Primary projects |
 |------|-------------|-----------|------------------|
-| um690 | 100.81.13.95 | control-plane | 00, 02, 08, scheduling, **all AI services** |
-| node1 | 100.75.124.36 | primary-worker | 01, 04, 06, 09-prep |
-| node2 | 100.104.54.20 | edge-gateway | 06, 07 |
-| node3 | 100.82.177.52 | storage-forge | 03, 05, 09 |
+| um690 | MagicDNS | control-plane | 00, 02, 08, scheduling, **all AI services** |
+| node1 | MagicDNS | primary-worker | 01, 04, 06, 09-prep |
+| node2 | MagicDNS | edge-gateway | 06, 07 |
+| node3 | MagicDNS | storage-forge | 03, 05, 09 |
 
 **Design rule:** Ollama + Open WebUI stay on um690 only (`OLLAMA_MAX_LOADED_MODELS=1`, 10GB mem_limit).
 
@@ -716,7 +719,7 @@ Add to `portal/static/`:
 | RAG live | Jul 1, 2026 | RAG eval suite ≥80% via Open WebUI (not ollama-only) | PR 7, 12 |
 | Context injection | Jul 15, 2026 | Day N prompts correct (Phase 4a) | PR 6, 8, 9 |
 | Credential fix | Jul 1, 2026 | No password in `daily.json` | PR 6b |
-| PWA on tablet | Jul 15, 2026 | j-tab install works | PR 11 |
+| PWA on tablet | Jul 15, 2026 | operator-tablet install works | PR 11 |
 | Cycle 1 complete | ~Jul 28, 2026 | Day 45 logged; day 46 loops correctly | PR 6 |
 | Weak areas closed | Oct 2026 | Timed drill pass | PR 2–3 |
 | Mock exam pass | Nov 2026 | 2-hour mock ≥80% | — |
@@ -789,7 +792,7 @@ program_cycle: 1
 project: "00"
 phase: "3-4"
 node: um690
-node_ip: 100.81.13.95
+node_ip: um690  # MagicDNS; no Tailscale CGNAT in-repo
 title: "Documentation Matrix — /usr/share/doc & apt"
 domains: ["Essential Commands"]
 study_guide: /study/00.md
@@ -960,16 +963,16 @@ PR 6 adds `weak_area` field to each `days[]` entry in `daily-schedule.json` (nul
 
 ### PR 16 auth spike options (iframe :3080 → :3082)
 
-Cross-origin iframe auth on Chrome/Android (j-tab) is difficult. Evaluate **before** PR 16:
+Cross-origin iframe auth on Chrome/Android (operator-tablet) is difficult. Evaluate **before** PR 16:
 
 | Option | Approach | Tablet test required |
 |--------|----------|---------------------|
-| (a) nginx subpath proxy | Proxy Open WebUI at `portal/nginx.conf` `/ai/` same-origin; `auth_request` or shared cookie on :3080 | Yes — j-tab Chrome |
+| (a) nginx subpath proxy | Proxy Open WebUI at `portal/nginx.conf` `/ai/` same-origin; `auth_request` or shared cookie on :3080 | Yes — operator-tablet Chrome |
 | (b) API-key automation only | UI stays `WEBUI_AUTH=false` on tailnet; only sync scripts use API key | Minimal UX change |
 | (c) Tailscale identity headers | `tailscale serve` + identity headers (if um690 uses Serve) | Yes |
 | (d) Embed token in iframe URL | Short-lived token param — security review required | Yes |
 
-**Recommendation:** Option (b) for Phase 5 unless spike (a) passes j-tab test. Do not enable `WEBUI_AUTH=true` without a proven iframe path.
+**Recommendation:** Option (b) for Phase 5 unless spike (a) passes operator-tablet test. Do not enable `WEBUI_AUTH=true` without a proven iframe path.
 
 ---
 
@@ -1268,7 +1271,7 @@ Reordered per review. Each PR lists milestone mapping.
 - **Files:** `portal/static/manifest.webmanifest`, `sw.js`, `icons/`, `portal/shell/index.html`
 - **Dependencies:** None (parallel)
 - **Milestone:** PWA (Jul 15)
-- **Description:** Installable shell on j-tab.
+- **Description:** Installable shell on operator-tablet.
 
 ### PR 13: Monitoring — Ara health + latency in sidebar
 - **Files:** `automation/lfcs-portal-build.sh`, `portal/static/app.js`
@@ -1280,7 +1283,7 @@ Reordered per review. Each PR lists milestone mapping.
 - **Files:** `docker/docker-compose.yml`, `portal/nginx.conf` (if option a), `guides/GETTING_STARTED.md`
 - **Dependencies:** PR 6b, **auth spike (OQ3)**
 - **Milestone:** Phase 5 hardening
-- **Description:** Spike options (a–d) on j-tab; implement winning approach. Default recommendation: option (b) API-key-only automation.
+- **Description:** Spike options (a–d) on operator-tablet; implement winning approach. Default recommendation: option (b) API-key-only automation.
 
 ### PR 17: Backup automation for OWUI + Ollama volumes
 - **Files:** `automation/lfcs-backup-volumes.sh`, `guides/CLUSTER_MAP.md`

@@ -1,7 +1,7 @@
 # SSH & Remote Access — LFCS Reference
 
 **LFCS weight:** Networking ~25% · **Projects:** 06, 09  
-**AIOS nodes:** node2 (hardening), node3 (capstone), j-tab (Termius client)  
+**AIOS nodes:** node2 (hardening), node3 (capstone), operator-tablet (Termius client)  
 **Tracker:** `guides/OBJECTIVES_TRACKER.md` §§ 1, 6, 9
 
 OpenSSH server/client, key auth, hardening drop-ins, session management. **Exam trap:** lock yourself out — always `sshd -t` before reload.
@@ -12,12 +12,12 @@ OpenSSH server/client, key auth, hardening drop-ins, session management. **Exam 
 
 ```bash
 ssh user@host
-ssh -i ~/.ssh/lfcs_lab user@100.75.124.36
+ssh -i ~/.ssh/lfcs_lab user@node1
 ssh -p 2222 user@host                 # custom port
 
 # Config shortcut — ~/.ssh/config
 Host node1
-  HostName 100.75.124.36
+  HostName node1
   User kraken
   IdentityFile ~/.ssh/lfcs_lab
 
@@ -29,7 +29,7 @@ ssh node1
 ## Key-based authentication
 
 ```bash
-ssh-keygen -t ed25519 -f ~/.ssh/lfcs_lab -C "lfcs-j-tab"
+ssh-keygen -t ed25519 -f ~/.ssh/lfcs_lab -C "lfcs-operator-tablet"
 chmod 600 ~/.ssh/lfcs_lab
 chmod 644 ~/.ssh/lfcs_lab.pub
 
@@ -66,7 +66,7 @@ sudo systemctl reload sshd
 # keep existing session open until verified
 ```
 
-Test new session from j-tab **before** closing old one.
+Test new session from operator-tablet **before** closing old one.
 
 ---
 
@@ -117,7 +117,7 @@ From `Study_Projects/09.md`:
 - Drop-in: `/etc/ssh/sshd_config.d/99-lfcs-forge.conf`
 - Audit with `sshd -t` + `grep PermitRootLogin /etc/ssh/sshd_config.d/*`
 
-Tablet workflow: Termius on j-tab → SSH to node3 for forge work.
+Tablet workflow: Termius on operator-tablet → SSH to node3 for forge work.
 
 ---
 

@@ -7,7 +7,7 @@ This file describes an older tablet-and-Docker layout and outdated addresses. **
 **Repo:** `aios-ed` (local) → [DestroyTheKraken/aios-os](https://github.com/DestroyTheKraken/aios-os.git)  
 **Updated:** June 16, 2026  
 **Exam target:** LFCS Dec 2026 / Jan 2027  
-**Control plane:** um690 `100.81.13.95`
+**Control plane:** um690 `REDACTED`
 
 ---
 
@@ -79,11 +79,11 @@ export LFCS_ROOT=/home/kraken/Projects/aios-ed   # or your clone path
 
 | Service | Port | URL |
 |---------|------|-----|
-| Dashboard | 3080 | http://100.81.13.95:3080/ |
-| Ara (Open WebUI) | 3082 | http://100.81.13.95:3082/ |
+| Dashboard | 3080 | http://REDACTED:3080/ |
+| Ara (Open WebUI) | 3082 | http://REDACTED:3082/ |
 | Workspace (code-server) | 3080/ide/ | via portal |
-| Lab browser (Mullvad) | 3001 | https://100.81.13.95:3001/ |
-| Ollama | 11434 | http://100.81.13.95:11434 |
+| Lab browser (Mullvad) | 3001 | https://REDACTED:3001/ |
+| Ollama | 11434 | http://REDACTED:11434 |
 
 **Models:** `Ara` (llama3.2:3b), `qwen2.5-coder:7b`
 
@@ -105,7 +105,7 @@ export LFCS_ROOT=/home/kraken/Projects/aios-ed   # or your clone path
 3. **Deploy** — `sudo ./automation/lfcs-backend-deploy.sh` after compose changes
 4. **Daily sync** — `./automation/lfcs-ara-sync.sh` (or wait for 07:00 cron via `lfcs-daily-guidance.sh`)
 5. **Mullvad UX** — bookmark/homepage inside streamed Firefox; persist to compose volume (deferred)
-6. **PWA install test** — j-tab “Add to Home Screen” after PNG icons added
+6. **PWA install test** — operator-tablet “Add to Home Screen” after PNG icons added
 
 ---
 

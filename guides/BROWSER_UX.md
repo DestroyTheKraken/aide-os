@@ -9,7 +9,7 @@
 
 This avoids the WebSocket crash from auto-resize while fitting both phone and monitor.
 
-## Mobile / Tablet (j-tab)
+## Mobile / Tablet (operator-tablet)
 
 1. Open Portal first — bottom dock: **Browser** / **Today**
 2. Log into Mullvad Browser — accept cert warning

@@ -52,3 +52,21 @@ brain/bootcamp/lfcs/study/Terminus-Global/
 brain/bootcamp/lfcs/study/bashcrawl/
 brain/bootcamp/lfcs/study/clh-bash/
 brain/bootcamp/lfcs/study/**/node_modules/
+
+# --- privacy / secrets ---
+# Portfolio privacy / secrets (do not commit)
+.env
+*.pem
+id_rsa*
+*.key
+tailscale-status.json
+**/*credential*
+ara_tutor/user-profile/*.pdf
+ara_tutor/user-profile/profile-summary.md
+console-pack/SCAN-fam-*.md
+brain/.obsidian/
+brain/.spark/conversations/
+brain/sessions/
+.grok/docs/user-attachments/screenshots/
+docs/labs/*PUBKEY*
+docs/labs/*-authorize-*.sh
